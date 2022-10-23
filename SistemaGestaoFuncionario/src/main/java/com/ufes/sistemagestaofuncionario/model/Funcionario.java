@@ -9,7 +9,7 @@ import java.util.List;
 public class Funcionario {
     private long id;
     private String nome;
-    private String cargo;
+    private Cargo cargo;
     private double salarioBase;
     private double distanciaTrabalho;
     private LocalDate dataAdmissao;
@@ -18,7 +18,7 @@ public class Funcionario {
     private List<Bonus> bonusRecebidos;
     private List<FaltaAoTrabalho> faltaAoTrabalho;
     
-    public Funcionario(String nome, String cargo, double salarioBase, 
+    public Funcionario(String nome, Cargo cargo, double salarioBase, 
             double distanciaTrabalho, LocalDate dataAdmissao, int idade) {
         this.nome = nome;
         this.cargo = cargo;
@@ -29,6 +29,19 @@ public class Funcionario {
         this.salarioTotal = 0;
     }
 
+    public Funcionario(long id, String nome, Cargo cargo, double salarioBase, double distanciaTrabalho, LocalDate dataAdmissao, int idade, double salarioTotal, List<Bonus> bonusRecebidos, List<FaltaAoTrabalho> faltaAoTrabalho) {
+        this.id = id;
+        this.nome = nome;
+        this.cargo = cargo;
+        this.salarioBase = salarioBase;
+        this.distanciaTrabalho = distanciaTrabalho;
+        this.dataAdmissao = dataAdmissao;
+        this.idade = idade;
+        this.salarioTotal = salarioTotal;
+        this.bonusRecebidos = bonusRecebidos;
+        this.faltaAoTrabalho = faltaAoTrabalho;
+    }
+
     public long getId() {
         return id;
     }
@@ -37,7 +50,7 @@ public class Funcionario {
         return nome;
     }
 
-    public String getCargo() {
+    public Cargo getCargo() {
         return cargo;
     }
 
@@ -67,46 +80,6 @@ public class Funcionario {
 
     public List<FaltaAoTrabalho> getFaltaAoTrabalho() {
         return faltaAoTrabalho;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
-    }
-
-    public void setSalarioBase(double salarioBase) {
-        this.salarioBase = salarioBase;
-    }
-
-    public void setDistanciaTrabalho(double distanciaTrabalho) {
-        this.distanciaTrabalho = distanciaTrabalho;
-    }
-
-    public void setDataAdmissao(LocalDate dataAdmissao) {
-        this.dataAdmissao = dataAdmissao;
-    }
-
-    public void setIdade(int idade) {
-        this.idade = idade;
-    }
-
-    public void setSalarioTotal(double salarioTotal) {
-        this.salarioTotal = salarioTotal;
-    }
-
-    public void setBonusRecebidos(List<Bonus> bonusRecebidos) {
-        this.bonusRecebidos = bonusRecebidos;
-    }
-
-    public void setFaltaAoTrabalho(List<FaltaAoTrabalho> faltaAoTrabalho) {
-        this.faltaAoTrabalho = faltaAoTrabalho;
     }
     
 }
