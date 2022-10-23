@@ -3,8 +3,6 @@ package com.ufes.sistemagestaofuncionario.persistencia.dao.funcionario;
 import com.ufes.sistemagestaofuncionario.model.Cargo;
 import com.ufes.sistemagestaofuncionario.model.Funcionario;
 import com.ufes.sistemagestaofuncionario.persistencia.conexao.ConexaoPostgreSQL;
-import com.ufes.sistemagestaofuncionario.persistencia.dao.cargo.CargoDAO;
-import com.ufes.sistemagestaofuncionario.persistencia.dao.cargo.ICargoDAO;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -48,6 +46,40 @@ public class FuncionarioDAO implements IFuncionarioDAO{
             return true;
         } catch (SQLException ex) {
             throw new SQLException("Erro ao registrar o funcionário.\n" + ex.getMessage());
+        } finally {
+            ConexaoPostgreSQL.closeConnection(conexao, ps);
+        }
+    }
+
+    @Override
+    public boolean update(Funcionario funcionario) throws SQLException {
+        PreparedStatement ps = null;
+        try{
+            String query = "UPDATE funcionario "
+                    + "SET nm_funcionario = ?"
+                    + ", vl_salario_base = ?"
+                    + ", vl_distancia_trabalho = ?"
+                    + ", vl_salario_total = ?"
+                    + ", nu_idade = ?"
+                    + ", id_cargo = ?"
+                    + ", dt_modificacao = ? "
+                    + "WHERE id_funcionario = ?;";
+            ps = conexao.prepareStatement(query);
+            ps.setString(1, funcionario.getNome());
+            ps.setDouble(2, funcionario.getSalarioBase());
+            ps.setDouble(3, funcionario.getDistanciaTrabalho());
+            ps.setDouble(4, funcionario.getSalarioTotal());
+            ps.setInt(5, funcionario.getIdade());
+            ps.setLong(6, funcionario.getCargo().getId());
+            // convertendo LocalDate para Date (SQL)
+            Date sqlDate = Date.valueOf(LocalDate.now());
+            ps.setDate(7, sqlDate);
+            ps.setLong(8, funcionario.getId());
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException ex){
+            throw new SQLException("Erro ao atualizar o funcionário.\n"
+                    + ex.getMessage());
         } finally {
             ConexaoPostgreSQL.closeConnection(conexao, ps);
         }
