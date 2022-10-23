@@ -26,7 +26,6 @@ public class FuncionarioDAO implements IFuncionarioDAO{
     @Override
     public boolean save(Funcionario funcionario) throws SQLException, ClassNotFoundException{
         PreparedStatement ps = null;
-        ResultSet rs = null;
         try {
             String query = "INSERT INTO funcionario(nm_funcionario, "
                 + "vl_salario_base, vl_distancia_trabalho, vl_salario_total, "
@@ -76,31 +75,41 @@ public class FuncionarioDAO implements IFuncionarioDAO{
         PreparedStatement ps = null;
         ResultSet rs = null;
         try{
-            String query = "SELECT * FROM funcionario WHERE id_funcionario = ?;";
+            String query = "SELECT "
+                    + "f.nm_funcionario"
+                    + ", f.vl_salario_base"
+                    + ", f.vl_distancia_trabalho"
+                    + ", f.vl_salario_total"
+                    + ", f.nu_idade"
+                    + ", f.dt_admissao"
+                    + ", f.id_cargo"
+                    + ", c.nm_cargo "
+                    + "FROM funcionario f "
+                    + "INNER JOIN cargo c "
+                    + "ON f.id_cargo = c.id_cargo "
+                    + "WHERE f.id_funcionario = ?;";
             ps = conexao.prepareStatement(query);
             ps.setLong(1, id);
             rs = ps.executeQuery();
             if(!rs.next())
                 throw new SQLException("Funcionário com id " 
                         + id + "não encontrado");
-            Long id_funcionario = rs.getLong(1);
-            String nome = rs.getString(2);
-            double salarioBase = rs.getDouble(3);
-            double distanciaTrabalho = rs.getDouble(4);
-            double salarioTotal = rs.getDouble(5);
-            int idade = rs.getInt(6);
-            LocalDate dtAdmissao = new Date(rs.getDate(7)
+            String nome = rs.getString(1);
+            double salarioBase = rs.getDouble(2);
+            double distanciaTrabalho = rs.getDouble(3);
+            double salarioTotal = rs.getDouble(4);
+            int idade = rs.getInt(5);
+            LocalDate dtAdmissao = new Date(rs.getDate(6)
                                                 .getTime()).toLocalDate();
+         
+            // Dados do cargo
+            long idCargo = rs.getLong(7);
+            String nomeCargo = rs.getString(8);
+            Cargo cargo = new Cargo(idCargo, nomeCargo);
             
-            // informações do cargo
-            long id_cargo = rs.getLong(8);
-            ICargoDAO cargoDAO = new CargoDAO();
-            Cargo cargo = cargoDAO.getById(id_cargo);
-            
-            return new Funcionario(id_funcionario, nome, cargo, salarioBase,
+            return new Funcionario(id, nome, cargo, salarioBase,
                 distanciaTrabalho, dtAdmissao, idade, salarioTotal, 
                     null, null);
-            
         } catch(SQLException ex) {
             throw new SQLException("Erro ao buscar funcionário.\n"
                     + ex.getMessage());
@@ -115,7 +124,19 @@ public class FuncionarioDAO implements IFuncionarioDAO{
         ResultSet rs = null;
         List<Funcionario> listaFuncionarios = new ArrayList();
         try{
-            String query = "SELECT * FROM funcionario;";
+            String query = "SELECT "
+                    + "f.id_funcionario"
+                    + ", f.nm_funcionario"
+                    + ", f.vl_salario_base"
+                    + ", f.vl_distancia_trabalho"
+                    + ", f.vl_salario_total"
+                    + ", f.nu_idade"
+                    + ", f.dt_admissao"
+                    + ", f.id_cargo"
+                    + ", c.nm_cargo "
+                    + "FROM funcionario f "
+                    + "INNER JOIN cargo c "
+                    + "ON f.id_cargo = c.id_cargo;";
             ps = conexao.prepareStatement(query);
             rs = ps.executeQuery();
             if(!rs.next())
@@ -131,9 +152,9 @@ public class FuncionarioDAO implements IFuncionarioDAO{
                                                     .getTime()).toLocalDate();
 
                 // informações do cargo
-                long id_cargo = rs.getLong(8);
-                ICargoDAO cargoDAO = new CargoDAO();
-                Cargo cargo = cargoDAO.getById(id_cargo);
+                long idCargo = rs.getLong(8);
+                String nomeCargo = rs.getString(9);
+                Cargo cargo = new Cargo(idCargo, nomeCargo);
                 
                 listaFuncionarios.add(new Funcionario(id_funcionario, nome, 
                         cargo, salarioBase, distanciaTrabalho, 
