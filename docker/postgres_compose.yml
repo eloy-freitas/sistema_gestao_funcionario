@@ -1,0 +1,28 @@
+version: '2'
+
+networks:
+  vpcbr:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 172.20.0.0/24
+
+services:
+  postgres:
+    container_name: funcionario_db
+    image: postgres:13
+    environment:
+      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+      PGDATA: /data/postgres
+    volumes:
+       - ./funcionario_db_volume:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      vpcbr:
+        ipv4_address: 172.20.0.10
+    restart: on-failure
+
+volumes:
+    funcionario_db_volume:
