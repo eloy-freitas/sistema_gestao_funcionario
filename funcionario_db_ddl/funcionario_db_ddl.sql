@@ -9,7 +9,7 @@ create table falta_trabalho(
 
 create table cargo (
 	id_cargo serial primary key unique
-	, nm_cargo varchar(50) not null
+	, nm_cargo varchar(50) not null unique
 );
 
 create table funcionario(
