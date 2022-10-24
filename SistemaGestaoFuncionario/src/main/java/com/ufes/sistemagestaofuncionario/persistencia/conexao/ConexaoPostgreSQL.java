@@ -14,7 +14,7 @@ public class ConexaoPostgreSQL {
             Class.forName("org.postgresql.Driver");
             try {
                 conexao = DriverManager.getConnection(
-                        "jdbc:postgresql://172.20.0.10:5432/postgres",
+                        "jdbc:postgresql://172.20.0.10:5432/funcionario_db",
                         "admin",
                         "admin_123");
                 System.out.println("Conectado.");
