@@ -52,6 +52,39 @@ public class FuncionarioDAO implements IFuncionarioDAO{
     }
 
     @Override
+    public boolean save(List<Funcionario> funcionarios) throws SQLException, ClassNotFoundException {
+        PreparedStatement ps = null;
+        String query = "INSERT INTO funcionario(nm_funcionario, "
+                + "vl_salario_base, vl_distancia_trabalho, vl_salario_total, "
+                + "nu_idade, dt_admissao, id_cargo, dt_modificacao) VALUES "
+                + "(?, ?, ?, ?, ?, ?, ?, ?);";
+        try {
+            for(Funcionario f : funcionarios){
+                ps = conexao.prepareStatement(query);
+                ps.setString(1, f.getNome());
+                ps.setDouble(2, f.getSalarioBase());
+                ps.setDouble(3, f.getDistanciaTrabalho());
+                ps.setDouble(4, f.getSalarioTotal());
+                ps.setInt(5, f.getIdade());
+                // Convertendo local date para o formato utilizado pelo PreparedStatement
+                Date sqlDate = Date.valueOf(f.getDataAdmissao());
+                ps.setDate(6, sqlDate);
+                ps.setLong(7, f.getCargo().getId());
+                sqlDate = Date.valueOf(LocalDate.now());
+                ps.setDate(8, sqlDate);
+                ps.executeUpdate();
+            }
+            return true;
+         } catch (SQLException ex) {
+            throw new SQLException("Erro ao registrar o funcionário.\n" + ex.getMessage());
+        } finally {
+            ConexaoPostgreSQL.closeConnection(conexao, ps);
+        }
+    }
+
+    
+    
+    @Override
     public boolean update(Funcionario funcionario) throws SQLException {
         PreparedStatement ps = null;
         try{
