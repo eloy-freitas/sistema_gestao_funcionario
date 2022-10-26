@@ -1,10 +1,9 @@
 
 
-create table falta_trabalho(
-	id_falta_trabalho serial primary key unique
-	, qt_faltas int not null
-	, dt_mes timestamp not null
-	, dt_atualizacao timestamp
+create table vigencia(
+	id_vigencia serial primary key unique
+	, dt_vigencia varchar(6) not null
+	, dt_modificacao timestamp
 );
 
 create table cargo (
@@ -23,7 +22,6 @@ create table funcionario(
 	, id_Cargo int not null
 	, dt_modificacao timestamp not null
 	, constraint id_cargo_fk foreign key (id_cargo) references cargo(id_cargo)
-
 );
 
 create table bonus(
@@ -42,10 +40,12 @@ create table funcionario_bonus(
 );
 
 
-create table funcionario_falta(
-	id_falta_trabalho int not null
+create table falta_funcionario(
+	id_vigencia int not null
 	, id_funcionario int not null
-	, constraint id_falta_trabalho_fk foreign key (id_falta_trabalho) references falta_trabalho(id_falta_trabalho)
+	, qt_faltas int not null
+	, dt_modificacao timestamp
+	, constraint id_vigencia_fk foreign key (id_vigencia) references vigencia(id_vigencia)
 	, constraint id_funcionario_falta_fk foreign key (id_funcionario) references funcionario(id_funcionario)
 );
 
