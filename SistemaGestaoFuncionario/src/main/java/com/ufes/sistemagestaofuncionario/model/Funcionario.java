@@ -29,7 +29,9 @@ public class Funcionario {
         this.salarioTotal = 0;
     }
 
-    public Funcionario(long id, String nome, Cargo cargo, double salarioBase, double distanciaTrabalho, LocalDate dataAdmissao, int idade, double salarioTotal, List<Bonus> bonusRecebidos, List<FaltaAoTrabalho> faltaAoTrabalho) {
+    public Funcionario(long id, String nome, Cargo cargo, double salarioBase, double distanciaTrabalho,
+                       LocalDate dataAdmissao, int idade, double salarioTotal,
+                       List<Bonus> bonusRecebidos, List<FaltaAoTrabalho> faltaAoTrabalho) {
         this.id = id;
         this.nome = nome;
         this.cargo = cargo;

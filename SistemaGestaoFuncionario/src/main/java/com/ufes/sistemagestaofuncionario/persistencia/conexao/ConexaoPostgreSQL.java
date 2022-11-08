@@ -1,5 +1,7 @@
 package com.ufes.sistemagestaofuncionario.persistencia.conexao;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -13,10 +15,14 @@ public class ConexaoPostgreSQL {
         try {
             Class.forName("org.postgresql.Driver");
             try {
+                Dotenv env = Dotenv.configure()
+                        .directory("./SistemaGestaoFuncionario/resources")
+                        .filename(".env")
+                        .load();
                 conexao = DriverManager.getConnection(
-                        "jdbc:postgresql://172.20.0.10:5432/funcionario_db",
-                        "admin",
-                        "admin_123");
+                        env.get("DB_URL"),
+                        env.get("DB_USER"),
+                        env.get("DB_PASSWORD"));
                 System.out.println("Conectado.");
             } catch (SQLException ex) {
                 throw new SQLException("Falha na conexão com banco.\n" 
