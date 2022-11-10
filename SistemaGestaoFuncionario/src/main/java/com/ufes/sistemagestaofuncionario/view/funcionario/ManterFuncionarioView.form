@@ -38,7 +38,7 @@
                               <Component id="ftfDataNascimento" min="-2" pref="113" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="checkboxFuncionarioMes" min="-2" max="-2" attributes="0"/>
+                              <Component id="checkBoxFuncionarioMes" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
                               <Component id="lbIdade" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -51,22 +51,22 @@
                               <Component id="btnFechar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="btnExcluir" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="btnEditar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnSalvar" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Group type="102" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="tfNome" min="-2" pref="363" max="-2" attributes="0"/>
+                                      <Component id="tfNome" max="32767" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
                                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="cbCargo" max="32767" attributes="0"/>
+                                      <Component id="cbCargo" min="-2" pref="335" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="btnNovoCargo" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -84,7 +84,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="9" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -99,15 +99,20 @@
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="ftfSalario" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cbCargo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnNovoCargo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="tfNome" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="ftfDataAdmissao" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="ftfDataAdmissao" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="tfFaltas" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -116,15 +121,16 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="checkboxFuncionarioMes" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="checkBoxFuncionarioMes" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lbIdade" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="btnFechar" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnExcluir" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnEditar" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnSalvar" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                      <Component id="btnSalvar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnExcluir" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace pref="11" max="32767" attributes="0"/>
           </Group>
@@ -147,7 +153,7 @@
         <Property name="text" type="java.lang.String" value="Faltas:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="checkboxFuncionarioMes">
+    <Component class="javax.swing.JCheckBox" name="checkBoxFuncionarioMes">
       <Properties>
         <Property name="text" type="java.lang.String" value="Funcion&#xe1;rio do m&#xea;s"/>
       </Properties>
@@ -188,11 +194,6 @@
         <Property name="text" type="java.lang.String" value="Salvar"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnEditar">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Editar"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="btnExcluir">
       <Properties>
         <Property name="text" type="java.lang.String" value="Excluir"/>
@@ -211,6 +212,11 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnNovoCargo">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="+ Cargo"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

@@ -31,6 +31,14 @@ public class ManterFuncionarioPresenter {
                 salvar();
             }
         });
+        
+        // Botão adicionar cargo
+        view.getBtnNovoCargo().addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                abrirCadastrarNovoCargo();
+            }
+        });
     }
     
     private void fechar(){
@@ -43,5 +51,9 @@ public class ManterFuncionarioPresenter {
                 "Sucesso",
                 JOptionPane.INFORMATION_MESSAGE);
         view.dispose();
+    }
+    
+    private void abrirCadastrarNovoCargo(){
+        new CadastrarCargoPresenter();
     }
 }
