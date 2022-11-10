@@ -38,7 +38,7 @@
                               <Component id="ftfDataNascimento" min="-2" pref="113" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="cbFuncionarioMes" min="-2" max="-2" attributes="0"/>
+                              <Component id="checkboxFuncionarioMes" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
                               <Component id="lbIdade" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -61,12 +61,12 @@
                                   <Group type="102" attributes="0">
                                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="tfNome" max="32767" attributes="0"/>
+                                      <Component id="tfNome" min="-2" pref="363" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="tfCargo" min="-2" pref="364" max="-2" attributes="0"/>
+                                      <Component id="cbCargo" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -96,9 +96,9 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="tfCargo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="ftfSalario" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbCargo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -116,7 +116,7 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="cbFuncionarioMes" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="checkboxFuncionarioMes" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lbIdade" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -147,7 +147,7 @@
         <Property name="text" type="java.lang.String" value="Faltas:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="cbFuncionarioMes">
+    <Component class="javax.swing.JCheckBox" name="checkboxFuncionarioMes">
       <Properties>
         <Property name="text" type="java.lang.String" value="Funcion&#xe1;rio do m&#xea;s"/>
       </Properties>
@@ -198,11 +198,19 @@
         <Property name="text" type="java.lang.String" value="Excluir"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfCargo">
-    </Component>
     <Component class="javax.swing.JTextField" name="tfNome">
     </Component>
     <Component class="javax.swing.JTextField" name="tfFaltas">
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cbCargo">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>
