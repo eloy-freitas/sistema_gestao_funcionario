@@ -3,6 +3,7 @@ package com.ufes.sistemagestaofuncionario.presenter;
 import com.ufes.sistemagestaofuncionario.view.funcionario.ManterFuncionarioView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 public class ManterFuncionarioPresenter {
     
@@ -15,10 +16,19 @@ public class ManterFuncionarioPresenter {
     }
     
     private void initListeners(){
+        // Botão fechar
         view.getBtnFechar().addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
                 fechar();
+            }
+        });
+        
+        // Botão salvar
+        view.getBtnSalvar().addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                salvar();
             }
         });
     }
@@ -27,4 +37,11 @@ public class ManterFuncionarioPresenter {
         view.dispose();
     }
     
+    private void salvar(){
+        JOptionPane.showMessageDialog(view,
+                "Funcionário <<nome>> salvo com sucesso!", 
+                "Sucesso",
+                JOptionPane.INFORMATION_MESSAGE);
+        view.dispose();
+    }
 }

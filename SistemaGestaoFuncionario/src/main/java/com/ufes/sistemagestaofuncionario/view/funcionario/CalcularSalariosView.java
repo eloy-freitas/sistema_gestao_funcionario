@@ -71,7 +71,7 @@ public class CalcularSalariosView extends javax.swing.JFrame {
         ftfDataCalculo = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         ftfDataBusca.setText("26/04/2018");
 

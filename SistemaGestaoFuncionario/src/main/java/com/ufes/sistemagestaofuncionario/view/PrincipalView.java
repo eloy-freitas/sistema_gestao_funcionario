@@ -59,7 +59,7 @@ public class PrincipalView extends javax.swing.JFrame {
 
         menuFuncionario.setText("Funcionário");
 
-        miNovoFuncionario.setText("Novo");
+        miNovoFuncionario.setText("Incluir");
         miNovoFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 miNovoFuncionarioActionPerformed(evt);
