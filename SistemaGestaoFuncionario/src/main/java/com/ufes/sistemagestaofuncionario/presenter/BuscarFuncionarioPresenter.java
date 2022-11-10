@@ -1,6 +1,7 @@
 package com.ufes.sistemagestaofuncionario.presenter;
 
 import com.ufes.sistemagestaofuncionario.view.funcionario.BuscarFuncionarioView;
+import com.ufes.sistemagestaofuncionario.view.funcionario.ManterFuncionarioView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ListSelectionModel;
@@ -30,16 +31,41 @@ public class BuscarFuncionarioPresenter {
     }
     
     private void initListeners(){
+        // Botão fechar
         view.getBtnFechar().addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
                 fechar();
             }
         });
+        
+        // Botão Novo
+        view.getBtnNovo().addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                abrirManterFuncionario();
+            }
+        });
+        
+        // Botão visualizar
+        view.getBtnVisualizar().addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                abrirVisualizarDetalhesFuncionario();
+            }
+        });
     }
     
     private void fechar(){
         view.dispose();
+    }
+    
+    private void abrirManterFuncionario(){
+        new ManterFuncionarioPresenter();
+    }
+    
+    private void abrirVisualizarDetalhesFuncionario(){
+        new ExibirDetalhesFuncionarioPresenter();
     }
     
 }
