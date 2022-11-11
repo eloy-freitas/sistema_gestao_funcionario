@@ -13,7 +13,7 @@ public class CalculadoraBonusAssiduidadeStrategy extends CalculadoraBonusStrateg
 
     
     @Override
-    public Funcionario calcular(Funcionario funcionario) {
+    public Bonus calcular(Funcionario funcionario) {
         int quantidade = 0;
         
         LocalDate data = LocalDate.now();
@@ -39,10 +39,7 @@ public class CalculadoraBonusAssiduidadeStrategy extends CalculadoraBonusStrateg
             bonus = new Bonus(this.getNome(), valor, data); 
         }
         
-        funcionario.getBonusRecebidos().add(bonus);
-        
-        return funcionario;
-
+        return bonus;
     }
     
     

@@ -11,7 +11,7 @@ public class CalculaBonusDistanciaTrabalho extends CalculadoraBonusStrategy{
     }
 
     @Override
-    public Funcionario calcular(Funcionario funcionario) {
+    public Bonus calcular(Funcionario funcionario) {
         Bonus bonus = null;
         double valor = 0;
         double distancia = funcionario.getDistanciaTrabalho();
@@ -33,9 +33,7 @@ public class CalculaBonusDistanciaTrabalho extends CalculadoraBonusStrategy{
             bonus = new Bonus(this.getNome(), valor, data);
         }
         
-        funcionario.getBonusRecebidos().add(bonus);
-        
-        return funcionario;
+        return bonus;
         
     }
     

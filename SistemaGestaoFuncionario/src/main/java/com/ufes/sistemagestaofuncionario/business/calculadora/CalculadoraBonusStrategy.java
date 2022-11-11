@@ -14,6 +14,6 @@ public abstract class CalculadoraBonusStrategy {
         return this.nome;
     }
     
-    public abstract Funcionario calcular(Funcionario funcionario);
+    public abstract Bonus calcular(Funcionario funcionario);
     
 }
