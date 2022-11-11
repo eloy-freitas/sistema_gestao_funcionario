@@ -7,8 +7,8 @@ import java.time.Period;
 
 public class CalculaBonusTempoServicoStrategy extends CalculadoraBonusStrategy{
 
-    public CalculaBonusTempoServicoStrategy(String nome) {
-        super(nome);
+    public CalculaBonusTempoServicoStrategy() {
+        super("Bonûs por tempo de serviço");
     }
     
     @Override
