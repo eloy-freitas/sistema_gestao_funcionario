@@ -332,12 +332,70 @@ public class FuncionarioDAO implements IFuncionarioDAO{
             ConexaoPostgreSQL.closeConnection(conexao, ps, result);
         }
         
-        
-        
-        
     }
+
+    @Override
+    public List<Funcionario> getAllBuscarFuncionarioView() throws SQLException, ClassNotFoundException {
+        PreparedStatement ps = null;
+        ResultSet result = null;
+        List<Funcionario> funcionarios = new ArrayList<>();
+        try{
+            String query = "" 
+                .concat("\nWITH cargo_atual as (")
+                .concat("\n		select ")
+                .concat("\n			f.id_funcionario ")
+                .concat("\n			, fc.id_cargo ")
+                .concat("\n			, max(fc.dt_modificacao) dt_modificacao ")
+                .concat("\n		FROM funcionario f ")
+                .concat("\n		INNER JOIN funcionario_cargo fc ")
+                .concat("\n			ON f.id_funcionario = fc.id_funcionario ")
+                .concat("\n		group by f.id_funcionario ")
+                .concat("\n			, fc.id_cargo ")
+                .concat("\n)")
+                .concat("\n	SELECT ")
+                .concat("\n		f.id_funcionario")
+                .concat("\n		, f.nm_funcionario")
+                .concat("\n		, f.nu_idade")
+                .concat("\n		, c.nm_cargo ")
+                .concat("\n		, f.vl_salario_base")
+                .concat("\n	FROM funcionario f ")
+                .concat("\n	INNER JOIN cargo_atual fc ")
+                .concat("\n		ON f.id_funcionario = fc.id_funcionario ")
+                .concat("\n	INNER JOIN cargo c ")
+                .concat("\n		ON fc.id_cargo = c.id_cargo");
+            ps = conexao.prepareStatement(query);
+
+            result = ps.executeQuery();  
+            if(!result.next())
+                throw new SQLException("Não há funcionários cadastrados.");
+            do{
+                int idFuncionario = result.getInt(1);
+                String nomeFuncionario = result.getString(2);
+                int idade = result.getInt(3);
+                String nomeCargo = result.getString(4);
+                double salarioBase = result.getDouble(5);
+
+                Cargo cargo = new Cargo(nomeCargo);
+                
+                funcionarios.add(
+                    new Funcionario(
+                        idFuncionario, 
+                        nomeFuncionario, 
+                        cargo, 
+                        salarioBase, 
+                        idade
+                    )
+                );
+            }while(result.next());
+            
+            return funcionarios;
+        } catch(SQLException ex) {
+            throw new SQLException("Erro ao buscar funcionários.\n"
+                    + ex.getMessage());
+        } finally{
+            ConexaoPostgreSQL.closeConnection(conexao, ps, result);
+        }
     
-    
-    
-    
+    }
+     
 }

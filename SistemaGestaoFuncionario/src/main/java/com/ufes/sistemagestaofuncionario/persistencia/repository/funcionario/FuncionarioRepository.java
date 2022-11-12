@@ -50,6 +50,11 @@ public class FuncionarioRepository implements IFuncionarioRepository{
     public Funcionario buscarFuncionarioPorName(String nome) throws SQLException, ClassNotFoundException {
             return funcionarioDAO.getByName(nome);
     }
+
+    @Override
+    public List<Funcionario> buscarBuscarFuncionarioView() throws SQLException, ClassNotFoundException {
+            return funcionarioDAO.getAllBuscarFuncionarioView();
+    }
        
     
         
