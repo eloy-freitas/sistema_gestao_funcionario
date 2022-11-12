@@ -47,4 +47,11 @@ public class FuncionarioService implements IFuncionarioService{
             return funcionarioRepository.buscarFuncionarioBonus(id);
     }
 
+    @Override
+    public Funcionario buscarFuncionarioPorName(String nome) throws SQLException, ClassNotFoundException {
+            return funcionarioRepository.buscarFuncionarioPorName(nome);
+    }
+    
+    
+
 }

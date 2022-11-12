@@ -13,4 +13,5 @@ public interface IFuncionarioDAO {
     public Funcionario getById(long id) throws SQLException, ClassNotFoundException;
     public List<Funcionario> getAll() throws SQLException, ClassNotFoundException;
     public ResultSet getFuncionarioBonus(long id) throws SQLException, ClassNotFoundException; 
+    public Funcionario getByName(String nome) throws SQLException, ClassNotFoundException; 
 }

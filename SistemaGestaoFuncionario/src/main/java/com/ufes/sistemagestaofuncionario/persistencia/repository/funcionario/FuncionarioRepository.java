@@ -45,7 +45,13 @@ public class FuncionarioRepository implements IFuncionarioRepository{
     public ResultSet buscarFuncionarioBonus(Long id) throws ClassNotFoundException, SQLException {
             return funcionarioDAO.getFuncionarioBonus(id);
     }
-        
+
+    @Override
+    public Funcionario buscarFuncionarioPorName(String nome) throws SQLException, ClassNotFoundException {
+            return funcionarioDAO.getByName(nome);
+    }
+       
+    
         
 	
 }
