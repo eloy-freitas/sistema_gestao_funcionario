@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.ufes.sistemagestaofuncionario.model.Funcionario;
+import java.sql.ResultSet;
 
 public interface IFuncionarioService {
 	boolean salvar(Funcionario funcionario) throws ClassNotFoundException, SQLException;
@@ -11,4 +12,5 @@ public interface IFuncionarioService {
 	boolean excluir(Long id) throws SQLException;
 	Funcionario buscarPorId(Long id) throws ClassNotFoundException, SQLException;
 	List<Funcionario> buscarTodos() throws ClassNotFoundException, SQLException;
+    ResultSet buscarFuncionarioBonus(Long id) throws ClassNotFoundException, SQLException;
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.ufes.sistemagestaofuncionario.model.Funcionario;
 import com.ufes.sistemagestaofuncionario.persistencia.dao.funcionario.FuncionarioDAO;
+import java.sql.ResultSet;
 
 public class FuncionarioRepository implements IFuncionarioRepository{
 
@@ -39,5 +40,12 @@ public class FuncionarioRepository implements IFuncionarioRepository{
 	public List<Funcionario> buscarTodos() throws ClassNotFoundException, SQLException {
 		return funcionarioDAO.getAll();
 	}
+
+    @Override
+    public ResultSet buscarFuncionarioBonus(Long id) throws ClassNotFoundException, SQLException {
+            return funcionarioDAO.getFuncionarioBonus(id);
+    }
+        
+        
 	
 }

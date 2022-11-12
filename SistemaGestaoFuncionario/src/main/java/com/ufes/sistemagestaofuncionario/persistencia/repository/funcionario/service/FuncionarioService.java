@@ -6,6 +6,7 @@ import java.util.List;
 import com.ufes.sistemagestaofuncionario.model.Funcionario;
 import com.ufes.sistemagestaofuncionario.persistencia.repository.funcionario.FuncionarioRepository;
 import com.ufes.sistemagestaofuncionario.persistencia.repository.funcionario.IFuncionarioRepository;
+import java.sql.ResultSet;
 
 public class FuncionarioService implements IFuncionarioService{
 	
@@ -40,7 +41,10 @@ public class FuncionarioService implements IFuncionarioService{
 	public List<Funcionario> buscarTodos() throws ClassNotFoundException, SQLException {
 		return funcionarioRepository.buscarTodos();
 	}
-	
-	
-	
+
+    @Override
+    public ResultSet buscarFuncionarioBonus(Long id) throws ClassNotFoundException, SQLException {
+            return funcionarioRepository.buscarFuncionarioBonus(id);
+    }
+
 }
