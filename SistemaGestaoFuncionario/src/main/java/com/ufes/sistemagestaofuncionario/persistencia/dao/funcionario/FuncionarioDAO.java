@@ -236,6 +236,42 @@ public class FuncionarioDAO implements IFuncionarioDAO{
         
         return listaFuncionarios;
     }
+
+    @Override
+    public ResultSet getFuncionarioBonus(long id) throws SQLException, ClassNotFoundException {
+        PreparedStatement ps = null;
+        ResultSet result = null;
+        try{
+            String query = "" 
+                .concat("select ")
+                .concat("\n	fb.dt_modificacao" )
+                .concat("\n	, c.nm_cargo" )
+                .concat("\n	, b.nm_bonus" )
+                .concat("\n	, fb.vl_bonus" )
+                .concat("\nfrom funcionario f" )
+                .concat("\ninner join funcionario_bonus fb" )
+                .concat("\n	on f.id_funcionario = fb.id_funcionario" )
+                .concat("\ninner join bonus b" )
+                .concat("\n	on fb.id_bonus = b.id_bonus" )
+                .concat("\ninner join funcionario_cargo fc" )
+                .concat("\n	on f.id_funcionario = fc.id_funcionario" )
+                .concat("\ninner join cargo c" )
+                .concat("\n	on fc.id_cargo = c.id_cargo" )
+                .concat("\nwhere f.id_funcionario = ?");
+            ps = conexao.prepareStatement(query);
+            ps.setLong(1, id);
+            result = ps.executeQuery();  
+        } catch(SQLException ex) {
+            throw new SQLException("Erro ao buscar funcionários.\n"
+                    + ex.getMessage());
+        } finally{
+            ConexaoPostgreSQL.closeConnection(conexao, ps, result);
+        }
+        
+        return result;
+        
+    }
+    
     
     
     
