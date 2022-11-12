@@ -1,6 +1,6 @@
 package com.ufes.sistemagestaofuncionario.presenter;
 
-import com.ufes.sistemagestaofuncionario.view.funcionario.VisualizarBonusView;
+import com.ufes.sistemagestaofuncionario.view.bonus.VisualizarBonusView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ListSelectionModel;
