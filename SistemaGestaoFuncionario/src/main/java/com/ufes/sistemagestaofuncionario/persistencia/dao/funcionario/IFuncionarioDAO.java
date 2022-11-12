@@ -1,6 +1,7 @@
 package com.ufes.sistemagestaofuncionario.persistencia.dao.funcionario;
 
 import com.ufes.sistemagestaofuncionario.model.Funcionario;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -10,5 +11,6 @@ public interface IFuncionarioDAO {
     public boolean update(Funcionario funcionario) throws SQLException;
     public boolean delete(long id) throws SQLException;
     public Funcionario getById(long id) throws SQLException, ClassNotFoundException;
-    public List<Funcionario> getAll() throws ClassNotFoundException, SQLException;
+    public List<Funcionario> getAll() throws SQLException, ClassNotFoundException;
+    public ResultSet getFuncionarioBonus(long id) throws SQLException, ClassNotFoundException; 
 }

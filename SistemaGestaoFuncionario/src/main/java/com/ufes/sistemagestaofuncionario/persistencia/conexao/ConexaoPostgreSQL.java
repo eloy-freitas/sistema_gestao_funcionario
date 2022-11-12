@@ -16,7 +16,7 @@ public class ConexaoPostgreSQL {
             Class.forName("org.postgresql.Driver");
             try {
                 Dotenv env = Dotenv.configure()
-                        .directory("./SistemaGestaoFuncionario/resources")
+                        .directory("./resources")
                         .filename(".env")
                         .load();
                 conexao = DriverManager.getConnection(
