@@ -1,0 +1,32 @@
+package com.ufes.sistemagestaofuncionario.persistencia.repository.cargo.service;
+
+import com.ufes.sistemagestaofuncionario.model.Cargo;
+import com.ufes.sistemagestaofuncionario.persistencia.repository.cargo.CargoRepository;
+import com.ufes.sistemagestaofuncionario.persistencia.repository.cargo.ICargoRepository;
+import java.sql.SQLException;
+import java.util.List;
+
+public class CargoService implements ICargoService{
+    private ICargoRepository cargoRepository;
+    
+    public CargoService() throws ClassNotFoundException, SQLException{
+        this.cargoRepository = new CargoRepository();
+    }
+
+    @Override
+    public List<Cargo> buscarTodos() throws ClassNotFoundException, SQLException {
+        return cargoRepository.buscarTodos();
+    }
+
+    @Override
+    public Cargo buscarPorNome(String nome) throws ClassNotFoundException, SQLException {
+        return cargoRepository.buscarPorNome(nome);
+    }
+
+    @Override
+    public boolean criar(Cargo cargo) throws ClassNotFoundException, SQLException {
+        return cargoRepository.criar(cargo);
+    }
+    
+    
+}
