@@ -14,4 +14,10 @@ public class FaltaAoTrabalho {
     public int getQuantidade() {
         return quantidade;
     }
+
+    public LocalDate getMes() {
+        return mes;
+    }
+    
+    
 }

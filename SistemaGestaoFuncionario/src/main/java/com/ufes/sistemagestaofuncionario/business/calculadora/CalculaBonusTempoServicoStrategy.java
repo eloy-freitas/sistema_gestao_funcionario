@@ -7,12 +7,12 @@ import java.time.Period;
 
 public class CalculaBonusTempoServicoStrategy extends CalculadoraBonusStrategy{
 
-    public CalculaBonusTempoServicoStrategy(String nome) {
-        super(nome);
+    public CalculaBonusTempoServicoStrategy() {
+        super("Bonûs por tempo de serviço");
     }
     
     @Override
-    public Funcionario calcular(Funcionario funcionario) {
+    public Bonus calcular(Funcionario funcionario) {
         LocalDate data = LocalDate.now();
         int valorTempoServico = Period
                 .between(
@@ -43,10 +43,7 @@ public class CalculaBonusTempoServicoStrategy extends CalculadoraBonusStrategy{
             bonus = new Bonus(getNome(), valor, data);            
         }          
             
-        funcionario.getBonusRecebidos().add(bonus);
-        
-        return funcionario;
-        
+        return bonus;
     }
     
 }
