@@ -1,6 +1,7 @@
 package com.ufes.sistemagestaofuncionario.persistencia.dao.cargo;
 
 import com.ufes.sistemagestaofuncionario.model.Cargo;
+import com.ufes.sistemagestaofuncionario.model.Funcionario;
 import java.sql.SQLException;
 import java.util.List;
 
