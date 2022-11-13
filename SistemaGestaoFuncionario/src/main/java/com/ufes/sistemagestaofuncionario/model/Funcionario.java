@@ -13,6 +13,7 @@ public class Funcionario {
     private double salarioBase;
     private double distanciaTrabalho;
     private LocalDate dataAdmissao;
+    private double tempoServico;
     private int idade;
     private double salarioTotal; // salarioBase + bonusRecebidos
     private List<Bonus> bonusRecebidos;
@@ -53,6 +54,19 @@ public class Funcionario {
         this.idade = idade;
 
     }
+    
+    public Funcionario(long id, String nome, Cargo cargo, double salarioBase, 
+                       double distanciaTrabalho, double tempoServico, LocalDate dataAdmissao) {
+        this.id = id;
+        this.nome = nome;
+        this.cargo = cargo;
+        this.salarioBase = salarioBase;
+        this.distanciaTrabalho = idade;
+        this.tempoServico = tempoServico;
+        this.dataAdmissao = dataAdmissao;
+    }
+    
+    
 
     public long getId() {
         return id;
@@ -93,5 +107,10 @@ public class Funcionario {
     public List<FaltaAoTrabalho> getFaltaAoTrabalho() {
         return faltaAoTrabalho;
     }
+
+    public double getTempoServico() {
+        return tempoServico;
+    }
+    
     
 }

@@ -55,22 +55,28 @@ public class FuncionarioDAO implements IFuncionarioDAO{
     @Override
     public boolean save(List<Funcionario> funcionarios) throws SQLException, ClassNotFoundException {
         PreparedStatement ps = null;
-        String query = "INSERT INTO funcionario(nm_funcionario, "
-                + "vl_salario_base, vl_distancia_trabalho, "
-                + "nu_idade, dt_admissao, dt_modificacao) VALUES "
-                + "(?, ?, ?, ?, ?, ?);";
+        String query = ""
+            .concat("\n INSERT INTO funcionario(")
+            .concat("\n id_funcionario")
+            .concat("\n , nm_funcionario")
+            .concat("\n , vl_salario_base")
+            .concat("\n , vl_distancia_trabalho")
+            .concat("\n , vl_tempo_servico")
+            .concat("\n , dt_admissao")
+            .concat("\n , dt_modificacao)")
+            .concat("\n VALUES (?, ?, ?, ?, ?, ?, ?);");
         try {
             for(Funcionario f : funcionarios){
                 ps = conexao.prepareStatement(query);
-                ps.setString(1, f.getNome());
-                ps.setDouble(2, f.getSalarioBase());
-                ps.setDouble(3, f.getDistanciaTrabalho());
-                ps.setInt(4, f.getIdade());
-                // Convertendo local date para o formato utilizado pelo PreparedStatement
+                ps.setLong(1, f.getId());
+                ps.setString(2, f.getNome());
+                ps.setDouble(3, f.getSalarioBase());
+                ps.setDouble(4, f.getDistanciaTrabalho());
+                ps.setDouble(5, f.getTempoServico());
                 Date sqlDate = Date.valueOf(f.getDataAdmissao());
-                ps.setDate(5, sqlDate);
-                sqlDate = Date.valueOf(LocalDate.now());
                 ps.setDate(6, sqlDate);
+                sqlDate = Date.valueOf(LocalDate.now());
+                ps.setDate(7, sqlDate);
                 ps.executeUpdate();
             }
             return true;
@@ -81,8 +87,6 @@ public class FuncionarioDAO implements IFuncionarioDAO{
         }
     }
 
-    
-    
     @Override
     public boolean update(Funcionario funcionario) throws SQLException {
         PreparedStatement ps = null;
