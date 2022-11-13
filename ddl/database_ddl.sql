@@ -8,7 +8,8 @@ create table funcionario(
 	, nm_funcionario varchar(150) not null
 	, vl_salario_base decimal not null
 	, vl_distancia_trabalho decimal not null
-	, nu_idade int not null
+	, vl_tempo_servico decimal
+	, nu_idade int
 	, dt_admissao timestamp not null
 	, dt_modificacao timestamp not null
 );

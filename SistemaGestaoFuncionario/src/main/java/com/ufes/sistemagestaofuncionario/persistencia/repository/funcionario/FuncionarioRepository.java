@@ -40,6 +40,14 @@ public class FuncionarioRepository implements IFuncionarioRepository {
     }
 
     @Override
+    public boolean criar(List<Funcionario> funcionarios) throws ClassNotFoundException, SQLException {
+        abrirConexoes();
+        return funcionarioDAO.save(funcionarios);
+    }
+    
+    
+
+    @Override
     public boolean excluir(Long id) throws ClassNotFoundException, SQLException {
         abrirConexoes();
         return funcionarioDAO.delete(id);

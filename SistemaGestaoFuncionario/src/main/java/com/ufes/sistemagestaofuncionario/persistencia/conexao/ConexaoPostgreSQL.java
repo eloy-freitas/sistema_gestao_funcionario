@@ -23,7 +23,6 @@ public class ConexaoPostgreSQL {
                         env.get("DB_URL"),
                         env.get("DB_USER"),
                         env.get("DB_PASSWORD"));
-                System.out.println("Conectado.");
             } catch (SQLException ex) {
                 throw new SQLException("Falha na conexão com banco.\n" 
                         + ex.getMessage());

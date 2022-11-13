@@ -23,6 +23,11 @@ public class FuncionarioService implements IFuncionarioService {
     }
 
     @Override
+    public boolean salvar(List<Funcionario> funcionarios) throws ClassNotFoundException, SQLException {
+        return funcionarioRepository.criar(funcionarios);
+    }
+
+    @Override
     public boolean atualizar(Funcionario funcionario) throws ClassNotFoundException, SQLException {
         return funcionarioRepository.atualizar(funcionario);
     }
