@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface IFileReaderAdapter {
     List<Funcionario> readFuncionarioFile() throws IOException;
-
+    
 }

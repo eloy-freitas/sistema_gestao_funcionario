@@ -30,7 +30,6 @@ public class FileReaderCSVAdapter implements IFileReaderAdapter{
         try {
             String[] nextRecord;
             csvReader.readNext();
-            int id;
             String nome;
             Cargo cargo = null;
             double salarioBase;
@@ -38,7 +37,6 @@ public class FileReaderCSVAdapter implements IFileReaderAdapter{
             double tempoServico;
             LocalDate dataAdmissao;
             while ((nextRecord = csvReader.readNext()) != null) {
-                id = Integer.parseInt(nextRecord[0]);
                 nome = nextRecord[1];
                 cargo = new Cargo(nextRecord[2]);
                 salarioBase = Double.parseDouble(nextRecord[3]);
@@ -46,7 +44,6 @@ public class FileReaderCSVAdapter implements IFileReaderAdapter{
                 tempoServico = Double.parseDouble(nextRecord[5]);
                 dataAdmissao = LocalDate.parse(nextRecord[6]);
                 funcionarios.add(new Funcionario(
-                        id, 
                         nome,
                         cargo,
                         salarioBase, 
