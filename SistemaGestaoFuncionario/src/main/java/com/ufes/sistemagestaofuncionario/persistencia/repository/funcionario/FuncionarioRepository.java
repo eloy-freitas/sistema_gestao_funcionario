@@ -11,75 +11,98 @@ import java.sql.ResultSet;
 import java.time.LocalDate;
 import com.ufes.sistemagestaofuncionario.persistencia.dao.bonus.IBonusCalculadoDAO;
 import com.ufes.sistemagestaofuncionario.persistencia.dao.cargo.ICargoDAO;
+import com.ufes.sistemagestaofuncionario.persistencia.dao.falta.FaltaDAO;
+import com.ufes.sistemagestaofuncionario.persistencia.dao.falta.IFaltaDAO;
 import com.ufes.sistemagestaofuncionario.persistencia.dao.funcionario.IFuncionarioDAO;
 
-public class FuncionarioRepository implements IFuncionarioRepository{
+public class FuncionarioRepository implements IFuncionarioRepository {
 
-	private IFuncionarioDAO funcionarioDAO;
-        private ICargoDAO cargoDAO;
-        private IBonusCalculadoDAO bonusCalculadoDAO;
+    private IFuncionarioDAO funcionarioDAO;
+    private ICargoDAO cargoDAO;
+    private IBonusCalculadoDAO bonusCalculadoDAO;
+    private IFaltaDAO faltaDAO;
 
-	public FuncionarioRepository() throws SQLException, ClassNotFoundException{
-		super();
-		this.funcionarioDAO = new FuncionarioDAO();
-                this.cargoDAO = new CargoDAO();
-                this.bonusCalculadoDAO = new BonusCalculadoDAO();
-	}
+    public FuncionarioRepository() throws SQLException, ClassNotFoundException {
+        super();
+    }
 
-	@Override
-	public boolean criar(Funcionario funcionario) throws ClassNotFoundException, SQLException {
-		return funcionarioDAO.save(funcionario) && cargoDAO.save(funcionario); 
-	}
+    private void abrirConexoes() throws ClassNotFoundException, SQLException {
+        this.funcionarioDAO = new FuncionarioDAO();
+        this.cargoDAO = new CargoDAO();
+        this.bonusCalculadoDAO = new BonusCalculadoDAO();
+        this.faltaDAO = new FaltaDAO();
+    }
 
-	@Override
-	public boolean excluir(Long id) throws SQLException {
-		return funcionarioDAO.delete(id);
-	}
-	
-	@Override
-	public boolean atualizar(Funcionario funcionario) throws SQLException {
-		return funcionarioDAO.update(funcionario);
-	}
+    @Override
+    public boolean criar(Funcionario funcionario) throws ClassNotFoundException, SQLException {
+        abrirConexoes();
+        return funcionarioDAO.save(funcionario) && cargoDAO.save(funcionario);
+    }
 
-	@Override
-	public Funcionario buscarPorId(Long id) throws ClassNotFoundException, SQLException {
-		return funcionarioDAO.getById(id);
-	}
+    @Override
+    public boolean excluir(Long id) throws ClassNotFoundException, SQLException {
+        abrirConexoes();
+        return funcionarioDAO.delete(id);
+    }
 
-	@Override
-	public List<Funcionario> buscarTodos() throws ClassNotFoundException, SQLException {
-		return funcionarioDAO.getAll();
-	}
+    @Override
+    public boolean atualizar(Funcionario funcionario) throws ClassNotFoundException, SQLException {
+        abrirConexoes();
+        return funcionarioDAO.update(funcionario);
+    }
+
+    @Override
+    public Funcionario buscarPorId(Long id) throws ClassNotFoundException, SQLException {
+        abrirConexoes();
+        return funcionarioDAO.getById(id);
+    }
+
+    @Override
+    public List<Funcionario> buscarTodos() throws ClassNotFoundException, SQLException {
+        abrirConexoes();
+        return funcionarioDAO.getAll();
+    }
 
     @Override
     public ResultSet buscarFuncionarioBonus(Long id) throws ClassNotFoundException, SQLException {
-            return funcionarioDAO.getFuncionarioBonus(id);
+        abrirConexoes();
+        return funcionarioDAO.getFuncionarioBonus(id);
     }
 
     @Override
     public Funcionario buscarFuncionarioPorName(String nome) throws SQLException, ClassNotFoundException {
-            return funcionarioDAO.getByName(nome);
+        abrirConexoes();
+        return funcionarioDAO.getByName(nome);
     }
 
     @Override
     public List<Funcionario> buscarBuscarFuncionarioView() throws SQLException, ClassNotFoundException {
-            return funcionarioDAO.getAllBuscarFuncionarioView();
+        abrirConexoes();
+        return funcionarioDAO.getAllBuscarFuncionarioView();
     }
 
     @Override
     public ResultSet buscarSalarioCalculadoPorData(LocalDate data) throws SQLException, ClassNotFoundException {
+        abrirConexoes();
         return funcionarioDAO.getSalarioCalculadoByDate(data);
     }
 
     @Override
     public ResultSet buscarTodosSalarioCalculado() throws SQLException, ClassNotFoundException {
+        abrirConexoes();
         return funcionarioDAO.getAllSalarioCalculado();
     }
 
     @Override
     public boolean incluirBonus(Funcionario funcionario) throws SQLException, ClassNotFoundException {
+        abrirConexoes();
         return bonusCalculadoDAO.save(funcionario);
     }
-    
-    
+
+    @Override
+    public boolean incluirFaltas(Funcionario funcionario) throws SQLException, ClassNotFoundException {
+        abrirConexoes();
+        return faltaDAO.save(funcionario);
+    }
+
 }

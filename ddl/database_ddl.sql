@@ -1,11 +1,3 @@
-
-
-create table vigencia(
-	id_vigencia serial primary key unique
-	, dt_vigencia varchar(6) not null
-	, dt_modificacao timestamp
-);
-
 create table cargo (
 	id_cargo serial primary key unique
 	, nm_cargo varchar(50) not null unique
@@ -38,11 +30,11 @@ create table funcionario_bonus(
 );
 
 create table funcionario_falta(
-	id_vigencia int not null
-	, id_funcionario int not null
+	id_funcionario int not null
 	, qt_faltas int not null
-	, dt_modificacao timestamp
-	, constraint id_vigencia_fk foreign key (id_vigencia) references vigencia(id_vigencia)
+	, dt_vigencia date
+	, dt_modificacao date
+	, constraint id_falta_pk primary key (id_funcionario, dt_vigencia)
 	, constraint id_funcionario_falta_fk foreign key (id_funcionario) references funcionario(id_funcionario)
 );
 
@@ -60,6 +52,4 @@ create table salario(
 	, dt_modificacao date
 	, constraint id_funcionario_salario_fk foreign key (id_funcionario) references funcionario(id_funcionario)
 
-)
-
-
+);
