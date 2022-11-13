@@ -11,25 +11,14 @@ create table cargo (
 	, nm_cargo varchar(50) not null unique
 );
 
-
-create table funcionario_cargo (
-	id_cargo int not null
-	, id_funcionario int not null
-	, dt_modificacao timestamp not null
-	, constraint id_cargo_fk foreign key (id_cargo) references cargo(id_cargo)
-	, constraint id_funcionario_cargo_fk foreign key (id_funcionario) references funcionario(id_funcionario)
-);
-
 create table funcionario(
 	id_funcionario serial primary key unique
 	, nm_funcionario varchar(150) not null
 	, vl_salario_base decimal not null
 	, vl_distancia_trabalho decimal not null
-	, vl_salario_total decimal not null
 	, nu_idade int not null
 	, dt_admissao timestamp not null
 	, dt_modificacao timestamp not null
-	, constraint id_cargo_fk foreign key (id_cargo) references cargo(id_cargo)
 );
 
 create table bonus(
@@ -47,8 +36,7 @@ create table funcionario_bonus(
 	, constraint id_funcionario_bonus_fk foreign key (id_funcionario) references funcionario(id_funcionario)
 );
 
-
-create table falta_funcionario(
+create table funcionario_falta(
 	id_vigencia int not null
 	, id_funcionario int not null
 	, qt_faltas int not null
@@ -57,5 +45,20 @@ create table falta_funcionario(
 	, constraint id_funcionario_falta_fk foreign key (id_funcionario) references funcionario(id_funcionario)
 );
 
+create table funcionario_cargo (
+	id_cargo int not null
+	, id_funcionario int not null
+	, dt_modificacao timestamp not null
+	, constraint id_cargo_fk foreign key (id_cargo) references cargo(id_cargo)
+	, constraint id_funcionario_cargo_fk foreign key (id_funcionario) references funcionario(id_funcionario)
+);
+
+create table salario(
+	id_funcionario int not null
+	, vl_salario_total decimal not null
+	, dt_modificacao date
+	, constraint id_funcionario_salario_fk foreign key (id_funcionario) references funcionario(id_funcionario)
+
+)
 
 
