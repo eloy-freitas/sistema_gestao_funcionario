@@ -104,7 +104,7 @@ public class CargoDAO implements ICargoDAO{
             rs = ps.executeQuery();
             if(!rs.next())
                 throw new SQLException("Não há cargos cadastrados"
-                        + "até o momento");
+                        + " até o momento");
             do {
                 long id = rs.getLong(1);
                 String nome = rs.getString(2);
