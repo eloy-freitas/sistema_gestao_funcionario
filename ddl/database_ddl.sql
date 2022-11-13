@@ -23,7 +23,7 @@ create table funcionario(
 
 create table bonus(
 	id_bonus serial primary key unique
-	, nm_bonus varchar(100) not null
+	, nm_bonus varchar(100) not null unique
 	, dt_modificacao timestamp not null
 );
 
