@@ -18,5 +18,5 @@ public interface IFuncionarioRepository {
     List<Funcionario> buscarBuscarFuncionarioView() throws SQLException, ClassNotFoundException; 
     ResultSet buscarSalarioCalculadoPorData(LocalDate data) throws SQLException, ClassNotFoundException; 
     ResultSet buscarTodosSalarioCalculado() throws SQLException, ClassNotFoundException; 
-
+    boolean incluirBonus(Funcionario funcionario) throws SQLException, ClassNotFoundException;
 }

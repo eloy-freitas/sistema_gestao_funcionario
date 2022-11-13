@@ -67,4 +67,9 @@ public class FuncionarioService implements IFuncionarioService{
     public ResultSet buscarTodosSalarioCalculado() throws SQLException, ClassNotFoundException {
         return funcionarioRepository.buscarTodosSalarioCalculado();
     }
+
+    @Override
+    public boolean incluirBonus(Funcionario funcionario) throws SQLException, ClassNotFoundException {
+        return funcionarioRepository.incluirBonus(funcionario);
+    }
 }
