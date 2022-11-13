@@ -397,5 +397,47 @@ public class FuncionarioDAO implements IFuncionarioDAO{
         }
     
     }
-     
+
+    @Override
+    public ResultSet getSalarioCalculadoByDate(LocalDate data) throws SQLException, ClassNotFoundException {
+        PreparedStatement ps = null;
+        ResultSet result = null;
+        try{
+            String query = "" 
+                .concat("\n select ")
+                .concat("\n     f.nm_funcionario ")
+                .concat("\n     , s.dt_modificacao")
+                .concat("\n     , f.vl_salario_base ")
+                .concat("\n     , sum(fb.vl_bonus) vl_bonus")
+                .concat("\n     , s.vl_salario_total ")
+                .concat("\n from funcionario f ")
+                .concat("\n left join salario s ")
+                .concat("\n     on f.id_funcionario = s.id_funcionario ")
+                .concat("\n left join funcionario_bonus fb ")
+                .concat("\n     on f.id_funcionario = fb.id_funcionario ")
+                .concat("\n where s.dt_modificacao = ?")
+                .concat("\n     and fb.dt_modificacao = ?")
+                .concat("\n group by f.nm_funcionario ")
+                .concat("\n     , s.dt_modificacao")
+                .concat("\n     , f.vl_salario_base ")
+                .concat("\n     , s.vl_salario_total ");
+            
+            ps = conexao.prepareStatement(query);
+            ps.setDate(1, Date.valueOf(data));
+            ps.setDate(2, Date.valueOf(data));
+            result = ps.executeQuery();  
+            return result;
+            
+        } catch(SQLException ex) {
+            throw new SQLException("Erro ao buscar funcionários.\n"
+                    + ex.getMessage());
+        } finally{
+            ConexaoPostgreSQL.closeConnection(conexao, ps, result);
+        }
+        
+
+
+    }
+    
+    
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import com.ufes.sistemagestaofuncionario.model.Funcionario;
 import com.ufes.sistemagestaofuncionario.persistencia.dao.funcionario.FuncionarioDAO;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 
 public class FuncionarioRepository implements IFuncionarioRepository{
 
@@ -54,6 +55,11 @@ public class FuncionarioRepository implements IFuncionarioRepository{
     @Override
     public List<Funcionario> buscarBuscarFuncionarioView() throws SQLException, ClassNotFoundException {
             return funcionarioDAO.getAllBuscarFuncionarioView();
+    }
+
+    @Override
+    public ResultSet buscarSalarioCalculadoPorData(LocalDate data) throws SQLException, ClassNotFoundException {
+        return funcionarioDAO.getSalarioCalculadoByDate(data);
     }
        
     
