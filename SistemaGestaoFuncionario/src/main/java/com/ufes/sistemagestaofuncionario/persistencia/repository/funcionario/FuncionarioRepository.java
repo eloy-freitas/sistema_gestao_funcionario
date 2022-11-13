@@ -4,20 +4,26 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.ufes.sistemagestaofuncionario.model.Funcionario;
+import com.ufes.sistemagestaofuncionario.persistencia.dao.bonus.BonusCalculadoDAO;
 import com.ufes.sistemagestaofuncionario.persistencia.dao.cargo.CargoDAO;
 import com.ufes.sistemagestaofuncionario.persistencia.dao.funcionario.FuncionarioDAO;
 import java.sql.ResultSet;
 import java.time.LocalDate;
+import com.ufes.sistemagestaofuncionario.persistencia.dao.bonus.IBonusCalculadoDAO;
+import com.ufes.sistemagestaofuncionario.persistencia.dao.cargo.ICargoDAO;
+import com.ufes.sistemagestaofuncionario.persistencia.dao.funcionario.IFuncionarioDAO;
 
 public class FuncionarioRepository implements IFuncionarioRepository{
 
-	private FuncionarioDAO funcionarioDAO;
-        private CargoDAO cargoDAO;
+	private IFuncionarioDAO funcionarioDAO;
+        private ICargoDAO cargoDAO;
+        private IBonusCalculadoDAO bonusCalculadoDAO;
 
 	public FuncionarioRepository() throws SQLException, ClassNotFoundException{
 		super();
 		this.funcionarioDAO = new FuncionarioDAO();
                 this.cargoDAO = new CargoDAO();
+                this.bonusCalculadoDAO = new BonusCalculadoDAO();
 	}
 
 	@Override
@@ -69,4 +75,11 @@ public class FuncionarioRepository implements IFuncionarioRepository{
     public ResultSet buscarTodosSalarioCalculado() throws SQLException, ClassNotFoundException {
         return funcionarioDAO.getAllSalarioCalculado();
     }
+
+    @Override
+    public boolean incluirBonus(Funcionario funcionario) throws SQLException, ClassNotFoundException {
+        return bonusCalculadoDAO.save(funcionario);
+    }
+    
+    
 }
