@@ -43,6 +43,16 @@ public class Funcionario {
         this.bonusRecebidos = bonusRecebidos;
         this.faltaAoTrabalho = faltaAoTrabalho;
     }
+    
+    public Funcionario(long id, String nome, Cargo cargo, double salarioBase, 
+                       int idade) {
+        this.id = id;
+        this.nome = nome;
+        this.cargo = cargo;
+        this.salarioBase = salarioBase;
+        this.idade = idade;
+
+    }
 
     public long getId() {
         return id;

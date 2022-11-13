@@ -13,4 +13,7 @@ public interface IFuncionarioService {
 	Funcionario buscarPorId(Long id) throws ClassNotFoundException, SQLException;
 	List<Funcionario> buscarTodos() throws ClassNotFoundException, SQLException;
     ResultSet buscarFuncionarioBonus(Long id) throws ClassNotFoundException, SQLException;
+    Funcionario buscarFuncionarioPorName(String nome) throws SQLException, ClassNotFoundException; 
+    List<Funcionario> buscarBuscarFuncionarioView() throws SQLException, ClassNotFoundException; 
+
 }
