@@ -9,9 +9,9 @@ import java.sql.ResultSet;
 public interface IFuncionarioRepository {
 	boolean criar(Funcionario funcionario) throws ClassNotFoundException, SQLException;
 
-	boolean excluir(Long id) throws SQLException;
+	boolean excluir(Long id) throws SQLException, ClassNotFoundException;
 
-	boolean atualizar(Funcionario funcionario) throws SQLException;
+	boolean atualizar(Funcionario funcionario) throws SQLException, ClassNotFoundException;
 
 	Funcionario buscarPorId(Long id) throws ClassNotFoundException, SQLException;
 

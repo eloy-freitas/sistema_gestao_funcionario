@@ -5,46 +5,56 @@ import java.util.List;
 
 import com.ufes.sistemagestaofuncionario.model.Funcionario;
 import com.ufes.sistemagestaofuncionario.persistencia.dao.funcionario.FuncionarioDAO;
+import com.ufes.sistemagestaofuncionario.persistencia.dao.funcionario.IFuncionarioDAO;
 import java.sql.ResultSet;
 
 public class FuncionarioRepository implements IFuncionarioRepository{
 
-	private FuncionarioDAO funcionarioDAO;
+	private IFuncionarioDAO funcionarioDAO;
 
-	public FuncionarioRepository() throws SQLException, ClassNotFoundException{
-		super();
-		this.funcionarioDAO = new FuncionarioDAO();
+	public FuncionarioRepository() {
+            super();
 	}
+        
+        private void abrirConexao() throws SQLException, ClassNotFoundException{
+            this.funcionarioDAO = new FuncionarioDAO();
+        }
 
 	@Override
 	public boolean criar(Funcionario funcionario) throws ClassNotFoundException, SQLException {
+                abrirConexao();
 		return funcionarioDAO.save(funcionario);
 	}
 
 	@Override
-	public boolean excluir(Long id) throws SQLException {
-		return funcionarioDAO.delete(id);
+	public boolean excluir(Long id) throws SQLException, ClassNotFoundException{
+            abrirConexao();
+            return funcionarioDAO.delete(id);
 	}
 	
 	@Override
-	public boolean atualizar(Funcionario funcionario) throws SQLException {
-		return funcionarioDAO.update(funcionario);
+	public boolean atualizar(Funcionario funcionario) throws SQLException, ClassNotFoundException {
+            abrirConexao();
+            return funcionarioDAO.update(funcionario);
 	}
 
 	@Override
 	public Funcionario buscarPorId(Long id) throws ClassNotFoundException, SQLException {
-		return funcionarioDAO.getById(id);
+            abrirConexao();
+            return funcionarioDAO.getById(id);
 	}
 
 	@Override
 	public List<Funcionario> buscarTodos() throws ClassNotFoundException, SQLException {
-		return funcionarioDAO.getAll();
+            abrirConexao();
+            return funcionarioDAO.getAll();
 	}
 
-    @Override
-    public ResultSet buscarFuncionarioBonus(Long id) throws ClassNotFoundException, SQLException {
+        @Override
+        public ResultSet buscarFuncionarioBonus(Long id) throws ClassNotFoundException, SQLException {
+            abrirConexao();
             return funcionarioDAO.getFuncionarioBonus(id);
-    }
+        }
         
         
 	
