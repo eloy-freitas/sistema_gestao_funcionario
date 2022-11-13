@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.time.LocalDate;
 import com.ufes.sistemagestaofuncionario.persistencia.dao.bonus.IBonusCalculadoDAO;
 import com.ufes.sistemagestaofuncionario.persistencia.dao.cargo.ICargoDAO;
+import com.ufes.sistemagestaofuncionario.persistencia.dao.falta.FaltaDAO;
+import com.ufes.sistemagestaofuncionario.persistencia.dao.falta.IFaltaDAO;
 import com.ufes.sistemagestaofuncionario.persistencia.dao.funcionario.IFuncionarioDAO;
 
 public class FuncionarioRepository implements IFuncionarioRepository{
@@ -18,12 +20,14 @@ public class FuncionarioRepository implements IFuncionarioRepository{
 	private IFuncionarioDAO funcionarioDAO;
         private ICargoDAO cargoDAO;
         private IBonusCalculadoDAO bonusCalculadoDAO;
+        private IFaltaDAO faltaDAO;
 
 	public FuncionarioRepository() throws SQLException, ClassNotFoundException{
 		super();
 		this.funcionarioDAO = new FuncionarioDAO();
                 this.cargoDAO = new CargoDAO();
                 this.bonusCalculadoDAO = new BonusCalculadoDAO();
+                this.faltaDAO = new FaltaDAO();
 	}
 
 	@Override
@@ -79,6 +83,11 @@ public class FuncionarioRepository implements IFuncionarioRepository{
     @Override
     public boolean incluirBonus(Funcionario funcionario) throws SQLException, ClassNotFoundException {
         return bonusCalculadoDAO.save(funcionario);
+    }
+
+    @Override
+    public boolean incluirFaltas(Funcionario funcionario) throws SQLException, ClassNotFoundException {
+        return faltaDAO.save(funcionario);
     }
     
     
