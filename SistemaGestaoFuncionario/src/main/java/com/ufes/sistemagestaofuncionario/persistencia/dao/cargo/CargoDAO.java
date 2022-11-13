@@ -1,11 +1,14 @@
 package com.ufes.sistemagestaofuncionario.persistencia.dao.cargo;
 
 import com.ufes.sistemagestaofuncionario.model.Cargo;
+import com.ufes.sistemagestaofuncionario.model.Funcionario;
 import com.ufes.sistemagestaofuncionario.persistencia.conexao.ConexaoPostgreSQL;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,13 +21,16 @@ public class CargoDAO implements ICargoDAO{
     }
     
     @Override
-    public boolean save(Cargo cargo) throws SQLException {
+    public boolean save(Funcionario funcionario) throws SQLException {
         PreparedStatement ps = null;
         try{
-            String query = "INSERT INTO cargo (nm_cargo) "
-                + "VALUES (?);";
+            String query = "INSERT INTO funcionario_cargo(id_funcionario, "
+                + "id_cargo, dt_modificacao)"
+                + "VALUES (?, ?, ?);";
             ps = conexao.prepareStatement(query);
-            ps.setString(1, cargo.getNome());
+            ps.setLong(1, funcionario.getId());
+            ps.setLong(2, funcionario.getCargo().getId());
+            ps.setDate(3, Date.valueOf(LocalDate.now()));
             ps.executeUpdate();
             return true;
         } catch (SQLException ex){
@@ -38,7 +44,7 @@ public class CargoDAO implements ICargoDAO{
     public boolean delete(long id) throws SQLException {
         PreparedStatement ps = null;
         try{
-            String query = "DELETE FROM cargo WHERE id_cargo = ?;";
+            String query = "DELETE FROM funcionario_cargo WHERE id_funcionario = ?;";
             ps = conexao.prepareStatement(query);
             ps.setLong(1, id);
             ps.executeUpdate();

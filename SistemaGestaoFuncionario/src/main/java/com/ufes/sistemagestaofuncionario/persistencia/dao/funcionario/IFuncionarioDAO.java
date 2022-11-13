@@ -3,6 +3,7 @@ package com.ufes.sistemagestaofuncionario.persistencia.dao.funcionario;
 import com.ufes.sistemagestaofuncionario.model.Funcionario;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface IFuncionarioDAO {
@@ -15,4 +16,6 @@ public interface IFuncionarioDAO {
     public ResultSet getFuncionarioBonus(long id) throws SQLException, ClassNotFoundException; 
     public Funcionario getByName(String nome) throws SQLException, ClassNotFoundException; 
     public List<Funcionario> getAllBuscarFuncionarioView() throws SQLException, ClassNotFoundException; 
+    public ResultSet getSalarioCalculadoByDate(LocalDate data) throws SQLException, ClassNotFoundException; 
+    public ResultSet getAllSalarioCalculado() throws SQLException, ClassNotFoundException; 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.ufes.sistemagestaofuncionario.model.Funcionario;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 
 public interface IFuncionarioService {
 	boolean salvar(Funcionario funcionario) throws ClassNotFoundException, SQLException;
@@ -15,5 +16,7 @@ public interface IFuncionarioService {
     ResultSet buscarFuncionarioBonus(Long id) throws ClassNotFoundException, SQLException;
     Funcionario buscarFuncionarioPorName(String nome) throws SQLException, ClassNotFoundException; 
     List<Funcionario> buscarBuscarFuncionarioView() throws SQLException, ClassNotFoundException; 
+    ResultSet buscarSalarioCalculadoPorData(LocalDate data) throws SQLException, ClassNotFoundException; 
+    ResultSet buscarTodosSalarioCalculado() throws SQLException, ClassNotFoundException; 
 
 }
