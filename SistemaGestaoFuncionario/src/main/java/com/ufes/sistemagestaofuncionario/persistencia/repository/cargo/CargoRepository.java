@@ -35,4 +35,12 @@ public class CargoRepository implements ICargoRepository{
         abrirConexao();
         return cargoDAO.save(funcionario);
     }
+
+    @Override
+    public boolean criar(List<Funcionario> funcionarios) throws SQLException, ClassNotFoundException {
+        abrirConexao();
+        return cargoDAO.save(funcionarios);
+    }
+    
+    
 }

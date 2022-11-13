@@ -12,4 +12,7 @@ public interface ICargoRepository {
     Cargo buscarPorNome(String nome) throws SQLException, ClassNotFoundException;
 
     boolean criar(Funcionario funcionario) throws SQLException, ClassNotFoundException;
+
+    boolean criar(List<Funcionario> funcionarios) throws SQLException, ClassNotFoundException;
+
 }

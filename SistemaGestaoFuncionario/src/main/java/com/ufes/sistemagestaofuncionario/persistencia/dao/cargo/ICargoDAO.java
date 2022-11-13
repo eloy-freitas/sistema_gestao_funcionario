@@ -8,6 +8,7 @@ import java.util.List;
 public interface ICargoDAO {
     
     public boolean save(Funcionario funcionario) throws SQLException;
+    public boolean save(List<Funcionario> funcionarios) throws SQLException;
     public boolean delete(long id) throws SQLException;
     public Cargo getById(long id) throws SQLException;
     public Cargo getByNome(String nome) throws SQLException;
