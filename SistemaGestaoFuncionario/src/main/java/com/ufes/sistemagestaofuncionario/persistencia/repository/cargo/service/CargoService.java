@@ -1,6 +1,7 @@
 package com.ufes.sistemagestaofuncionario.persistencia.repository.cargo.service;
 
 import com.ufes.sistemagestaofuncionario.model.Cargo;
+import com.ufes.sistemagestaofuncionario.model.Funcionario;
 import com.ufes.sistemagestaofuncionario.persistencia.repository.cargo.CargoRepository;
 import com.ufes.sistemagestaofuncionario.persistencia.repository.cargo.ICargoRepository;
 import java.sql.SQLException;
@@ -24,7 +25,7 @@ public class CargoService implements ICargoService{
     }
 
     @Override
-    public boolean criar(Cargo cargo) throws ClassNotFoundException, SQLException {
-        return cargoRepository.criar(cargo);
+    public boolean criar(Funcionario funcionario) throws ClassNotFoundException, SQLException {
+        return cargoRepository.criar(funcionario);
     }
 }
