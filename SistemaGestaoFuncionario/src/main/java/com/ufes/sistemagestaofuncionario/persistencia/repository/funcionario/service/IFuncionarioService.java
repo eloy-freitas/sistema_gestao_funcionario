@@ -10,7 +10,9 @@ import java.time.LocalDate;
 public interface IFuncionarioService {
 
     boolean salvar(Funcionario funcionario) throws ClassNotFoundException, SQLException;
-
+    
+    boolean salvar(List<Funcionario> funcionarios) throws ClassNotFoundException, SQLException;
+    
     boolean atualizar(Funcionario funcionario) throws ClassNotFoundException, SQLException;
 
     boolean excluir(Long id) throws ClassNotFoundException, SQLException;
