@@ -23,31 +23,32 @@ public class FuncionarioDAO implements IFuncionarioDAO{
 
     @Override
     public boolean save(Funcionario funcionario) throws SQLException, ClassNotFoundException{
-        PreparedStatement ps = null;
+        PreparedStatement psFuncionario = null;
+        
         try {
-            String query = "INSERT INTO funcionario(nm_funcionario, "
-                + "vl_salario_base, vl_distancia_trabalho, vl_salario_total, "
-                + "nu_idade, dt_admissao, id_cargo, dt_modificacao) VALUES "
-                + "(?, ?, ?, ?, ?, ?, ?, ?);";
-            ps = conexao.prepareStatement(query);
-            ps.setString(1, funcionario.getNome());
-            ps.setDouble(2, funcionario.getSalarioBase());
-            ps.setDouble(3, funcionario.getDistanciaTrabalho());
-            ps.setDouble(4, funcionario.getSalarioTotal());
-            ps.setInt(5, funcionario.getIdade());
+            String queryFuncionario = "INSERT INTO funcionario(nm_funcionario, "
+                + "vl_salario_base, vl_distancia_trabalho "
+                + "nu_idade, dt_admissao, dt_modificacao) VALUES "
+                + "(?, ?, ?, ?, ?, ?);";
+            
+            psFuncionario = conexao.prepareStatement(queryFuncionario);
+            psFuncionario.setString(1, funcionario.getNome());
+            psFuncionario.setDouble(2, funcionario.getSalarioBase());
+            psFuncionario.setDouble(3, funcionario.getDistanciaTrabalho());
+            psFuncionario.setInt(4, funcionario.getIdade());
             // Convertendo local date para o formato utilizado pelo PreparedStatement
             Date sqlDate = Date.valueOf(funcionario.getDataAdmissao());
-            ps.setDate(6, sqlDate);
-            ps.setLong(7, funcionario.getCargo().getId());
+            psFuncionario.setDate(5, sqlDate);
             sqlDate = Date.valueOf(LocalDate.now());
-            ps.setDate(8, sqlDate);
+            psFuncionario.setDate(6, sqlDate);
             
-            ps.executeUpdate();
+            psFuncionario.executeUpdate();
+            
             return true;
         } catch (SQLException ex) {
             throw new SQLException("Erro ao registrar o funcionário.\n" + ex.getMessage());
         } finally {
-            ConexaoPostgreSQL.closeConnection(conexao, ps);
+            ConexaoPostgreSQL.closeConnection(conexao, psFuncionario);
         }
     }
 
@@ -55,23 +56,21 @@ public class FuncionarioDAO implements IFuncionarioDAO{
     public boolean save(List<Funcionario> funcionarios) throws SQLException, ClassNotFoundException {
         PreparedStatement ps = null;
         String query = "INSERT INTO funcionario(nm_funcionario, "
-                + "vl_salario_base, vl_distancia_trabalho, vl_salario_total, "
-                + "nu_idade, dt_admissao, id_cargo, dt_modificacao) VALUES "
-                + "(?, ?, ?, ?, ?, ?, ?, ?);";
+                + "vl_salario_base, vl_distancia_trabalho, "
+                + "nu_idade, dt_admissao, dt_modificacao) VALUES "
+                + "(?, ?, ?, ?, ?, ?);";
         try {
             for(Funcionario f : funcionarios){
                 ps = conexao.prepareStatement(query);
                 ps.setString(1, f.getNome());
                 ps.setDouble(2, f.getSalarioBase());
                 ps.setDouble(3, f.getDistanciaTrabalho());
-                ps.setDouble(4, f.getSalarioTotal());
-                ps.setInt(5, f.getIdade());
+                ps.setInt(4, f.getIdade());
                 // Convertendo local date para o formato utilizado pelo PreparedStatement
                 Date sqlDate = Date.valueOf(f.getDataAdmissao());
-                ps.setDate(6, sqlDate);
-                ps.setLong(7, f.getCargo().getId());
+                ps.setDate(5, sqlDate);
                 sqlDate = Date.valueOf(LocalDate.now());
-                ps.setDate(8, sqlDate);
+                ps.setDate(6, sqlDate);
                 ps.executeUpdate();
             }
             return true;
@@ -257,7 +256,7 @@ public class FuncionarioDAO implements IFuncionarioDAO{
                 .concat("\n 	on f.id_funcionario = fc.id_funcionario" )
                 .concat("\n inner join cargo c" )
                 .concat("\n 	on fc.id_cargo = c.id_cargo" )
-                .concat("\n where f.id_funcionario = ?");
+                .concat("\n where f.id_funcionario = ?;");
             ps = conexao.prepareStatement(query);
             ps.setLong(1, id);
             result = ps.executeQuery();  
@@ -301,7 +300,7 @@ public class FuncionarioDAO implements IFuncionarioDAO{
                 .concat("\n		on f.id_funcionario = fc.id_funcionario ")
                 .concat("\n	inner join cargo c ")
                 .concat("\n		on fc.id_cargo = c.id_cargo ")
-                .concat("\n	where f.nm_funcionario = ?");
+                .concat("\n	where f.nm_funcionario = ?;");
             ps = conexao.prepareStatement(query);
             ps.setString(1, nome);
             result = ps.executeQuery();  
@@ -362,7 +361,7 @@ public class FuncionarioDAO implements IFuncionarioDAO{
                 .concat("\n	inner join cargo_atual fc ")
                 .concat("\n		on f.id_funcionario = fc.id_funcionario ")
                 .concat("\n	inner join cargo c ")
-                .concat("\n		on fc.id_cargo = c.id_cargo");
+                .concat("\n		on fc.id_cargo = c.id_cargo;");
             ps = conexao.prepareStatement(query);
 
             result = ps.executeQuery();  
@@ -420,7 +419,7 @@ public class FuncionarioDAO implements IFuncionarioDAO{
                 .concat("\n group by f.nm_funcionario ")
                 .concat("\n     , s.dt_modificacao")
                 .concat("\n     , f.vl_salario_base ")
-                .concat("\n     , s.vl_salario_total ");
+                .concat("\n     , s.vl_salario_total;");
             
             ps = conexao.prepareStatement(query);
             ps.setDate(1, Date.valueOf(data));
@@ -456,7 +455,7 @@ public class FuncionarioDAO implements IFuncionarioDAO{
                 .concat("\n group by f.nm_funcionario ")
                 .concat("\n     , s.dt_modificacao")
                 .concat("\n     , f.vl_salario_base ")
-                .concat("\n     , s.vl_salario_total ");
+                .concat("\n     , s.vl_salario_total;");
             
             ps = conexao.prepareStatement(query);
             result = ps.executeQuery();  
