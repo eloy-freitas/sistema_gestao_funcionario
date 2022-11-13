@@ -55,8 +55,9 @@ public class Funcionario {
 
     }
     
-    public Funcionario(String nome, Cargo cargo, double salarioBase, 
+    public Funcionario(long id, String nome, Cargo cargo, double salarioBase, 
                        double distanciaTrabalho, double tempoServico, LocalDate dataAdmissao) {
+        this.id = id;
         this.nome = nome;
         this.cargo = cargo;
         this.salarioBase = salarioBase;

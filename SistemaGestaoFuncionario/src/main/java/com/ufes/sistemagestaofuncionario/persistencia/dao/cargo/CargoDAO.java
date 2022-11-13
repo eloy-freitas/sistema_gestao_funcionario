@@ -24,12 +24,16 @@ public class CargoDAO implements ICargoDAO{
     public boolean save(Funcionario funcionario) throws SQLException {
         PreparedStatement ps = null;
         try{
-            String query = "INSERT INTO funcionario_cargo(id_funcionario, "
-                + "id_cargo, dt_modificacao)"
-                + "VALUES (?, ?, ?);";
+            String query = ""
+                .concat("\n INSERT INTO funcionario_cargo(")
+                .concat("\n id_funcionario")
+                .concat("\n, id_cargo")
+                .concat("\n, dt_modificacao)")
+                .concat("\n VALUES (?,") 
+                .concat("(select id_cargo from cargo where nm_cargo = ?), ?);");
             ps = conexao.prepareStatement(query);
             ps.setLong(1, funcionario.getId());
-            ps.setLong(2, funcionario.getCargo().getId());
+            ps.setString(2, funcionario.getCargo().getNome());
             ps.setDate(3, Date.valueOf(LocalDate.now()));
             ps.executeUpdate();
             return true;
@@ -39,6 +43,38 @@ public class CargoDAO implements ICargoDAO{
             ConexaoPostgreSQL.closeConnection(conexao, ps);
         }
     }
+
+    @Override
+    public boolean save(List<Funcionario> funcionarios) throws SQLException {
+        PreparedStatement ps = null;
+        try{
+            if(!funcionarios.isEmpty()){
+                for(Funcionario f : funcionarios){
+                    String query = ""
+                        .concat("\n INSERT INTO funcionario_cargo(")
+                        .concat("\n id_funcionario")
+                        .concat("\n, id_cargo")
+                        .concat("\n, dt_modificacao)")
+                        .concat("\n VALUES (?,") 
+                        .concat("(select id_cargo from cargo where nm_cargo = ?), ?);");
+                    ps = conexao.prepareStatement(query);
+                    ps.setLong(1, f.getId());
+                    ps.setString(2, f.getCargo().getNome());
+                    ps.setDate(3, Date.valueOf(LocalDate.now()));
+                    ps.executeUpdate();
+                }
+                return true;
+            }else
+                return false;
+            
+        } catch (SQLException ex){
+            throw new SQLException("Erro ao registrar o cargo.\n" + ex.getMessage());
+        } finally {
+            ConexaoPostgreSQL.closeConnection(conexao, ps);
+        }
+    }
+    
+    
 
     @Override
     public boolean delete(long id) throws SQLException {

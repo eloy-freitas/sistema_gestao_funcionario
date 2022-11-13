@@ -9,4 +9,7 @@ public interface ICargoService {
     List<Cargo> buscarTodos() throws ClassNotFoundException, SQLException;
     Cargo buscarPorNome(String nome) throws ClassNotFoundException, SQLException;
     boolean criar(Funcionario funcionario) throws ClassNotFoundException, SQLException; 
+    boolean criar(List<Funcionario> funcionarios) throws ClassNotFoundException, SQLException; 
+
+
 }

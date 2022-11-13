@@ -28,4 +28,11 @@ public class CargoService implements ICargoService{
     public boolean criar(Funcionario funcionario) throws ClassNotFoundException, SQLException {
         return cargoRepository.criar(funcionario);
     }
+
+    @Override
+    public boolean criar(List<Funcionario> funcionarios) throws ClassNotFoundException, SQLException {
+        return cargoRepository.criar(funcionarios);
+    }
+    
+    
 }
