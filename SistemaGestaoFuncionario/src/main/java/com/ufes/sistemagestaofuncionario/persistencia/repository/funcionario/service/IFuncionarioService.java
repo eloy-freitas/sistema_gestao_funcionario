@@ -17,5 +17,6 @@ public interface IFuncionarioService {
     Funcionario buscarFuncionarioPorName(String nome) throws SQLException, ClassNotFoundException; 
     List<Funcionario> buscarBuscarFuncionarioView() throws SQLException, ClassNotFoundException; 
     ResultSet buscarSalarioCalculadoPorData(LocalDate data) throws SQLException, ClassNotFoundException; 
+    ResultSet buscarTodosSalarioCalculado() throws SQLException, ClassNotFoundException; 
 
 }

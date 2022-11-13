@@ -61,8 +61,9 @@ public class FuncionarioRepository implements IFuncionarioRepository{
     public ResultSet buscarSalarioCalculadoPorData(LocalDate data) throws SQLException, ClassNotFoundException {
         return funcionarioDAO.getSalarioCalculadoByDate(data);
     }
-       
-    
-        
-	
+
+    @Override
+    public ResultSet buscarTodosSalarioCalculado() throws SQLException, ClassNotFoundException {
+        return funcionarioDAO.getAllSalarioCalculado();
+    }
 }

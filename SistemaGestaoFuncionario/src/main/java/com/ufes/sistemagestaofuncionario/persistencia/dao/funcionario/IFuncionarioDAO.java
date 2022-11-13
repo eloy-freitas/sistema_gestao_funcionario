@@ -17,4 +17,5 @@ public interface IFuncionarioDAO {
     public Funcionario getByName(String nome) throws SQLException, ClassNotFoundException; 
     public List<Funcionario> getAllBuscarFuncionarioView() throws SQLException, ClassNotFoundException; 
     public ResultSet getSalarioCalculadoByDate(LocalDate data) throws SQLException, ClassNotFoundException; 
+    public ResultSet getAllSalarioCalculado() throws SQLException, ClassNotFoundException; 
 }
