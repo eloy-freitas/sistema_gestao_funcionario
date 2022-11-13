@@ -244,20 +244,20 @@ public class FuncionarioDAO implements IFuncionarioDAO{
         try{
             String query = "" 
                 .concat("select ")
-                .concat("\n	fb.dt_modificacao" )
-                .concat("\n	, c.nm_cargo" )
-                .concat("\n	, b.nm_bonus" )
-                .concat("\n	, fb.vl_bonus" )
-                .concat("\nfrom funcionario f" )
-                .concat("\ninner join funcionario_bonus fb" )
-                .concat("\n	on f.id_funcionario = fb.id_funcionario" )
-                .concat("\ninner join bonus b" )
-                .concat("\n	on fb.id_bonus = b.id_bonus" )
-                .concat("\ninner join funcionario_cargo fc" )
-                .concat("\n	on f.id_funcionario = fc.id_funcionario" )
-                .concat("\ninner join cargo c" )
-                .concat("\n	on fc.id_cargo = c.id_cargo" )
-                .concat("\nwhere f.id_funcionario = ?");
+                .concat("\n 	fb.dt_modificacao" )
+                .concat("\n 	, c.nm_cargo" )
+                .concat("\n 	, b.nm_bonus" )
+                .concat("\n 	, fb.vl_bonus" )
+                .concat("\n from funcionario f" )
+                .concat("\n inner join funcionario_bonus fb" )
+                .concat("\n 	on f.id_funcionario = fb.id_funcionario" )
+                .concat("\n inner join bonus b" )
+                .concat("\n 	on fb.id_bonus = b.id_bonus" )
+                .concat("\n inner join funcionario_cargo fc" )
+                .concat("\n 	on f.id_funcionario = fc.id_funcionario" )
+                .concat("\n inner join cargo c" )
+                .concat("\n 	on fc.id_cargo = c.id_cargo" )
+                .concat("\n where f.id_funcionario = ?");
             ps = conexao.prepareStatement(query);
             ps.setLong(1, id);
             result = ps.executeQuery();  
@@ -279,28 +279,28 @@ public class FuncionarioDAO implements IFuncionarioDAO{
         Funcionario funcionario = null;
         try{
             String query = "" 
-                .concat("\nWITH cargo_atual as (")
+                .concat("\n with cargo_atual as (")
                 .concat("\n		select ")
                 .concat("\n			f.id_funcionario ")
                 .concat("\n			, fc.id_cargo ")
                 .concat("\n			, max(fc.dt_modificacao) dt_modificacao ")
-                .concat("\n		FROM funcionario f ")
-                .concat("\n		INNER JOIN funcionario_cargo fc ")
-                .concat("\n			ON f.id_funcionario = fc.id_funcionario ")
+                .concat("\n		from funcionario f ")
+                .concat("\n		inner join funcionario_cargo fc ")
+                .concat("\n			on f.id_funcionario = fc.id_funcionario ")
                 .concat("\n		group by f.id_funcionario ")
                 .concat("\n			, fc.id_cargo ")
-                .concat("\n)")
-                .concat("\n	SELECT ")
+                .concat("\n )")
+                .concat("\n	select ")
                 .concat("\n		f.id_funcionario")
                 .concat("\n		, f.nm_funcionario")
                 .concat("\n		, f.nu_idade")
                 .concat("\n		, c.nm_cargo ")
                 .concat("\n		, f.vl_salario_base")
-                .concat("\n	FROM funcionario f ")
-                .concat("\n	INNER JOIN cargo_atual fc ")
-                .concat("\n		ON f.id_funcionario = fc.id_funcionario ")
-                .concat("\n	INNER JOIN cargo c ")
-                .concat("\n		ON fc.id_cargo = c.id_cargo ")
+                .concat("\n	from funcionario f ")
+                .concat("\n	inner join cargo_atual fc ")
+                .concat("\n		on f.id_funcionario = fc.id_funcionario ")
+                .concat("\n	inner join cargo c ")
+                .concat("\n		on fc.id_cargo = c.id_cargo ")
                 .concat("\n	where f.nm_funcionario = ?");
             ps = conexao.prepareStatement(query);
             ps.setString(1, nome);
@@ -341,28 +341,28 @@ public class FuncionarioDAO implements IFuncionarioDAO{
         List<Funcionario> funcionarios = new ArrayList<>();
         try{
             String query = "" 
-                .concat("\nWITH cargo_atual as (")
+                .concat("\n with cargo_atual as (")
                 .concat("\n		select ")
                 .concat("\n			f.id_funcionario ")
                 .concat("\n			, fc.id_cargo ")
                 .concat("\n			, max(fc.dt_modificacao) dt_modificacao ")
-                .concat("\n		FROM funcionario f ")
-                .concat("\n		INNER JOIN funcionario_cargo fc ")
-                .concat("\n			ON f.id_funcionario = fc.id_funcionario ")
+                .concat("\n		from funcionario f ")
+                .concat("\n		inner join funcionario_cargo fc ")
+                .concat("\n			on f.id_funcionario = fc.id_funcionario ")
                 .concat("\n		group by f.id_funcionario ")
                 .concat("\n			, fc.id_cargo ")
-                .concat("\n)")
-                .concat("\n	SELECT ")
+                .concat("\n )")
+                .concat("\n	select ")
                 .concat("\n		f.id_funcionario")
                 .concat("\n		, f.nm_funcionario")
                 .concat("\n		, f.nu_idade")
                 .concat("\n		, c.nm_cargo ")
                 .concat("\n		, f.vl_salario_base")
-                .concat("\n	FROM funcionario f ")
-                .concat("\n	INNER JOIN cargo_atual fc ")
-                .concat("\n		ON f.id_funcionario = fc.id_funcionario ")
-                .concat("\n	INNER JOIN cargo c ")
-                .concat("\n		ON fc.id_cargo = c.id_cargo");
+                .concat("\n	from funcionario f ")
+                .concat("\n	inner join cargo_atual fc ")
+                .concat("\n		on f.id_funcionario = fc.id_funcionario ")
+                .concat("\n	inner join cargo c ")
+                .concat("\n		on fc.id_cargo = c.id_cargo");
             ps = conexao.prepareStatement(query);
 
             result = ps.executeQuery();  
