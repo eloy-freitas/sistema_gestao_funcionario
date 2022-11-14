@@ -201,7 +201,7 @@ public class FuncionarioDAO implements IFuncionarioDAO {
 
             return new Funcionario(id, nome, cargo, salarioBase,
                     distanciaTrabalho, dtAdmissao, idade, salarioTotal,
-                    bonusRecebidos, faltas);
+                    bonusRecebidos, faltas, 0);
         } catch (SQLException ex) {
             throw new SQLException("Erro ao buscar funcionário.\n"
                     + ex.getMessage());
@@ -225,6 +225,7 @@ public class FuncionarioDAO implements IFuncionarioDAO {
                     + ", f.dt_admissao" //6
                     + ", fc.id_cargo" //7
                     + ", c.nm_cargo " //8
+                    + ", f.vl_tempo_servico " //9
                     + "FROM funcionario f "
                     + "LEFT JOIN funcionario_cargo fc "
                     + "ON f.id_funcionario = fc.id_funcionario "
@@ -248,12 +249,13 @@ public class FuncionarioDAO implements IFuncionarioDAO {
                 // informações do cargo
                 long idCargo = rs.getLong(7);
                 String nomeCargo = rs.getString(8);
+                double tempoServico = rs.getDouble(9);
                 Cargo cargo = new Cargo(idCargo, nomeCargo);
 
                 listaFuncionarios.add(new Funcionario(id_funcionario, nome,
                         cargo, salarioBase, distanciaTrabalho,
                         dtAdmissao, idade, salarioTotal,
-                        null, null));
+                        new ArrayList<>(), new ArrayList<>(), tempoServico));
             } while (rs.next());
 
         } catch (SQLException ex) {
