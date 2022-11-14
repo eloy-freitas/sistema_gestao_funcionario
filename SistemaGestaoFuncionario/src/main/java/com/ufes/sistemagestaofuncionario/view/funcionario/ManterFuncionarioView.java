@@ -30,10 +30,6 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
         return checkBoxFuncionarioMes;
     }
 
-    public JButton getBtnExcluir() {
-        return btnExcluir;
-    }
-
     public JDatePicker getDpDataAdmissao() {
         return dpDataAdmissao;
     }
@@ -56,10 +52,6 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
 
     public JFormattedTextField getFtfSalario() {
         return ftfSalario;
-    }
-
-    public JLabel getLbIdade() {
-        return lbIdade;
     }
 
     public JComboBox<String> getCbCargo() {
@@ -91,10 +83,8 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         ftfSalario = new javax.swing.JFormattedTextField();
         jLabel7 = new javax.swing.JLabel();
-        lbIdade = new javax.swing.JLabel();
         btnFechar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
-        btnExcluir = new javax.swing.JButton();
         tfNome = new javax.swing.JTextField();
         tfFaltas = new javax.swing.JTextField();
         cbCargo = new javax.swing.JComboBox<>();
@@ -120,13 +110,9 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
 
         jLabel7.setText("Data de Admissão:");
 
-        lbIdade.setText("<idade>");
-
         btnFechar.setText("Fechar");
 
         btnSalvar.setText("Salvar");
-
-        btnExcluir.setText("Excluir");
 
         jLabel3.setText("Distância do Trabalho:");
 
@@ -152,8 +138,6 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnExcluir)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnSalvar))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
@@ -179,10 +163,7 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(ftfSalario))
                             .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 687, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(checkBoxFuncionarioMes)
-                        .addGap(148, 148, 148)
-                        .addComponent(lbIdade))
+                    .addComponent(checkBoxFuncionarioMes)
                     .addComponent(btnFechar))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
@@ -211,14 +192,12 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
                         .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbIdade)
                     .addComponent(checkBoxFuncionarioMes)
                     .addComponent(jLabel3)
                     .addComponent(tfDistanciaTrabalho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnExcluir)
                     .addComponent(btnSalvar)
                     .addComponent(btnFechar))
                 .addContainerGap())
@@ -266,7 +245,6 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnFechar;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox<String> cbCargo;
@@ -282,7 +260,6 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel lbIdade;
     private javax.swing.JTextField tfDistanciaTrabalho;
     private javax.swing.JTextField tfFaltas;
     private javax.swing.JTextField tfNome;
