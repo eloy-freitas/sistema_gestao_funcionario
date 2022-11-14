@@ -33,7 +33,6 @@ create table funcionario_falta(
 	, qt_faltas int not null
 	, dt_vigencia date
 	, dt_modificacao date
-	, constraint id_falta_pk primary key (id_funcionario, dt_vigencia)
 	, constraint id_funcionario_falta_fk foreign key (id_funcionario) references funcionario(id_funcionario)
 );
 
