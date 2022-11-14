@@ -209,18 +209,19 @@ public class FuncionarioDAO implements IFuncionarioDAO{
         List<Funcionario> listaFuncionarios = new ArrayList();
         try{
             String query = "SELECT "
-                    + "f.id_funcionario"
-                    + ", f.nm_funcionario"
-                    + ", f.vl_salario_base"
-                    + ", f.vl_distancia_trabalho"
-                    + ", f.vl_salario_total"
-                    + ", f.nu_idade"
-                    + ", f.dt_admissao"
-                    + ", f.id_cargo"
-                    + ", c.nm_cargo "
+                    + "f.id_funcionario" //1
+                    + ", f.nm_funcionario" //2
+                    + ", f.vl_salario_base" //3
+                    + ", f.vl_distancia_trabalho" //4
+                    + ", f.nu_idade" //5
+                    + ", f.dt_admissao" //6
+                    + ", fc.id_cargo" //7
+                    + ", c.nm_cargo " //8
                     + "FROM funcionario f "
+                    + "INNER JOIN funcionario_cargo fc "
+                    + "ON f.id_funcionario = fc.id_funcionario "
                     + "INNER JOIN cargo c "
-                    + "ON f.id_cargo = c.id_cargo;";
+                    + "ON fc.id_cargo = c.id_cargo;";
             ps = conexao.prepareStatement(query);
             rs = ps.executeQuery();
             if(!rs.next())
@@ -230,14 +231,15 @@ public class FuncionarioDAO implements IFuncionarioDAO{
                 String nome = rs.getString(2);
                 double salarioBase = rs.getDouble(3);
                 double distanciaTrabalho = rs.getDouble(4);
+                int idade = rs.getInt(5);
                 double salarioTotal = rs.getDouble(5);
-                int idade = rs.getInt(6);
-                LocalDate dtAdmissao = new Date(rs.getDate(7)
-                                                    .getTime()).toLocalDate();
+                LocalDate dtAdmissao = new Date(rs.getDate(6)
+                                                    .getTime()).toLocalDate(); 
+                
 
                 // informações do cargo
-                long idCargo = rs.getLong(8);
-                String nomeCargo = rs.getString(9);
+                long idCargo = rs.getLong(7);
+                String nomeCargo = rs.getString(8);
                 Cargo cargo = new Cargo(idCargo, nomeCargo);
                 
                 listaFuncionarios.add(new Funcionario(id_funcionario, nome, 
