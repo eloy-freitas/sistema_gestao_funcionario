@@ -7,6 +7,7 @@ import com.ufes.sistemagestaofuncionario.view.funcionario.BuscarFuncionarioView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ListIterator;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -18,17 +19,32 @@ public class BuscarFuncionarioPresenter {
     private BuscarFuncionarioView view;
     private DefaultTableModel tmFuncionarios;
     private IFuncionarioService funcionarioService;
+    private List<Funcionario> listaFuncionarios;
 
+    /*
+        Construtor para quando esta presenter é chamada pela view principal.
+        Irá listar todos os funcionários que estiverem no banco de dados.
+     */
     public BuscarFuncionarioPresenter() {
         view = new BuscarFuncionarioView();
         initServices();
-        initTable();
+        try {
+            // Carregando todos os funcionários.
+            this.listaFuncionarios = funcionarioService.buscarTodos();
+        } catch (ClassNotFoundException | SQLException ex) {
+            JOptionPane.showMessageDialog(view,
+                    "Erro ao listar os funcionários.\n\n"
+                    + ex.getMessage(),
+                    "ERRO",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        initTabela();
         populaTabela();
         initListeners();
         view.setVisible(true);
     }
 
-    private void initServices(){
+    private void initServices() {
         try {
             funcionarioService = new FuncionarioService();
         } catch (ClassNotFoundException | SQLException ex) {
@@ -40,7 +56,7 @@ public class BuscarFuncionarioPresenter {
         }
     }
 
-    private void initTable() {
+    private void initTabela() {
         JTable tabela = view.getTblFuncionario();
         tmFuncionarios = new DefaultTableModel(
                 new Object[][]{},
@@ -52,31 +68,34 @@ public class BuscarFuncionarioPresenter {
         tabela.setModel(tmFuncionarios);
 
     }
-    
-    private void populaTabela() {
-        try {
-            // Percorrendo a lista para adicionar à tabela.
-            ListIterator<Funcionario> iterator
-                    = funcionarioService.buscarTodos()
-                            .listIterator();
-            while (iterator.hasNext()) {
-                Funcionario funcionario = iterator.next();
-                tmFuncionarios.addRow(new Object[]{
-                    funcionario.getId(),
-                    funcionario.getNome(),
-                    funcionario.getIdade(),
-                    funcionario.getCargo().getNome(),
-                    funcionario.getSalarioBase()
-                });
+
+    private void limpaTabela() {
+        int rowCount = tmFuncionarios.getRowCount();
+        if (rowCount > 0) {
+            for (int i = rowCount - 1; i >= 0; i--) {
+                tmFuncionarios.removeRow(i);
             }
-        } catch (ClassNotFoundException | SQLException ex) {
-            JOptionPane.showMessageDialog(view,
-                    "Erro ao listar os funcionários.\n\n"
-                    + ex.getMessage(),
-                    "ERRO",
-                    JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    private void populaTabela() {
+        limpaTabela();
+        // Percorrendo a lista para adicionar à tabela.
+        ListIterator<Funcionario> iterator
+                = this.listaFuncionarios.listIterator();
+        while (iterator.hasNext()) {
+            Funcionario funcionario = iterator.next();
+            tmFuncionarios.addRow(new Object[]{
+                funcionario.getId(),
+                funcionario.getNome(),
+                funcionario.getIdade(),
+                funcionario.getCargo().getNome(),
+                funcionario.getSalarioBase()
+            });
+
+        }
+    }
+    
 
     private void initListeners() {
         // Botão fechar
@@ -102,6 +121,14 @@ public class BuscarFuncionarioPresenter {
                 abrirVisualizarDetalhesFuncionario();
             }
         });
+
+        // Botão Buscar
+        view.getBtnBuscar().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                buscar();
+            }
+        });
     }
 
     private void fechar() {
@@ -112,23 +139,45 @@ public class BuscarFuncionarioPresenter {
         JTable tabela = view.getTblFuncionario();
         int linha = tabela.getSelectedRow();
         Object id = tabela.getModel().getValueAt(linha, 0);
-        System.out.println(id.toString());
         Funcionario funcionario;
         try {
             funcionario = funcionarioService.buscarPorId(
                     Long.valueOf(id.toString()));
+            fechar();
             new ExibirDetalhesFuncionarioPresenter(funcionario);
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(view,
                     "Erro ao buscar funcionário.\n\n"
-                            + ex.getMessage(),
+                    + ex.getMessage(),
                     "ERRO",
                     JOptionPane.ERROR_MESSAGE);
-        } 
+        }
     }
 
     private void abrirManterFuncionario() {
+        fechar();
         new ManterFuncionarioPresenter();
+    }
+
+    private void buscar() {
+        String nome = view.getTfNome().getText();
+
+        try {
+            //fechar();
+            //new BuscarFuncionarioPresenter();
+            setListaFuncionarios(funcionarioService.buscarFuncionarioPorName(nome));
+            populaTabela();
+        } catch (SQLException | ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(view,
+                    "Erro ao buscar funcionário.\n\n"
+                    + ex.getMessage(),
+                    "ERRO",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void setListaFuncionarios(List<Funcionario> listaFuncionarios) {
+        this.listaFuncionarios = listaFuncionarios;
     }
 
 }

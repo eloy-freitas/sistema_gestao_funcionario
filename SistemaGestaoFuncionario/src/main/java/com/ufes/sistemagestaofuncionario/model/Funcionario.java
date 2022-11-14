@@ -117,6 +117,22 @@ public class Funcionario {
     public double getTempoServico() {
         return tempoServico;
     }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setCargo(Cargo cargo) {
+        this.cargo = cargo;
+    }
+
+    public void setSalarioBase(double salarioBase) {
+        this.salarioBase = salarioBase;
+    }
+
+    public void setDistanciaTrabalho(double distanciaTrabalho) {
+        this.distanciaTrabalho = distanciaTrabalho;
+    }
     
     
 }

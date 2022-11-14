@@ -34,7 +34,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="tfFaltas" min="-2" pref="52" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbDataNascimento" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="dpDataNascimento" min="-2" pref="170" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -53,7 +53,7 @@
                                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
-                                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbDataAdmissao" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="dpDataAdmissao" min="-2" pref="182" max="-2" attributes="0"/>
                                   </Group>
@@ -102,12 +102,12 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="tfFaltas" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbDataNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                       <Component id="dpDataNascimento" min="-2" max="-2" attributes="0"/>
                       <Component id="dpDataAdmissao" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel7" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbDataAdmissao" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -148,7 +148,7 @@
         <Property name="text" type="java.lang.String" value="Funcion&#xe1;rio do m&#xea;s"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel5">
+    <Component class="javax.swing.JLabel" name="lbDataNascimento">
       <Properties>
         <Property name="text" type="java.lang.String" value="Data de Nascimento:"/>
       </Properties>
@@ -160,7 +160,7 @@
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="ftfSalario">
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel7">
+    <Component class="javax.swing.JLabel" name="lbDataAdmissao">
       <Properties>
         <Property name="text" type="java.lang.String" value="Data de Admiss&#xe3;o:"/>
       </Properties>

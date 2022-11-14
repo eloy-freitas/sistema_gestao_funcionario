@@ -80,7 +80,7 @@ public class FuncionarioRepository implements IFuncionarioRepository {
     }
 
     @Override
-    public Funcionario buscarFuncionarioPorName(String nome) throws SQLException, ClassNotFoundException {
+    public List<Funcionario> buscarFuncionarioPorName(String nome) throws SQLException, ClassNotFoundException {
         abrirConexoes();
         return funcionarioDAO.getByName(nome);
     }
