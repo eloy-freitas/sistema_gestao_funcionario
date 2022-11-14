@@ -37,8 +37,18 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuSalario">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Sal&#xe1;rio"/>
+            <Property name="text" type="java.lang.String" value="Sal&#xe1;rios"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="miCalcularSalarios">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Calcular Sal&#xe1;rios"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miCalcularSalariosActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuFerramentas">
           <Properties>

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.ufes.sistemagestaofuncionario.model.Funcionario;
 import com.ufes.sistemagestaofuncionario.model.HistoricoBonus;
+import com.ufes.sistemagestaofuncionario.model.SalarioCalculado;
 import java.sql.ResultSet;
 import java.time.LocalDate;
 
@@ -30,10 +31,12 @@ public interface IFuncionarioRepository {
 
     ResultSet buscarSalarioCalculadoPorData(LocalDate data) throws SQLException, ClassNotFoundException;
 
-    ResultSet buscarTodosSalarioCalculado() throws SQLException, ClassNotFoundException;
+    List<SalarioCalculado> buscarTodosSalarioCalculado() throws SQLException, ClassNotFoundException;
 
-    boolean incluirBonus(Funcionario funcionario) throws SQLException, ClassNotFoundException;
+    boolean incluirBonus(List<Funcionario> funcionarios) throws SQLException, ClassNotFoundException;
 
     boolean incluirFaltas(Funcionario funcionario) throws SQLException, ClassNotFoundException;
+    
+    boolean incluirSalario(List<Funcionario> funcionarios) throws SQLException, ClassNotFoundException; 
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.ufes.sistemagestaofuncionario.model.Funcionario;
 import com.ufes.sistemagestaofuncionario.model.HistoricoBonus;
+import com.ufes.sistemagestaofuncionario.model.SalarioCalculado;
 import com.ufes.sistemagestaofuncionario.persistencia.dao.bonus.BonusCalculadoDAO;
 import com.ufes.sistemagestaofuncionario.persistencia.dao.cargo.CargoDAO;
 import com.ufes.sistemagestaofuncionario.persistencia.dao.funcionario.FuncionarioDAO;
@@ -15,6 +16,8 @@ import com.ufes.sistemagestaofuncionario.persistencia.dao.cargo.ICargoDAO;
 import com.ufes.sistemagestaofuncionario.persistencia.dao.falta.FaltaDAO;
 import com.ufes.sistemagestaofuncionario.persistencia.dao.falta.IFaltaDAO;
 import com.ufes.sistemagestaofuncionario.persistencia.dao.funcionario.IFuncionarioDAO;
+import com.ufes.sistemagestaofuncionario.persistencia.dao.salario.ISalarioDAO;
+import com.ufes.sistemagestaofuncionario.persistencia.dao.salario.SalarioDAO;
 
 public class FuncionarioRepository implements IFuncionarioRepository {
 
@@ -22,6 +25,7 @@ public class FuncionarioRepository implements IFuncionarioRepository {
     private ICargoDAO cargoDAO;
     private IBonusCalculadoDAO bonusCalculadoDAO;
     private IFaltaDAO faltaDAO;
+    private ISalarioDAO salarioDAO;
 
     public FuncionarioRepository() throws SQLException, ClassNotFoundException {
         super();
@@ -32,6 +36,7 @@ public class FuncionarioRepository implements IFuncionarioRepository {
         this.cargoDAO = new CargoDAO();
         this.bonusCalculadoDAO = new BonusCalculadoDAO();
         this.faltaDAO = new FaltaDAO();
+        this.salarioDAO = new SalarioDAO();
     }
 
     @Override
@@ -47,8 +52,6 @@ public class FuncionarioRepository implements IFuncionarioRepository {
         abrirConexoes();
         return funcionarioDAO.save(funcionarios);
     }
-    
-    
 
     @Override
     public boolean excluir(Long id) throws ClassNotFoundException, SQLException {
@@ -99,21 +102,26 @@ public class FuncionarioRepository implements IFuncionarioRepository {
     }
 
     @Override
-    public ResultSet buscarTodosSalarioCalculado() throws SQLException, ClassNotFoundException {
+    public List<SalarioCalculado> buscarTodosSalarioCalculado() throws SQLException, ClassNotFoundException {
         abrirConexoes();
         return funcionarioDAO.getAllSalarioCalculado();
     }
 
     @Override
-    public boolean incluirBonus(Funcionario funcionario) throws SQLException, ClassNotFoundException {
+    public boolean incluirBonus(List<Funcionario> funcionarios) throws SQLException, ClassNotFoundException {
         abrirConexoes();
-        return bonusCalculadoDAO.save(funcionario);
+        return bonusCalculadoDAO.save(funcionarios);
     }
 
     @Override
     public boolean incluirFaltas(Funcionario funcionario) throws SQLException, ClassNotFoundException {
         abrirConexoes();
         return faltaDAO.save(funcionario);
+    }
+    
+    @Override
+    public boolean incluirSalario(List<Funcionario> funcionarios) throws SQLException, ClassNotFoundException {
+        return salarioDAO.criar(funcionarios);
     }
 
 }

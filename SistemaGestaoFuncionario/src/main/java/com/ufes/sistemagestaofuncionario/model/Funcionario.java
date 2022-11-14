@@ -32,7 +32,7 @@ public class Funcionario {
 
     public Funcionario(long id, String nome, Cargo cargo, double salarioBase, double distanciaTrabalho,
                        LocalDate dataAdmissao, int idade, double salarioTotal,
-                       List<Bonus> bonusRecebidos, List<FaltaAoTrabalho> faltaAoTrabalho) {
+                       List<Bonus> bonusRecebidos, List<FaltaAoTrabalho> faltaAoTrabalho, double tempoServico) {
         this.id = id;
         this.nome = nome;
         this.cargo = cargo;
@@ -43,6 +43,7 @@ public class Funcionario {
         this.salarioTotal = salarioTotal;
         this.bonusRecebidos = bonusRecebidos;
         this.faltaAoTrabalho = faltaAoTrabalho;
+        this.tempoServico = tempoServico;
     }
     
     public Funcionario(long id, String nome, Cargo cargo, double salarioBase, 
@@ -80,6 +81,10 @@ public class Funcionario {
 
     public String getNome() {
         return nome;
+    }
+
+    public void setBonusRecebidos(List<Bonus> bonusRecebidos) {
+        this.bonusRecebidos = bonusRecebidos;
     }
 
     public Cargo getCargo() {

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.ufes.sistemagestaofuncionario.model.Funcionario;
 import com.ufes.sistemagestaofuncionario.model.HistoricoBonus;
+import com.ufes.sistemagestaofuncionario.model.SalarioCalculado;
 import com.ufes.sistemagestaofuncionario.persistencia.repository.funcionario.FuncionarioRepository;
 import com.ufes.sistemagestaofuncionario.persistencia.repository.funcionario.IFuncionarioRepository;
 import java.sql.ResultSet;
@@ -69,18 +70,23 @@ public class FuncionarioService implements IFuncionarioService {
     }
 
     @Override
-    public ResultSet buscarTodosSalarioCalculado() throws SQLException, ClassNotFoundException {
+    public List<SalarioCalculado> buscarTodosSalarioCalculado() throws SQLException, ClassNotFoundException {
         return funcionarioRepository.buscarTodosSalarioCalculado();
     }
 
     @Override
-    public boolean incluirBonus(Funcionario funcionario) throws SQLException, ClassNotFoundException {
-        return funcionarioRepository.incluirBonus(funcionario);
+    public boolean incluirBonus(List<Funcionario> funcionarios) throws SQLException, ClassNotFoundException {
+        return funcionarioRepository.incluirBonus(funcionarios);
     }
 
     @Override
     public boolean incluirFaltas(Funcionario funcionario) throws SQLException, ClassNotFoundException {
         return funcionarioRepository.incluirFaltas(funcionario);
+    }
+
+    @Override
+    public boolean incluirSalario(List<Funcionario> funcionarios) throws SQLException, ClassNotFoundException {
+        return funcionarioRepository.incluirSalario(funcionarios);
     }
 
 }
