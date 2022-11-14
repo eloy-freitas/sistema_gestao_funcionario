@@ -169,9 +169,9 @@ public class FuncionarioDAO implements IFuncionarioDAO {
                     .concat("\n     , c.id_cargo")
                     .concat("\n     , c.nm_cargo ")
                     .concat("\n FROM funcionario f ")
-                    .concat("\n INNER JOIN funcionario_cargo fc ")
+                    .concat("\n LEFT JOIN funcionario_cargo fc ")
                     .concat("\n ON f.id_funcionario = fc.id_funcionario ")
-                    .concat("\n INNER JOIN cargo c ")
+                    .concat("\n LEFT JOIN cargo c ")
                     .concat("\n ON fc.id_cargo = c.id_cargo ")
                     .concat("\n LEFT JOIN salario s ")
                     .concat("\n ON f.id_funcionario = s.id_funcionario ")
@@ -225,9 +225,9 @@ public class FuncionarioDAO implements IFuncionarioDAO {
                     + ", fc.id_cargo" //7
                     + ", c.nm_cargo " //8
                     + "FROM funcionario f "
-                    + "INNER JOIN funcionario_cargo fc "
+                    + "LEFT JOIN funcionario_cargo fc "
                     + "ON f.id_funcionario = fc.id_funcionario "
-                    + "INNER JOIN cargo c "
+                    + "LEFT JOIN cargo c "
                     + "ON fc.id_cargo = c.id_cargo;";
             ps = conexao.prepareStatement(query);
             rs = ps.executeQuery();
@@ -277,13 +277,13 @@ public class FuncionarioDAO implements IFuncionarioDAO {
                     .concat("\n 	, b.nm_bonus")
                     .concat("\n 	, fb.vl_bonus")
                     .concat("\n from funcionario f")
-                    .concat("\n inner join funcionario_bonus fb")
+                    .concat("\n left join funcionario_bonus fb")
                     .concat("\n 	on f.id_funcionario = fb.id_funcionario")
-                    .concat("\n inner join bonus b")
+                    .concat("\n left join bonus b")
                     .concat("\n 	on fb.id_bonus = b.id_bonus")
-                    .concat("\n inner join funcionario_cargo fc")
+                    .concat("\n left join funcionario_cargo fc")
                     .concat("\n 	on f.id_funcionario = fc.id_funcionario")
-                    .concat("\n inner join cargo c")
+                    .concat("\n left join cargo c")
                     .concat("\n 	on fc.id_cargo = c.id_cargo")
                     .concat("\n where f.id_funcionario = ?;");
             ps = conexao.prepareStatement(query);
@@ -313,7 +313,7 @@ public class FuncionarioDAO implements IFuncionarioDAO {
                     .concat("\n			, fc.id_cargo ")
                     .concat("\n			, max(fc.dt_modificacao) dt_modificacao ")
                     .concat("\n		from funcionario f ")
-                    .concat("\n		inner join funcionario_cargo fc ")
+                    .concat("\n		left join funcionario_cargo fc ")
                     .concat("\n			on f.id_funcionario = fc.id_funcionario ")
                     .concat("\n		group by f.id_funcionario ")
                     .concat("\n			, fc.id_cargo ")
@@ -325,9 +325,9 @@ public class FuncionarioDAO implements IFuncionarioDAO {
                     .concat("\n		, c.nm_cargo ") //4
                     .concat("\n		, f.vl_salario_base") //5
                     .concat("\n	from funcionario f ")
-                    .concat("\n	inner join cargo_atual fc ")
+                    .concat("\n	left join cargo_atual fc ")
                     .concat("\n		on f.id_funcionario = fc.id_funcionario ")
-                    .concat("\n	inner join cargo c ")
+                    .concat("\n	left join cargo c ")
                     .concat("\n		on fc.id_cargo = c.id_cargo ")
                     .concat("\n	where f.nm_funcionario LIKE ?;");
             ps = conexao.prepareStatement(query);
@@ -378,7 +378,7 @@ public class FuncionarioDAO implements IFuncionarioDAO {
                     .concat("\n			, fc.id_cargo ")
                     .concat("\n			, max(fc.dt_modificacao) dt_modificacao ")
                     .concat("\n		from funcionario f ")
-                    .concat("\n		inner join funcionario_cargo fc ")
+                    .concat("\n		left join funcionario_cargo fc ")
                     .concat("\n			on f.id_funcionario = fc.id_funcionario ")
                     .concat("\n		group by f.id_funcionario ")
                     .concat("\n			, fc.id_cargo ")
@@ -390,9 +390,9 @@ public class FuncionarioDAO implements IFuncionarioDAO {
                     .concat("\n		, c.nm_cargo ")
                     .concat("\n		, f.vl_salario_base")
                     .concat("\n	from funcionario f ")
-                    .concat("\n	inner join cargo_atual fc ")
+                    .concat("\n	left join cargo_atual fc ")
                     .concat("\n		on f.id_funcionario = fc.id_funcionario ")
-                    .concat("\n	inner join cargo c ")
+                    .concat("\n	left join cargo c ")
                     .concat("\n		on fc.id_cargo = c.id_cargo;");
             ps = conexao.prepareStatement(query);
 
@@ -474,21 +474,21 @@ public class FuncionarioDAO implements IFuncionarioDAO {
         ResultSet result = null;
         try {
             String query = ""
-                    .concat("\n select ")
-                    .concat("\n     f.nm_funcionario ")
-                    .concat("\n     , s.dt_modificacao")
-                    .concat("\n     , f.vl_salario_base ")
-                    .concat("\n     , sum(fb.vl_bonus) vl_bonus")
-                    .concat("\n     , s.vl_salario_total ")
-                    .concat("\n from funcionario f ")
-                    .concat("\n left join salario s ")
-                    .concat("\n     on f.id_funcionario = s.id_funcionario ")
-                    .concat("\n left join funcionario_bonus fb ")
-                    .concat("\n     on f.id_funcionario = fb.id_funcionario ")
-                    .concat("\n group by f.nm_funcionario ")
-                    .concat("\n     , s.dt_modificacao")
-                    .concat("\n     , f.vl_salario_base ")
-                    .concat("\n     , s.vl_salario_total;");
+                .concat("\n select ")
+                .concat("\n     f.nm_funcionario ")
+                .concat("\n     , s.dt_modificacao")
+                .concat("\n     , coalesce (f.vl_salario_base, 0) vl_salario_base ")
+                .concat("\n     , coalesce (sum(fb.vl_bonus), 0) vl_bonus")
+                .concat("\n     , coalesce (s.vl_salario_total, 0) vl_salario_total ")
+                .concat("\n from funcionario f ")
+                .concat("\n left join salario s ")
+                .concat("\n     on f.id_funcionario = s.id_funcionario ")
+                .concat("\n left join funcionario_bonus fb ")
+                .concat("\n     on f.id_funcionario = fb.id_funcionario ")
+                .concat("\n group by f.nm_funcionario ")
+                .concat("\n     , s.dt_modificacao")
+                .concat("\n     , f.vl_salario_base ")
+                .concat("\n     , s.vl_salario_total;");
 
             ps = conexao.prepareStatement(query);
             result = ps.executeQuery();
