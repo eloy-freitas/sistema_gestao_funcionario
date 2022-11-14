@@ -6,10 +6,10 @@ package com.ufes.sistemagestaofuncionario.view.funcionario;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import org.jdatepicker.JDatePicker;
 
 /**
  *
@@ -45,8 +45,8 @@ public class ExibirDetalhesFuncionarioView extends javax.swing.JFrame {
         return btnFechar;
     }
 
-    public JTextField getTfCargo() {
-        return tfCargo;
+    public JComboBox<String> getCbCargo() {
+        return cbCargo;
     }
 
     public JCheckBox getCheckBoxFuncionarioMes() {
@@ -90,12 +90,12 @@ public class ExibirDetalhesFuncionarioView extends javax.swing.JFrame {
         btnEditar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         ftfSalario = new javax.swing.JFormattedTextField();
-        tfCargo = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         tfDistanciaTrabalho = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         tfDataAdmissao = new javax.swing.JTextField();
+        cbCargo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -137,8 +137,8 @@ public class ExibirDetalhesFuncionarioView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(tfCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(ftfSalario))
@@ -181,7 +181,7 @@ public class ExibirDetalhesFuncionarioView extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(ftfSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -251,6 +251,7 @@ public class ExibirDetalhesFuncionarioView extends javax.swing.JFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnFechar;
+    private javax.swing.JComboBox<String> cbCargo;
     private javax.swing.JCheckBox checkBoxFuncionarioMes;
     private javax.swing.JFormattedTextField ftfSalario;
     private javax.swing.JLabel jLabel1;
@@ -261,7 +262,6 @@ public class ExibirDetalhesFuncionarioView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel lbIdade;
-    private javax.swing.JTextField tfCargo;
     private javax.swing.JTextField tfDataAdmissao;
     private javax.swing.JTextField tfDistanciaTrabalho;
     private javax.swing.JTextField tfFaltas;

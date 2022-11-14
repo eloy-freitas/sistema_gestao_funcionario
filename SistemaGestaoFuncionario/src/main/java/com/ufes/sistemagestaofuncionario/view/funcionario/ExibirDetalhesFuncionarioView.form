@@ -34,8 +34,8 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="tfCargo" min="-2" pref="363" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="cbCargo" min="-2" pref="369" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="ftfSalario" max="32767" attributes="0"/>
@@ -91,7 +91,7 @@
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="ftfSalario" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="tfCargo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cbCargo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -180,8 +180,6 @@
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="ftfSalario">
     </Component>
-    <Component class="javax.swing.JTextField" name="tfCargo">
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
         <Property name="text" type="java.lang.String" value="Data Admiss&#xe3;o:"/>
@@ -200,6 +198,16 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfDataAdmissao">
+    </Component>
+    <Component class="javax.swing.JComboBox" name="cbCargo">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

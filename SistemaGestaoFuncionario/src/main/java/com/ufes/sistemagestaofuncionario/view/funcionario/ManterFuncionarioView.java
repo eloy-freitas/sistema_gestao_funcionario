@@ -34,6 +34,14 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
         return dpDataAdmissao;
     }
 
+    public JLabel getLbDataAdmissao() {
+        return lbDataAdmissao;
+    }
+
+    public JLabel getLbDataNascimento() {
+        return lbDataNascimento;
+    }
+
     public JDatePicker getDpDataNascimento() {
         return dpDataNascimento;
     }
@@ -79,10 +87,10 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         checkBoxFuncionarioMes = new javax.swing.JCheckBox();
-        jLabel5 = new javax.swing.JLabel();
+        lbDataNascimento = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         ftfSalario = new javax.swing.JFormattedTextField();
-        jLabel7 = new javax.swing.JLabel();
+        lbDataAdmissao = new javax.swing.JLabel();
         btnFechar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
         tfNome = new javax.swing.JTextField();
@@ -104,11 +112,11 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
 
         checkBoxFuncionarioMes.setText("Funcionário do mês");
 
-        jLabel5.setText("Data de Nascimento:");
+        lbDataNascimento.setText("Data de Nascimento:");
 
         jLabel6.setText("Salário (R$):");
 
-        jLabel7.setText("Data de Admissão:");
+        lbDataAdmissao.setText("Data de Admissão:");
 
         btnFechar.setText("Fechar");
 
@@ -132,7 +140,7 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tfFaltas, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(11, 11, 11)
-                        .addComponent(jLabel5)
+                        .addComponent(lbDataNascimento)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dpDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -149,7 +157,7 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel8))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel7)
+                                        .addComponent(lbDataAdmissao)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(dpDataAdmissao, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
@@ -185,11 +193,11 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(tfFaltas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel4)
-                        .addComponent(jLabel5))
+                        .addComponent(lbDataNascimento))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(dpDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(dpDataAdmissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)))
+                        .addComponent(lbDataAdmissao, javax.swing.GroupLayout.Alignment.TRAILING)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(checkBoxFuncionarioMes)
@@ -256,10 +264,10 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel lbDataAdmissao;
+    private javax.swing.JLabel lbDataNascimento;
     private javax.swing.JTextField tfDistanciaTrabalho;
     private javax.swing.JTextField tfFaltas;
     private javax.swing.JTextField tfNome;
