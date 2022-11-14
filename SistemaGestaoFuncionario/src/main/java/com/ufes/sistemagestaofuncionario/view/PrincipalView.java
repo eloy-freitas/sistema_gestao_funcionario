@@ -5,6 +5,7 @@
 package com.ufes.sistemagestaofuncionario.view;
 
 import com.ufes.sistemagestaofuncionario.presenter.BuscarFuncionarioPresenter;
+import com.ufes.sistemagestaofuncionario.presenter.CalcularSalariosPresenter;
 import com.ufes.sistemagestaofuncionario.presenter.CarregarArquivoPresenter;
 import com.ufes.sistemagestaofuncionario.presenter.ManterFuncionarioPresenter;
 import javax.swing.JMenuItem;
@@ -45,6 +46,7 @@ public class PrincipalView extends javax.swing.JFrame {
         miBuscarFuncionario = new javax.swing.JMenuItem();
         miCarregarArquivo = new javax.swing.JMenuItem();
         menuSalario = new javax.swing.JMenu();
+        miCalcularSalarios = new javax.swing.JMenuItem();
         menuFerramentas = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -87,7 +89,16 @@ public class PrincipalView extends javax.swing.JFrame {
 
         jMenuBar1.add(menuFuncionario);
 
-        menuSalario.setText("Salário");
+        menuSalario.setText("Salários");
+
+        miCalcularSalarios.setText("Calcular Salários");
+        miCalcularSalarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miCalcularSalariosActionPerformed(evt);
+            }
+        });
+        menuSalario.add(miCalcularSalarios);
+
         jMenuBar1.add(menuSalario);
 
         menuFerramentas.setText("Ferramentas");
@@ -146,6 +157,10 @@ public class PrincipalView extends javax.swing.JFrame {
         new CarregarArquivoPresenter();
     }//GEN-LAST:event_miCarregarArquivoActionPerformed
 
+    private void miCalcularSalariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCalcularSalariosActionPerformed
+        new CalcularSalariosPresenter();
+    }//GEN-LAST:event_miCalcularSalariosActionPerformed
+
     public JMenuItem getMiNovoFuncionario() {
         return miNovoFuncionario;
     }
@@ -197,6 +212,7 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JMenu menuFuncionario;
     private javax.swing.JMenu menuSalario;
     private javax.swing.JMenuItem miBuscarFuncionario;
+    private javax.swing.JMenuItem miCalcularSalarios;
     private javax.swing.JMenuItem miCarregarArquivo;
     private javax.swing.JMenuItem miNovoFuncionario;
     // End of variables declaration//GEN-END:variables

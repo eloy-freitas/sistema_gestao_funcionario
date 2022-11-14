@@ -4,6 +4,7 @@ import com.ufes.sistemagestaofuncionario.model.Bonus;
 import com.ufes.sistemagestaofuncionario.model.Cargo;
 import com.ufes.sistemagestaofuncionario.model.FaltaAoTrabalho;
 import com.ufes.sistemagestaofuncionario.model.Funcionario;
+import com.ufes.sistemagestaofuncionario.model.SalarioCalculado;
 import com.ufes.sistemagestaofuncionario.persistencia.conexao.ConexaoPostgreSQL;
 import java.sql.Connection;
 import java.sql.Date;
@@ -469,36 +470,58 @@ public class FuncionarioDAO implements IFuncionarioDAO {
     }
 
     @Override
-    public ResultSet getAllSalarioCalculado() throws SQLException, ClassNotFoundException {
+    public List<SalarioCalculado> getAllSalarioCalculado() throws SQLException, ClassNotFoundException {
         PreparedStatement ps = null;
         ResultSet result = null;
+        List<SalarioCalculado> salariosCalculados = new ArrayList<>();
         try {
             String query = ""
                 .concat("\n select ")
-                .concat("\n     f.nm_funcionario ")
-                .concat("\n     , s.dt_modificacao")
-                .concat("\n     , coalesce (f.vl_salario_base, 0) vl_salario_base ")
-                .concat("\n     , coalesce (sum(fb.vl_bonus), 0) vl_bonus")
-                .concat("\n     , coalesce (s.vl_salario_total, 0) vl_salario_total ")
+                .concat("\n     f.id_funcionario ")//1
+                .concat("\n     , f.nm_funcionario ")//2
+                .concat("\n     , s.dt_modificacao")//3
+                .concat("\n     , coalesce (f.vl_salario_base, 0) vl_salario_base ")//4
+                .concat("\n     , coalesce (sum(fb.vl_bonus), 0) vl_bonus")//5
+                .concat("\n     , coalesce (s.vl_salario_total, 0) vl_salario_total ")//6
                 .concat("\n from funcionario f ")
-                .concat("\n left join salario s ")
+                .concat("\n inner join salario s ")
                 .concat("\n     on f.id_funcionario = s.id_funcionario ")
                 .concat("\n left join funcionario_bonus fb ")
                 .concat("\n     on f.id_funcionario = fb.id_funcionario ")
-                .concat("\n group by f.nm_funcionario ")
+                .concat("\n group by f.id_funcionario, f.nm_funcionario ")
                 .concat("\n     , s.dt_modificacao")
                 .concat("\n     , f.vl_salario_base ")
                 .concat("\n     , s.vl_salario_total;");
 
             ps = conexao.prepareStatement(query);
             result = ps.executeQuery();
-            return result;
+            if(!result.next())
+                throw new SQLException("O banco não possui salários calculados.\n\n");
+            do{
+                long id = result.getLong(1);
+                String nome = result.getString(2);
+                Date dataSQL = result.getDate(3);
+                LocalDate dataCalculo = dataSQL.toLocalDate();
+                double salarioBase = result.getDouble(4);
+                double totalBonus = result.getDouble(5);
+                double salarioTotal = result.getDouble(6);
+                
+                salariosCalculados.add(new SalarioCalculado(
+                        id,
+                        nome,
+                        dataCalculo,
+                        salarioBase,
+                        totalBonus,
+                        salarioTotal
+                ));
+            }while(result.next());
 
         } catch (SQLException ex) {
-            throw new SQLException("Erro ao buscar funcionários.\n"
+            throw new SQLException("Erro ao carregar salários calculados. \n"
                     + ex.getMessage());
         } finally {
             ConexaoPostgreSQL.closeConnection(conexao, ps, result);
         }
+        return salariosCalculados;
     }
 }

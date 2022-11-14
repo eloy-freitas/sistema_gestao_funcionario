@@ -7,6 +7,9 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.ListIterator;
 
 
 public class BonusCalculadoDAO implements IBonusCalculadoDAO{
@@ -18,27 +21,33 @@ public class BonusCalculadoDAO implements IBonusCalculadoDAO{
     }
     
     @Override
-    public boolean save(Funcionario funcionario) throws SQLException, ClassNotFoundException {
+    public boolean save(List<Funcionario> funcionarios) throws SQLException, ClassNotFoundException {
         PreparedStatement ps = null;
-        String query = "insert into funcionario_bonus (id_funcionario, id_bonus, vl_bonus, dt_modificacao)\n"
-                        + "values (?, (select id_bonus from bonus b where b.nm_bonus = ?), ?, ?);";
+        String query = "insert into funcionario_bonus ("
+                + " id_funcionario" //1
+                + ", id_bonus" //2
+                + ", vl_bonus" //3 
+                + ", dt_modificacao)\n" //4
+                        + "values (?"
+                + ", (select id_bonus from bonus b where b.nm_bonus = ?), ?, ?);";
         try {
-            if(!funcionario.getBonusRecebidos().isEmpty()){
-                for(Bonus b : funcionario.getBonusRecebidos()){
-                    ps = conexao.prepareStatement(query);
-                    ps.setLong(1, funcionario.getId());
-                    ps.setString(2, b.getTipo());
-                    ps.setDouble(3, b.getValor());
-                    ps.setDate(4, Date.valueOf(b.getData()));
+            ListIterator<Funcionario> itFuncionario 
+                    = funcionarios.listIterator();
+            
+            while(itFuncionario.hasNext()){
+                Funcionario funcionario = itFuncionario.next();
+                ps = conexao.prepareStatement(query);
+                ps.setLong(1, funcionario.getId());
+                for(Bonus bonus : funcionario.getBonusRecebidos()){
+                    ps.setString(2, bonus.getTipo());
+                    ps.setDouble(3, bonus.getValor());
+                    ps.setDate(4, Date.valueOf(LocalDate.now()));
                     ps.executeUpdate();
                 }
-                return true;
-            }else
-                return false;
-            
-            
+            }
+            return true;
          } catch (SQLException ex) {
-            throw new SQLException("Erro ao registrar o funcionário.\n" + ex.getMessage());
+            throw new SQLException("Erro ao registrar o bônus.\n" + ex.getMessage());
         } finally {
             ConexaoPostgreSQL.closeConnection(conexao, ps);
         }

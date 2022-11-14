@@ -1,6 +1,7 @@
 package com.ufes.sistemagestaofuncionario.persistencia.dao.funcionario;
 
 import com.ufes.sistemagestaofuncionario.model.Funcionario;
+import com.ufes.sistemagestaofuncionario.model.SalarioCalculado;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -28,5 +29,5 @@ public interface IFuncionarioDAO {
 
     public ResultSet getSalarioCalculadoByDate(LocalDate data) throws SQLException, ClassNotFoundException;
 
-    public ResultSet getAllSalarioCalculado() throws SQLException, ClassNotFoundException;
+    public List<SalarioCalculado> getAllSalarioCalculado() throws SQLException, ClassNotFoundException;
 }

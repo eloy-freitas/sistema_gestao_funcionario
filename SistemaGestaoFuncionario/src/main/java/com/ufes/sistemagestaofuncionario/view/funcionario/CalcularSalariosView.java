@@ -4,8 +4,11 @@
  */
 package com.ufes.sistemagestaofuncionario.view.funcionario;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 
 /**
@@ -20,6 +23,8 @@ public class CalcularSalariosView extends javax.swing.JFrame {
     public CalcularSalariosView() {
         initComponents();
         this.setLocationRelativeTo(this.getParent());
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        lbDataCalculo.setText(dtf.format(LocalDate.now()));
     }
 
     public JButton getBtnBuscar() {
@@ -42,8 +47,8 @@ public class CalcularSalariosView extends javax.swing.JFrame {
         return ftfDataBusca;
     }
 
-    public JFormattedTextField getFtfDataCalculo() {
-        return ftfDataCalculo;
+    public JLabel getLbDataCalculo() {
+        return lbDataCalculo;
     }
 
     public JTable getTblCalculoSalario() {
@@ -68,8 +73,8 @@ public class CalcularSalariosView extends javax.swing.JFrame {
         tblCalculoSalario = new javax.swing.JTable();
         btnFechar = new javax.swing.JButton();
         btnCalcular = new javax.swing.JButton();
-        ftfDataCalculo = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
+        lbDataCalculo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -96,9 +101,9 @@ public class CalcularSalariosView extends javax.swing.JFrame {
 
         btnCalcular.setText("Calcular");
 
-        ftfDataCalculo.setText("26/04/2018");
+        jLabel1.setText("Data do Cálculo:");
 
-        jLabel1.setText("Data do Cálculo");
+        lbDataCalculo.setText("<< data >>");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,8 +123,8 @@ public class CalcularSalariosView extends javax.swing.JFrame {
                         .addComponent(btnFechar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ftfDataCalculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbDataCalculo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnCalcular)))
                 .addContainerGap())
@@ -138,8 +143,8 @@ public class CalcularSalariosView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnFechar)
                     .addComponent(btnCalcular)
-                    .addComponent(ftfDataCalculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(lbDataCalculo))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -187,9 +192,9 @@ public class CalcularSalariosView extends javax.swing.JFrame {
     private javax.swing.JButton btnFechar;
     private javax.swing.JButton btnListarTodos;
     private javax.swing.JFormattedTextField ftfDataBusca;
-    private javax.swing.JFormattedTextField ftfDataCalculo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbDataCalculo;
     private javax.swing.JTable tblCalculoSalario;
     // End of variables declaration//GEN-END:variables
 }

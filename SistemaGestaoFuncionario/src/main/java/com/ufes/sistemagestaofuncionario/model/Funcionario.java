@@ -82,6 +82,10 @@ public class Funcionario {
         return nome;
     }
 
+    public void setBonusRecebidos(List<Bonus> bonusRecebidos) {
+        this.bonusRecebidos = bonusRecebidos;
+    }
+
     public Cargo getCargo() {
         return cargo;
     }
