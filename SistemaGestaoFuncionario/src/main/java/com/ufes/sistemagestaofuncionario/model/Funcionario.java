@@ -65,8 +65,10 @@ public class Funcionario {
         this.tempoServico = tempoServico;
         this.dataAdmissao = dataAdmissao;
     }
-    
-    
+
+    public void setSalarioTotal(double salarioTotal) {
+        this.salarioTotal = salarioTotal;
+    }
 
     public long getId() {
         return id;

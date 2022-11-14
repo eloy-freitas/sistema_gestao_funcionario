@@ -1,6 +1,8 @@
 package com.ufes.sistemagestaofuncionario.persistencia.dao.funcionario;
 
+import com.ufes.sistemagestaofuncionario.model.Bonus;
 import com.ufes.sistemagestaofuncionario.model.Cargo;
+import com.ufes.sistemagestaofuncionario.model.FaltaAoTrabalho;
 import com.ufes.sistemagestaofuncionario.model.Funcionario;
 import com.ufes.sistemagestaofuncionario.persistencia.conexao.ConexaoPostgreSQL;
 import java.sql.Connection;
@@ -141,19 +143,24 @@ public class FuncionarioDAO implements IFuncionarioDAO{
         PreparedStatement ps = null;
         ResultSet rs = null;
         try{
-            String query = "SELECT "
-                    + "f.nm_funcionario"
-                    + ", f.vl_salario_base"
-                    + ", f.vl_distancia_trabalho"
-                    + ", f.vl_salario_total"
-                    + ", f.nu_idade"
-                    + ", f.dt_admissao"
-                    + ", f.id_cargo"
-                    + ", c.nm_cargo "
-                    + "FROM funcionario f "
-                    + "INNER JOIN cargo c "
-                    + "ON f.id_cargo = c.id_cargo "
-                    + "WHERE f.id_funcionario = ?;";
+            String query = ""
+                    .concat("\n SELECT ")
+                    .concat("\n     f.nm_funcionario")
+                    .concat("\n     , f.vl_salario_base")
+                    .concat("\n     , f.vl_distancia_trabalho")
+                    .concat("\n     , s.vl_salario_total")
+                    .concat("\n     , f.nu_idade")
+                    .concat("\n     , f.dt_admissao")
+                    .concat("\n     , c.id_cargo")
+                    .concat("\n     , c.nm_cargo ")
+                    .concat("\n FROM funcionario f ")
+                    .concat("\n INNER JOIN funcionario_cargo fc ")
+                    .concat("\n ON f.id_funcionario = fc.id_funcionario ")
+                    .concat("\n INNER JOIN cargo c ")
+                    .concat("\n ON fc.id_cargo = c.id_cargo ")
+                    .concat("\n LEFT JOIN salario s ")
+                    .concat("\n ON f.id_funcionario = s.id_funcionario ")
+                    .concat("\n WHERE f.id_funcionario = ?;");
             ps = conexao.prepareStatement(query);
             ps.setLong(1, id);
             rs = ps.executeQuery();
@@ -168,6 +175,8 @@ public class FuncionarioDAO implements IFuncionarioDAO{
             LocalDate dtAdmissao = new Date(rs.getDate(6)
                                                 .getTime()).toLocalDate();
          
+            List<Bonus> bonusRecebidos = new ArrayList<>();
+            List<FaltaAoTrabalho> faltas = new ArrayList<>();
             // Dados do cargo
             long idCargo = rs.getLong(7);
             String nomeCargo = rs.getString(8);
@@ -175,7 +184,7 @@ public class FuncionarioDAO implements IFuncionarioDAO{
             
             return new Funcionario(id, nome, cargo, salarioBase,
                 distanciaTrabalho, dtAdmissao, idade, salarioTotal, 
-                    null, null);
+                    bonusRecebidos, faltas);
         } catch(SQLException ex) {
             throw new SQLException("Erro ao buscar funcionário.\n"
                     + ex.getMessage());

@@ -14,16 +14,10 @@ public class CalculaBonusTempoServicoStrategy extends CalculadoraBonusStrategy{
     @Override
     public Bonus calcular(Funcionario funcionario) {
         LocalDate data = LocalDate.now();
-        int valorTempoServico = Period
-                .between(
-                    funcionario.getDataAdmissao(),
-                    data
-                )
-                .getYears();
+        double valorTempoServico = funcionario.getTempoServico();
         Bonus bonus = null;
         double valor = 0;
         
-        System.out.println(valorTempoServico);
         if(valorTempoServico <= 0){
             bonus = new Bonus(getNome(), 0, data);
         }else if(valorTempoServico >= 1 && valorTempoServico <= 5){
