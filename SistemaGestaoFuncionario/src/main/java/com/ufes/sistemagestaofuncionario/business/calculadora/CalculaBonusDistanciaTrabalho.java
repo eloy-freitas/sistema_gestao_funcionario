@@ -17,7 +17,7 @@ public class CalculaBonusDistanciaTrabalho extends CalculadoraBonusStrategy{
         double distancia = funcionario.getDistanciaTrabalho();
         LocalDate data = LocalDate.now();
         
-        if(distancia < 100){
+        if(distancia >= 0 && distancia < 100){
             bonus = new Bonus(this.getNome(), valor, data);
         }else if(distancia >= 100 && distancia < 300){
             valor = 0.02;
