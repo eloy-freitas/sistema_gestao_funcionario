@@ -23,7 +23,7 @@ public interface IFuncionarioService {
 
     ResultSet buscarFuncionarioBonus(Long id) throws ClassNotFoundException, SQLException;
 
-    Funcionario buscarFuncionarioPorName(String nome) throws SQLException, ClassNotFoundException;
+    List<Funcionario> buscarFuncionarioPorName(String nome) throws SQLException, ClassNotFoundException;
 
     List<Funcionario> buscarBuscarFuncionarioView() throws SQLException, ClassNotFoundException;
 
