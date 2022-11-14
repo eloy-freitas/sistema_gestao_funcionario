@@ -11,9 +11,9 @@ import java.time.LocalDate;
 public interface IFuncionarioService {
 
     boolean salvar(Funcionario funcionario) throws ClassNotFoundException, SQLException;
-    
+
     boolean salvar(List<Funcionario> funcionarios) throws ClassNotFoundException, SQLException;
-    
+
     boolean atualizar(Funcionario funcionario) throws ClassNotFoundException, SQLException;
 
     boolean excluir(Long id) throws ClassNotFoundException, SQLException;
@@ -35,5 +35,7 @@ public interface IFuncionarioService {
     boolean incluirBonus(List<Funcionario> funcionarios) throws SQLException, ClassNotFoundException;
 
     boolean incluirFaltas(Funcionario funcionario) throws SQLException, ClassNotFoundException;
+
+    boolean incluirSalario(List<Funcionario> funcionarios) throws SQLException, ClassNotFoundException;
 
 }

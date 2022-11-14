@@ -7,6 +7,7 @@ import com.ufes.sistemagestaofuncionario.persistencia.repository.bonus.service.I
 import com.ufes.sistemagestaofuncionario.persistencia.repository.funcionario.service.FuncionarioService;
 import com.ufes.sistemagestaofuncionario.persistencia.repository.funcionario.service.IFuncionarioService;
 import com.ufes.sistemagestaofuncionario.service.calculadora.CalculadoraBonusService;
+import com.ufes.sistemagestaofuncionario.service.calculadora.CalculadoraSalarioService;
 import com.ufes.sistemagestaofuncionario.view.funcionario.CalcularSalariosView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,6 +25,7 @@ public class CalcularSalariosPresenter {
 
     private CalcularSalariosView view;
     private CalculadoraBonusService calculoBonusService;
+    private CalculadoraSalarioService calculadoraSalarioService;
     private IBonusService bonusService;
     private IFuncionarioService funcionarioService;
     private List<SalarioCalculado> listaSalarios;
@@ -57,8 +59,8 @@ public class CalcularSalariosPresenter {
 
         });
     }
-    
-    private List<SalarioCalculado> atualizaListaSalarios(){
+
+    private List<SalarioCalculado> atualizaListaSalarios() {
         try {
             this.listaSalarios = funcionarioService.buscarTodosSalarioCalculado();
         } catch (ClassNotFoundException | SQLException ex) {
@@ -73,6 +75,7 @@ public class CalcularSalariosPresenter {
 
     private void initServices() {
         this.calculoBonusService = new CalculadoraBonusService();
+        this.calculadoraSalarioService = new CalculadoraSalarioService();
         try {
             this.funcionarioService = new FuncionarioService();
             this.bonusService = new BonusService();
@@ -137,21 +140,25 @@ public class CalcularSalariosPresenter {
                     "ERRO",
                     JOptionPane.ERROR_MESSAGE);
         }
-        
-        ListIterator<Funcionario> iterator = listaFuncionarios.listIterator();
-        while(iterator.hasNext()){
-            Funcionario funcionario = iterator.next();
-            funcionario.setBonusRecebidos(new ArrayList());
-            listaFuncionariosCalculado.add(calculoBonusService.calcular(funcionario));
-        }
         try {
+            ListIterator<Funcionario> iterator = listaFuncionarios.listIterator();
+            while (iterator.hasNext()) {
+                Funcionario funcionario = iterator.next();
+                funcionario.setBonusRecebidos(new ArrayList());
+                funcionario = calculoBonusService.calcular(funcionario);
+                funcionario = calculadoraSalarioService.calcularSalario(funcionario);
+                listaFuncionariosCalculado.add(funcionario);
+            }
             bonusService.adicionar(listaFuncionarios);
-        } catch (ClassNotFoundException | SQLException ex) {
+            funcionarioService.incluirSalario(listaFuncionarios);
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(view,
                     ex.getMessage(),
                     "ERRO",
                     JOptionPane.ERROR_MESSAGE);
+        } finally {
+            populaTabela();
         }
-        
+
     }
 }
