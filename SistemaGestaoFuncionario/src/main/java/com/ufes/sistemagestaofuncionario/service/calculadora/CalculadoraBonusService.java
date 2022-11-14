@@ -21,8 +21,10 @@ public class CalculadoraBonusService {
     }
     
     public Funcionario calcular(Funcionario funcionario){
+        Bonus bonus = null;
         for(CalculadoraBonusStrategy calculo: this.metodosCalculoBonus){
-            funcionario.getBonusRecebidos().add(calculo.calcular(funcionario));
+            bonus = calculo.calcular(funcionario);
+            funcionario.getBonusRecebidos().add(bonus);
         }
         
         return funcionario;
