@@ -38,8 +38,8 @@
                       <Component id="btnFechar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="ftfDataCalculo" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lbDataCalculo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnCalcular" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -63,8 +63,8 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnFechar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnCalcular" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="ftfDataCalculo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbDataCalculo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="20" max="32767" attributes="0"/>
           </Group>
@@ -151,14 +151,14 @@
         <Property name="text" type="java.lang.String" value="Calcular"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="ftfDataCalculo">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="26/04/2018"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Data do C&#xe1;lculo"/>
+        <Property name="text" type="java.lang.String" value="Data do C&#xe1;lculo:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lbDataCalculo">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&lt;&lt; data &gt;&gt;"/>
       </Properties>
     </Component>
   </SubComponents>
