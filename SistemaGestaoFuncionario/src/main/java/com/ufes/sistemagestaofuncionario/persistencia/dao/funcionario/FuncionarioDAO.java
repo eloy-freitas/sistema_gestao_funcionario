@@ -4,6 +4,7 @@ import com.ufes.sistemagestaofuncionario.model.Bonus;
 import com.ufes.sistemagestaofuncionario.model.Cargo;
 import com.ufes.sistemagestaofuncionario.model.FaltaAoTrabalho;
 import com.ufes.sistemagestaofuncionario.model.Funcionario;
+import com.ufes.sistemagestaofuncionario.model.HistoricoBonus;
 import com.ufes.sistemagestaofuncionario.persistencia.conexao.ConexaoPostgreSQL;
 import java.sql.Connection;
 import java.sql.Date;
@@ -266,20 +267,21 @@ public class FuncionarioDAO implements IFuncionarioDAO {
     }
 
     @Override
-    public ResultSet getFuncionarioBonus(long id) throws SQLException, ClassNotFoundException {
+    public List<HistoricoBonus>  getFuncionarioBonus(long id) throws SQLException, ClassNotFoundException {
         PreparedStatement ps = null;
         ResultSet result = null;
+        List<HistoricoBonus> bonus = new ArrayList<>();
         try {
             String query = ""
                     .concat("select ")
-                    .concat("\n 	fb.dt_modificacao")
-                    .concat("\n 	, c.nm_cargo")
-                    .concat("\n 	, b.nm_bonus")
-                    .concat("\n 	, fb.vl_bonus")
+                    .concat("\n 	fb.dt_modificacao")//1
+                    .concat("\n 	, c.nm_cargo")//2
+                    .concat("\n 	, b.nm_bonus")//3
+                    .concat("\n 	, fb.vl_bonus")//4
                     .concat("\n from funcionario f")
-                    .concat("\n left join funcionario_bonus fb")
+                    .concat("\n inner join funcionario_bonus fb")
                     .concat("\n 	on f.id_funcionario = fb.id_funcionario")
-                    .concat("\n left join bonus b")
+                    .concat("\n inner join bonus b")
                     .concat("\n 	on fb.id_bonus = b.id_bonus")
                     .concat("\n left join funcionario_cargo fc")
                     .concat("\n 	on f.id_funcionario = fc.id_funcionario")
@@ -289,14 +291,33 @@ public class FuncionarioDAO implements IFuncionarioDAO {
             ps = conexao.prepareStatement(query);
             ps.setLong(1, id);
             result = ps.executeQuery();
+            Date data;
+            String nomeCargo;
+            String nomeBonus;
+            double valorBonus;
+            if(!result.next())
+                throw new SQLException("Funcionário não possui bônus calculados");
+            do{
+                data = result.getDate(1);
+                nomeCargo = result.getString(2);
+                nomeBonus = result.getString(3);
+                valorBonus = result.getDouble(4);
+                bonus.add(
+                        new HistoricoBonus(
+                                data.toLocalDate(), 
+                                nomeCargo, 
+                                nomeBonus, 
+                                valorBonus)
+                );
+            }while(result.next());
+            
+            return bonus;
         } catch (SQLException ex) {
-            throw new SQLException("Erro ao buscar funcionários.\n"
+            throw new SQLException("Erro ao buscar bônus do funcinário.\n"
                     + ex.getMessage());
         } finally {
             ConexaoPostgreSQL.closeConnection(conexao, ps, result);
         }
-
-        return result;
 
     }
 

@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.ufes.sistemagestaofuncionario.model.Funcionario;
+import com.ufes.sistemagestaofuncionario.model.HistoricoBonus;
 import com.ufes.sistemagestaofuncionario.persistencia.dao.bonus.BonusCalculadoDAO;
 import com.ufes.sistemagestaofuncionario.persistencia.dao.cargo.CargoDAO;
 import com.ufes.sistemagestaofuncionario.persistencia.dao.funcionario.FuncionarioDAO;
@@ -74,7 +75,7 @@ public class FuncionarioRepository implements IFuncionarioRepository {
     }
 
     @Override
-    public ResultSet buscarFuncionarioBonus(Long id) throws ClassNotFoundException, SQLException {
+    public List<HistoricoBonus>  buscarFuncionarioBonus(Long id) throws ClassNotFoundException, SQLException {
         abrirConexoes();
         return funcionarioDAO.getFuncionarioBonus(id);
     }

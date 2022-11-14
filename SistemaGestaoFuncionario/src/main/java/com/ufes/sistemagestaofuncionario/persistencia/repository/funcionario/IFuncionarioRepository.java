@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.ufes.sistemagestaofuncionario.model.Funcionario;
+import com.ufes.sistemagestaofuncionario.model.HistoricoBonus;
 import java.sql.ResultSet;
 import java.time.LocalDate;
 
@@ -21,7 +22,7 @@ public interface IFuncionarioRepository {
 
     List<Funcionario> buscarTodos() throws ClassNotFoundException, SQLException;
 
-    ResultSet buscarFuncionarioBonus(Long id) throws ClassNotFoundException, SQLException;
+    List<HistoricoBonus>  buscarFuncionarioBonus(Long id) throws ClassNotFoundException, SQLException;
 
     List<Funcionario> buscarFuncionarioPorName(String nome) throws SQLException, ClassNotFoundException;
 

@@ -1,6 +1,7 @@
 package com.ufes.sistemagestaofuncionario.persistencia.dao.funcionario;
 
 import com.ufes.sistemagestaofuncionario.model.Funcionario;
+import com.ufes.sistemagestaofuncionario.model.HistoricoBonus;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -20,7 +21,7 @@ public interface IFuncionarioDAO {
 
     public List<Funcionario> getAll() throws SQLException, ClassNotFoundException;
 
-    public ResultSet getFuncionarioBonus(long id) throws SQLException, ClassNotFoundException;
+    public List<HistoricoBonus> getFuncionarioBonus(long id) throws SQLException, ClassNotFoundException;
 
     public List<Funcionario> getByName(String nome) throws SQLException, ClassNotFoundException;
 
