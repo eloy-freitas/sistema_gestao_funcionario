@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.ufes.sistemagestaofuncionario.model.Funcionario;
+import com.ufes.sistemagestaofuncionario.model.SalarioCalculado;
 import com.ufes.sistemagestaofuncionario.persistencia.dao.bonus.BonusCalculadoDAO;
 import com.ufes.sistemagestaofuncionario.persistencia.dao.cargo.CargoDAO;
 import com.ufes.sistemagestaofuncionario.persistencia.dao.funcionario.FuncionarioDAO;
@@ -98,15 +99,15 @@ public class FuncionarioRepository implements IFuncionarioRepository {
     }
 
     @Override
-    public ResultSet buscarTodosSalarioCalculado() throws SQLException, ClassNotFoundException {
+    public List<SalarioCalculado> buscarTodosSalarioCalculado() throws SQLException, ClassNotFoundException {
         abrirConexoes();
         return funcionarioDAO.getAllSalarioCalculado();
     }
 
     @Override
-    public boolean incluirBonus(Funcionario funcionario) throws SQLException, ClassNotFoundException {
+    public boolean incluirBonus(List<Funcionario> funcionarios) throws SQLException, ClassNotFoundException {
         abrirConexoes();
-        return bonusCalculadoDAO.save(funcionario);
+        return bonusCalculadoDAO.save(funcionarios);
     }
 
     @Override
