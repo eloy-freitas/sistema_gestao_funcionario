@@ -7,11 +7,12 @@ import com.ufes.sistemagestaofuncionario.view.bonus.VisualizarBonusView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,18 +21,21 @@ public class VisualizarBonusPresenter {
     private VisualizarBonusView view;
     private DefaultTableModel tmBonus;
     private List<HistoricoBonus> listaBonus;
-    private Long idFuncionario;
+    private Funcionario funcionario;
     
-    public VisualizarBonusPresenter(Long id) {
-        this.idFuncionario = id;
+    
+    public VisualizarBonusPresenter(Funcionario funcionario) {
+        this.funcionario = funcionario;
         view = new VisualizarBonusView();
         listaBonus = new ArrayList<>();
         initListeners();
         initServices();
         initTable();
+        setNomeFuncionario(funcionario.getId(), funcionario.getNome());
         view.setVisible(true);
     }
     
+
     private void initListeners(){
         view.getBtnFechar().addActionListener(new ActionListener(){
             @Override
@@ -66,6 +70,12 @@ public class VisualizarBonusPresenter {
         populaTabela();
     }
     
+    private void setNomeFuncionario(Long id, String nome){
+        String titulo;
+        titulo = String.valueOf(id) + " - " + nome;
+        view.getLbNomeFuncionario().setText(titulo);
+    }
+    
     private void fechar(){
         view.dispose();
     }
@@ -83,7 +93,7 @@ public class VisualizarBonusPresenter {
         limpaTabela();
         // Percorrendo a lista para adicionar à tabela.
         try{
-            this.listaBonus = funcionarioService.buscarFuncionarioBonus(this.idFuncionario);
+            this.listaBonus = funcionarioService.buscarFuncionarioBonus(funcionario.getId());
         }catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(view,
                     "Erro ao inicializar janela de busca.\n\n"
@@ -94,10 +104,11 @@ public class VisualizarBonusPresenter {
         
         ListIterator<HistoricoBonus> iterator
                 = this.listaBonus.listIterator();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         while (iterator.hasNext()) {
             HistoricoBonus bonus = iterator.next();
             tmBonus.addRow(new Object[]{
-                bonus.getDataCalculo(),
+                formatter.format(bonus.getDataCalculo()),
                 bonus.getNomeCargo(),
                 bonus.getTipoBonus(),
                 bonus.getValorBonus()

@@ -171,7 +171,7 @@ public class BuscarFuncionarioPresenter {
             funcionario = funcionarioService.buscarPorId(
                     Long.valueOf(id.toString()));
             fechar();
-            new VisualizarBonusPresenter(funcionario.getId());
+            new VisualizarBonusPresenter(funcionario);
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(view,
                     "Erro ao buscar funcionário.\n\n"

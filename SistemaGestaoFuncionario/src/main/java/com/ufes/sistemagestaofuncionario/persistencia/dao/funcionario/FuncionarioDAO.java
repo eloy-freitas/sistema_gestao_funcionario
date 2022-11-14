@@ -278,6 +278,7 @@ public class FuncionarioDAO implements IFuncionarioDAO {
                     .concat("\n 	, c.nm_cargo")//2
                     .concat("\n 	, b.nm_bonus")//3
                     .concat("\n 	, fb.vl_bonus")//4
+                    .concat("\n 	, f.nm_funcionario")//5
                     .concat("\n from funcionario f")
                     .concat("\n inner join funcionario_bonus fb")
                     .concat("\n 	on f.id_funcionario = fb.id_funcionario")
@@ -295,6 +296,7 @@ public class FuncionarioDAO implements IFuncionarioDAO {
             String nomeCargo;
             String nomeBonus;
             double valorBonus;
+            String nomeFuncionario;
             if(!result.next())
                 throw new SQLException("Funcionário não possui bônus calculados");
             do{
@@ -302,8 +304,10 @@ public class FuncionarioDAO implements IFuncionarioDAO {
                 nomeCargo = result.getString(2);
                 nomeBonus = result.getString(3);
                 valorBonus = result.getDouble(4);
+                nomeFuncionario = result.getString(5);
                 bonus.add(
                         new HistoricoBonus(
+                                nomeFuncionario,
                                 data.toLocalDate(), 
                                 nomeCargo, 
                                 nomeBonus, 
