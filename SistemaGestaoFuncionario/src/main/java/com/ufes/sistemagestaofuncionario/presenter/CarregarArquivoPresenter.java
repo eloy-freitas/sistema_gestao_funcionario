@@ -2,6 +2,8 @@ package com.ufes.sistemagestaofuncionario.presenter;
 
 import com.ufes.sistemagestaofuncionario.adaptador.leitorarquivo.FileReaderCSVAdapter;
 import com.ufes.sistemagestaofuncionario.model.Funcionario;
+import com.ufes.sistemagestaofuncionario.persistencia.repository.cargo.service.CargoService;
+import com.ufes.sistemagestaofuncionario.persistencia.repository.cargo.service.ICargoService;
 import com.ufes.sistemagestaofuncionario.persistencia.repository.funcionario.service.FuncionarioService;
 import com.ufes.sistemagestaofuncionario.persistencia.repository.funcionario.service.IFuncionarioService;
 import com.ufes.sistemagestaofuncionario.service.leitorarquivo.ILeitorArquivoService;
@@ -19,6 +21,7 @@ public class CarregarArquivoPresenter {
     private Path path;
     private ILeitorArquivoService leitorArquivoService;
     private IFuncionarioService funcionarioService;
+    private ICargoService cargoService;
 
     public CarregarArquivoPresenter() {
         initServices();
@@ -41,6 +44,7 @@ public class CarregarArquivoPresenter {
     private void initServices() {
         try {
             funcionarioService = new FuncionarioService();
+            cargoService = new CargoService();
             leitorArquivoService = new LeitorArquivoCSVService();
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(fileChooser,
@@ -57,6 +61,7 @@ public class CarregarArquivoPresenter {
                     = leitorArquivoService.lerArquivoFuncionario(this.path.toString());
 
             funcionarioService.salvar(listaFuncionarios);
+            cargoService.criar(listaFuncionarios);
         } catch (ClassNotFoundException | SQLException | IOException ex) {
             JOptionPane.showMessageDialog(fileChooser,
                     "Erro ao ler arquivo.\n\n"
