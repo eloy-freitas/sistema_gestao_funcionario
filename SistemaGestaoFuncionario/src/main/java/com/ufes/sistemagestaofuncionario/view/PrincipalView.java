@@ -5,6 +5,7 @@
 package com.ufes.sistemagestaofuncionario.view;
 
 import com.ufes.sistemagestaofuncionario.presenter.BuscarFuncionarioPresenter;
+import com.ufes.sistemagestaofuncionario.presenter.CarregarArquivoPresenter;
 import com.ufes.sistemagestaofuncionario.presenter.ManterFuncionarioPresenter;
 import javax.swing.JMenuItem;
 
@@ -42,6 +43,7 @@ public class PrincipalView extends javax.swing.JFrame {
         menuFuncionario = new javax.swing.JMenu();
         miNovoFuncionario = new javax.swing.JMenuItem();
         miBuscarFuncionario = new javax.swing.JMenuItem();
+        miCarregarArquivo = new javax.swing.JMenuItem();
         menuSalario = new javax.swing.JMenu();
         menuFerramentas = new javax.swing.JMenu();
 
@@ -74,6 +76,14 @@ public class PrincipalView extends javax.swing.JFrame {
             }
         });
         menuFuncionario.add(miBuscarFuncionario);
+
+        miCarregarArquivo.setText("Carregar Arquivo");
+        miCarregarArquivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miCarregarArquivoActionPerformed(evt);
+            }
+        });
+        menuFuncionario.add(miCarregarArquivo);
 
         jMenuBar1.add(menuFuncionario);
 
@@ -132,6 +142,10 @@ public class PrincipalView extends javax.swing.JFrame {
         new BuscarFuncionarioPresenter();
     }//GEN-LAST:event_miBuscarFuncionarioActionPerformed
 
+    private void miCarregarArquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCarregarArquivoActionPerformed
+        new CarregarArquivoPresenter();
+    }//GEN-LAST:event_miCarregarArquivoActionPerformed
+
     public JMenuItem getMiNovoFuncionario() {
         return miNovoFuncionario;
     }
@@ -183,6 +197,7 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JMenu menuFuncionario;
     private javax.swing.JMenu menuSalario;
     private javax.swing.JMenuItem miBuscarFuncionario;
+    private javax.swing.JMenuItem miCarregarArquivo;
     private javax.swing.JMenuItem miNovoFuncionario;
     // End of variables declaration//GEN-END:variables
 }
