@@ -24,14 +24,20 @@ public class FuncionarioDAO implements IFuncionarioDAO{
     
 
     @Override
-    public boolean save(Funcionario funcionario) throws SQLException, ClassNotFoundException{
+    public long save(Funcionario funcionario) throws SQLException, ClassNotFoundException{
         PreparedStatement psFuncionario = null;
-        
+        ResultSet rsFuncionario = null;
         try {
-            String queryFuncionario = "INSERT INTO funcionario(nm_funcionario, "
-                + "vl_salario_base, vl_distancia_trabalho "
-                + "nu_idade, dt_admissao, dt_modificacao) VALUES "
-                + "(?, ?, ?, ?, ?, ?);";
+            String queryFuncionario = "INSERT INTO funcionario("
+                    + "nm_funcionario"
+                    + ", vl_salario_base"
+                    + ", vl_distancia_trabalho "
+                    + ", nu_idade"
+                    + ", dt_admissao"
+                    + ", dt_modificacao) "
+                    + "VALUES "
+                    + "(?, ?, ?, ?, ?, ?)"
+                    + "RETURNING id_funcionario;";
             
             psFuncionario = conexao.prepareStatement(queryFuncionario);
             psFuncionario.setString(1, funcionario.getNome());
@@ -44,9 +50,12 @@ public class FuncionarioDAO implements IFuncionarioDAO{
             sqlDate = Date.valueOf(LocalDate.now());
             psFuncionario.setDate(6, sqlDate);
             
-            psFuncionario.executeUpdate();
+            rsFuncionario = psFuncionario.executeQuery();
             
-            return true;
+            if(!rsFuncionario.next())
+                throw new SQLException("Funcionário não cadastrado.");
+            return rsFuncionario.getLong(1);
+            
         } catch (SQLException ex) {
             throw new SQLException("Erro ao registrar o funcionário.\n" + ex.getMessage());
         } finally {

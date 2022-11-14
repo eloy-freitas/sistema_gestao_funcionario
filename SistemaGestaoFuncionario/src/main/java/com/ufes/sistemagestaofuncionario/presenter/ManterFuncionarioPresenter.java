@@ -54,14 +54,7 @@ public class ManterFuncionarioPresenter {
                 salvar();
             }
         });
-
-        // Botão adicionar cargo
-        view.getBtnNovoCargo().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                abrirCadastrarNovoCargo();
-            }
-        });
+        
     }
 
     private void initComboBox() {
@@ -84,7 +77,7 @@ public class ManterFuncionarioPresenter {
         view.dispose();
     }
 
-    private Funcionario obterCampos() {
+    private Funcionario obterCampos() throws ClassNotFoundException, SQLException {
         /* 
         *  Utilizando calendar por se mostrar o objeto mais estável retornado
         *  pelo DatePicker.
@@ -105,6 +98,7 @@ public class ManterFuncionarioPresenter {
                 LocalDate.now());
 
         int idade = period.getYears();
+        System.out.println(idade);
         String nome = view.getTfNome().getText();
         String cargo = view.getCbCargo().getSelectedItem().toString();
         Double salarioBase = Double.valueOf(view.getFtfSalario().getText());
@@ -122,9 +116,8 @@ public class ManterFuncionarioPresenter {
     }
 
     private void salvar() {
-        Funcionario funcionario = obterCampos();
-
         try {
+            Funcionario funcionario = obterCampos();
             if (funcionarioService.salvar(funcionario)) {
                 JOptionPane.showMessageDialog(view,
                         "Funcionário\n"
@@ -142,14 +135,5 @@ public class ManterFuncionarioPresenter {
         }
 
         view.dispose();
-    }
-
-    private void abrirCadastrarNovoCargo() {
-        /*
-        * Irá se esconder para ser instanciada de novo na classe
-        * CadastrarCargoPresenter, para atualizar a combobox de cargos.
-         */
-        view.dispose();
-        new CadastrarCargoPresenter();
     }
 }
