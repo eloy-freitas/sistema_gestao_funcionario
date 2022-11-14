@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.Calendar;
 import java.util.List;
+import java.util.ListIterator;
 import javax.swing.JOptionPane;
 
 public class ManterFuncionarioPresenter {
@@ -20,9 +21,18 @@ public class ManterFuncionarioPresenter {
     private ManterFuncionarioView view;
     private FuncionarioService funcionarioService;
     private CargoService cargoService;
+    private List<Cargo> cargos;
 
     public ManterFuncionarioPresenter() {
         view = new ManterFuncionarioView();
+        initServices();
+        initListeners();
+        populaCargos();
+        initComboBox();
+        view.setVisible(true);
+    }
+
+    private void initServices() {
         try {
             funcionarioService = new FuncionarioService();
             cargoService = new CargoService();
@@ -33,9 +43,6 @@ public class ManterFuncionarioPresenter {
                     "Erro de Inicialização",
                     JOptionPane.ERROR_MESSAGE);
         }
-        initListeners();
-        initComboBox();
-        view.setVisible(true);
     }
 
     private void initListeners() {
@@ -54,16 +61,12 @@ public class ManterFuncionarioPresenter {
                 salvar();
             }
         });
-        
+
     }
 
-    private void initComboBox() {
-        List<Cargo> cargos;
+    private void populaCargos() {
         try {
             cargos = cargoService.buscarTodos();
-            for (Cargo cargo : cargos) {
-                view.getCbCargo().addItem(cargo.getNome());
-            }
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(view,
                     "Ocorreu um erro ao carregar os cargos.\n\n"
@@ -71,6 +74,16 @@ public class ManterFuncionarioPresenter {
                     "ERRO",
                     JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    private void initComboBox() {
+        ListIterator<Cargo> iterator = cargos.listIterator();
+
+        while (iterator.hasNext()) {
+            Cargo cargo = iterator.next();
+            view.getCbCargo().addItem(cargo.getNome());
+        }
+
     }
 
     private void fechar() {
@@ -120,9 +133,9 @@ public class ManterFuncionarioPresenter {
             Funcionario funcionario = obterCampos();
             if (funcionarioService.salvar(funcionario)) {
                 JOptionPane.showMessageDialog(view,
-                        "Funcionário\n"
+                        "Funcionário(a)\n"
                         + funcionario.getNome() + "\n"
-                        + "salvo com sucesso!",
+                        + "salvo(a) com sucesso!",
                         "Sucesso",
                         JOptionPane.INFORMATION_MESSAGE);
             }
