@@ -22,7 +22,7 @@ public interface IFuncionarioDAO {
 
     public ResultSet getFuncionarioBonus(long id) throws SQLException, ClassNotFoundException;
 
-    public Funcionario getByName(String nome) throws SQLException, ClassNotFoundException;
+    public List<Funcionario> getByName(String nome) throws SQLException, ClassNotFoundException;
 
     public List<Funcionario> getAllBuscarFuncionarioView() throws SQLException, ClassNotFoundException;
 
