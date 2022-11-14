@@ -35,5 +35,7 @@ public interface IFuncionarioRepository {
     boolean incluirBonus(List<Funcionario> funcionarios) throws SQLException, ClassNotFoundException;
 
     boolean incluirFaltas(Funcionario funcionario) throws SQLException, ClassNotFoundException;
+    
+    boolean incluirSalario(List<Funcionario> funcionarios) throws SQLException, ClassNotFoundException; 
 
 }

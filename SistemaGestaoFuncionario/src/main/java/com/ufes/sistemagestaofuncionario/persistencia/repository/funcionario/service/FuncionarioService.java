@@ -83,4 +83,9 @@ public class FuncionarioService implements IFuncionarioService {
         return funcionarioRepository.incluirFaltas(funcionario);
     }
 
+    @Override
+    public boolean incluirSalario(List<Funcionario> funcionarios) throws SQLException, ClassNotFoundException {
+        return funcionarioRepository.incluirSalario(funcionarios);
+    }
+
 }
