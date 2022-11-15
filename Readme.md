@@ -1,20 +1,40 @@
+# Sistema de gestão de funcionários
+
 ## Trabalho da disciplina de Padrão de Projetos de Software
 
 ### Componentes:
 - Eloy de Freitas Almeida
 - Matheus Paulo Bastos
 
+### Pré requisitos
+- É necessário ter o docker instalado para utilizar o banco de dados.
+
+```
+https://docs.docker.com/desktop/
+```
 ### Para iniciar o banco de dados siga o passo a passo:
 
-```
-    chmod +x initdb.sh
-```
+- Execute no terminal o seguinte comando para permitir a inicialiazação da base de dados:
 
 ```
-    ./initdb.sh
+chmod +x initdb.sh
 ```
+- Execute o seguinte comando para inicializar o container docker e criar as tabelas do banco de dados:
+
+```
+./initdb.sh
+```
+
+## Considerações:
+- No diretório ddl existe o arquivo funcionario_reduzido.csv com uma quantidade pequena de registro para teste. 
+
+- A insersão de funcionarios de um arquivo muito grande demora muito.
 
 ## Modelagem
+
+### Modelo Entidade de Relacionamento
+
+![MER](img/mer.png)
 
 ### Model
 
