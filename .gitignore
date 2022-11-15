@@ -3,7 +3,6 @@
 *.json
 
 # .env Example
-*.env
 
 # Compiled class file
 *.class
