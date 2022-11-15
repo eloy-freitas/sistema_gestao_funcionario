@@ -35,6 +35,11 @@ public class FuncionarioService implements IFuncionarioService {
     }
 
     @Override
+    public long contarFuncionarios() throws ClassNotFoundException, SQLException {
+        return funcionarioRepository.contarFuncionarios();
+    }
+
+    @Override
     public boolean excluir(Long id) throws ClassNotFoundException, SQLException {
         return funcionarioRepository.excluir(id);
     }

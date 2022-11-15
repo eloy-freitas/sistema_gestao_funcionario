@@ -18,6 +18,8 @@ public interface IFuncionarioRepository {
     boolean excluir(Long id) throws ClassNotFoundException, SQLException;
 
     boolean atualizar(Funcionario funcionario) throws ClassNotFoundException, SQLException;
+    
+    long contarFuncionarios() throws ClassNotFoundException, SQLException;
 
     Funcionario buscarPorId(Long id) throws ClassNotFoundException, SQLException;
 
