@@ -8,6 +8,7 @@ import com.ufes.sistemagestaofuncionario.presenter.BuscarFuncionarioPresenter;
 import com.ufes.sistemagestaofuncionario.presenter.CalcularSalariosPresenter;
 import com.ufes.sistemagestaofuncionario.presenter.CarregarArquivoPresenter;
 import com.ufes.sistemagestaofuncionario.presenter.ManterFuncionarioPresenter;
+import com.ufes.sistemagestaofuncionario.presenter.SobrePresenter;
 import javax.swing.JMenuItem;
 
 /**
@@ -48,6 +49,7 @@ public class PrincipalView extends javax.swing.JFrame {
         menuSalario = new javax.swing.JMenu();
         miCalcularSalarios = new javax.swing.JMenuItem();
         menuFerramentas = new javax.swing.JMenu();
+        miSobre = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -102,6 +104,15 @@ public class PrincipalView extends javax.swing.JFrame {
         jMenuBar1.add(menuSalario);
 
         menuFerramentas.setText("Ferramentas");
+
+        miSobre.setText("Sobre");
+        miSobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miSobreActionPerformed(evt);
+            }
+        });
+        menuFerramentas.add(miSobre);
+
         jMenuBar1.add(menuFerramentas);
 
         setJMenuBar(jMenuBar1);
@@ -161,6 +172,10 @@ public class PrincipalView extends javax.swing.JFrame {
         new CalcularSalariosPresenter();
     }//GEN-LAST:event_miCalcularSalariosActionPerformed
 
+    private void miSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSobreActionPerformed
+        new SobrePresenter();
+    }//GEN-LAST:event_miSobreActionPerformed
+
     public JMenuItem getMiNovoFuncionario() {
         return miNovoFuncionario;
     }
@@ -215,5 +230,6 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JMenuItem miCalcularSalarios;
     private javax.swing.JMenuItem miCarregarArquivo;
     private javax.swing.JMenuItem miNovoFuncionario;
+    private javax.swing.JMenuItem miSobre;
     // End of variables declaration//GEN-END:variables
 }
