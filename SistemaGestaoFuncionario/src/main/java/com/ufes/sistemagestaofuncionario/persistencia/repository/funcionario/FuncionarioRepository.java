@@ -66,6 +66,12 @@ public class FuncionarioRepository implements IFuncionarioRepository {
     }
 
     @Override
+    public long contarFuncionarios() throws ClassNotFoundException, SQLException {
+        abrirConexoes();
+        return funcionarioDAO.getFuncionarioCount();
+    }
+
+    @Override
     public Funcionario buscarPorId(Long id) throws ClassNotFoundException, SQLException {
         abrirConexoes();
         return funcionarioDAO.getById(id);

@@ -16,6 +16,8 @@ public interface IFuncionarioService {
     boolean salvar(List<Funcionario> funcionarios) throws ClassNotFoundException, SQLException;
 
     boolean atualizar(Funcionario funcionario) throws ClassNotFoundException, SQLException;
+    
+    long contarFuncionarios() throws ClassNotFoundException, SQLException;
 
     boolean excluir(Long id) throws ClassNotFoundException, SQLException;
 

@@ -19,6 +19,8 @@ public interface IFuncionarioDAO {
     public boolean delete(long id) throws SQLException;
 
     public Funcionario getById(long id) throws SQLException, ClassNotFoundException;
+    
+    public long getFuncionarioCount() throws SQLException, ClassNotFoundException;
 
     public List<Funcionario> getAll() throws SQLException, ClassNotFoundException;
 

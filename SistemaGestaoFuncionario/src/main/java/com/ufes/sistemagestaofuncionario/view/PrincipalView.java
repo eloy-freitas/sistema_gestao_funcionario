@@ -36,10 +36,6 @@ public class PrincipalView extends javax.swing.JFrame {
     private void initComponents() {
 
         jSeparator1 = new javax.swing.JSeparator();
-        lbVersao = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        lbQtdFuncionarios = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuFuncionario = new javax.swing.JMenu();
@@ -53,15 +49,7 @@ public class PrincipalView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lbVersao.setText("versao");
-
-        jLabel2.setText("XML");
-
-        jLabel3.setText("Txt");
-
-        lbQtdFuncionarios.setText("qtdFuncionarios");
-
-        jLabel5.setText("Logo");
+        jLabel5.setText("<< LOGO >>");
 
         menuFuncionario.setText("Funcionário");
 
@@ -121,36 +109,20 @@ public class PrincipalView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1)
+            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbVersao)
-                .addGap(73, 73, 73)
-                .addComponent(jLabel2)
-                .addGap(72, 72, 72)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                .addComponent(lbQtdFuncionarios)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(181, 181, 181)
+                .addGap(159, 159, 159)
                 .addComponent(jLabel5)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(108, 108, 108)
+                .addGap(103, 103, 103)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbVersao)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(lbQtdFuncionarios))
-                .addContainerGap())
+                .addGap(27, 27, 27))
         );
 
         pack();
@@ -216,13 +188,9 @@ public class PrincipalView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel lbQtdFuncionarios;
-    private javax.swing.JLabel lbVersao;
     private javax.swing.JMenu menuFerramentas;
     private javax.swing.JMenu menuFuncionario;
     private javax.swing.JMenu menuSalario;
