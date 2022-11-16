@@ -7,6 +7,7 @@ import com.ufes.sistemagestaofuncionario.view.funcionario.BuscarFuncionarioView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import javax.swing.JOptionPane;
@@ -19,7 +20,7 @@ public class BuscarFuncionarioPresenter {
     private BuscarFuncionarioView view;
     private DefaultTableModel tmFuncionarios;
     private IFuncionarioService funcionarioService;
-    private List<Funcionario> listaFuncionarios;
+    private List<Funcionario> listaFuncionarios = new ArrayList();
 
     /*
         Construtor para quando esta presenter é chamada pela view principal.
@@ -36,7 +37,7 @@ public class BuscarFuncionarioPresenter {
                     "Erro ao listar os funcionários.\n\n"
                     + ex.getMessage(),
                     "ERRO",
-                    JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.INFORMATION_MESSAGE);
         }
         initTabela();
         populaTabela();
@@ -95,7 +96,6 @@ public class BuscarFuncionarioPresenter {
 
         }
     }
-    
 
     private void initListeners() {
         // Botão fechar
@@ -129,7 +129,7 @@ public class BuscarFuncionarioPresenter {
                 buscar();
             }
         });
-        
+
         // Botão Ver Bonus
         view.getBtnVerBonus().addActionListener(new ActionListener() {
             @Override
@@ -161,7 +161,7 @@ public class BuscarFuncionarioPresenter {
                     JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     private void abrirVisualizarBonus() {
         JTable tabela = view.getTblFuncionario();
         int linha = tabela.getSelectedRow();
@@ -188,18 +188,26 @@ public class BuscarFuncionarioPresenter {
 
     private void buscar() {
         String nome = view.getTfNome().getText();
-
-        try {
-            //fechar();
-            //new BuscarFuncionarioPresenter();
-            setListaFuncionarios(funcionarioService.buscarFuncionarioPorName(nome));
-            populaTabela();
-        } catch (SQLException | ClassNotFoundException ex) {
+        if (!nome.isBlank()) {
+            try {
+                //fechar();
+                //new BuscarFuncionarioPresenter();
+                setListaFuncionarios(funcionarioService.buscarFuncionarioPorName(nome));
+                populaTabela();
+            } catch (SQLException | ClassNotFoundException ex) {
+                JOptionPane.showMessageDialog(view,
+                        "Erro ao buscar funcionário.\n\n"
+                        + ex.getMessage(),
+                        "ERRO",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else {
             JOptionPane.showMessageDialog(view,
-                    "Erro ao buscar funcionário.\n\n"
-                    + ex.getMessage(),
-                    "ERRO",
-                    JOptionPane.ERROR_MESSAGE);
+                    "Informe o nome do funcionário a ser buscado",
+                    "Campos em Branco",
+                    JOptionPane.INFORMATION_MESSAGE);
+            view.getTfNome().requestFocus();
         }
     }
 
