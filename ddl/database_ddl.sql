@@ -1,9 +1,9 @@
-create table cargo (
+create table if not exists cargo (
 	id_cargo serial primary key unique
 	, nm_cargo varchar(50) not null unique
 );
 
-create table funcionario(
+create table if not exists funcionario(
 	id_funcionario serial primary key unique
 	, nm_funcionario varchar(150) not null
 	, vl_salario_base decimal not null
@@ -14,12 +14,12 @@ create table funcionario(
 	, dt_modificacao date not null
 );
 
-create table bonus(
+create table if not exists bonus(
 	id_bonus serial primary key unique
 	, nm_bonus varchar(100) not null unique
 );
 
-create table funcionario_bonus(
+create table if not exists funcionario_bonus(
 	id_bonus int not null
 	, id_funcionario int not null
 	, vl_bonus decimal not null
@@ -28,7 +28,7 @@ create table funcionario_bonus(
 	, constraint id_funcionario_bonus_fk foreign key (id_funcionario) references funcionario(id_funcionario)
 );
 
-create table funcionario_falta(
+create table if not exists funcionario_falta(
 	id_funcionario int not null
 	, qt_faltas int not null
 	, dt_vigencia date
@@ -36,7 +36,7 @@ create table funcionario_falta(
 	, constraint id_funcionario_falta_fk foreign key (id_funcionario) references funcionario(id_funcionario)
 );
 
-create table funcionario_cargo (
+create table if not exists funcionario_cargo (
 	id_cargo int not null
 	, id_funcionario int not null
 	, dt_modificacao date not null
@@ -44,7 +44,7 @@ create table funcionario_cargo (
 	, constraint id_funcionario_cargo_fk foreign key (id_funcionario) references funcionario(id_funcionario)
 );
 
-create table salario(
+create table if not exists salario(
 	id_funcionario int not null
 	, vl_salario_total decimal not null
 	, dt_modificacao date
@@ -55,68 +55,82 @@ create table salario(
 alter sequence funcionario_id_funcionario_seq restart;
 update funcionario  set id_funcionario=nextval('funcionario_id_funcionario_seq');
 
+delete from funcionario_bonus;
+
+delete from funcionario_cargo;
+
+delete from funcionario_falta;
+
+delete from salario;
+
+delete from bonus;
+
+delete from cargo;
+
+delete from funcionario;
+
 insert into bonus(nm_bonus) values
-	('Bonûs distância do trabalho')
-	, ('Bonûs por tempo de serviço')
-	, ('Bonûs por assiduidade');
+	('bonûs distância do trabalho')
+	, ('bonûs por tempo de serviço')
+	, ('bonûs por assiduidade');
 
 insert into cargo(nm_cargo)
 values
-    ('Contador')
-	, ('Educador De Saúde')
-	, ('Corretor De Negócios')
-	, ('Ti De Suporte À Equipe')
-	, ('Padeiro')
-	, ('Especialista Em Saúde')
-	, ('Caixa')
-	, ('Supervisor De Logística Global')
-	, ('Médico')
-	, ('Designer')
-	, ('Atendente')
-	, ('Eletricista')
-	, ('Tesoureiro')
-	, ('Operador De Máquinas')
-	, ('Corretor De Seguros')
-	, ('Farmacêutico')
-	, ('Técnico De Laboratório')
-	, ('Banqueiro')
-	, ('Representante Da Central De Chamadas')
-	, ('Supervisor De Serviço')
-	, ('Consultor De Investimentos')
-	, ('Analista De Orçamento')
-	, ('Enfermeira Ambulatorial')
-	, ('Comprador Assistente')
-	, ('Administrador De Sistemas')
-	, ('Diretor-Executivo')
-	, ('Oficial De Empréstimos')
-	, ('Consultor De Pessoal')
-	, ('Engenheiro De Design')
-	, ('Fabricante')
-	, ('Gestor De Projeto')
-	, ('Gerente De Restaurante')
-	, ('Paramédico')
-	, ('Professor Associado')
-	, ('Coordenador Da Recepção')
-	, ('Pregoeiro Público')
-	, ('Especialista Em Rh')
-	, ('Dentista')
-	, ('Trainee De Varejo')
-	, ('Tecnólogo De Alimentos')
-	, ('Gerente De Caixa')
-	, ('Cozinhar')
-	, ('Chef Manager')
-	, ('Comissário De Bordo')
-	, ('Auditor')
-	, ('Coordenador De Rh')
-	, ('Biólogo')
-	, ('Pintor De Produção')
-	, ('Desenvolvedor Da Web')
-	, ('Conferencista')
-	, ('Desenvolvedor Móvel')
-	, ('Engenheiro De Software')
-	, ('Inspetor')
-	, ('Webmaster')
-	, ('Corretor Da Bolsa')
-	, ('Operador')
-	, ('Audiologista')
-	, ('Operador Cnc');
+    ('contador')
+	, ('educador de saúde')
+	, ('corretor de negócios')
+	, ('ti de suporte à equipe')
+	, ('padeiro')
+	, ('especialista em saúde')
+	, ('caixa')
+	, ('supervisor de logística global')
+	, ('médico')
+	, ('designer')
+	, ('atendente')
+	, ('eletricista')
+	, ('tesoureiro')
+	, ('operador de máquinas')
+	, ('corretor de seguros')
+	, ('farmacêutico')
+	, ('técnico de laboratório')
+	, ('banqueiro')
+	, ('representante da central de chamadas')
+	, ('supervisor de serviço')
+	, ('consultor de investimentos')
+	, ('analista de orçamento')
+	, ('enfermeira ambulatorial')
+	, ('comprador assistente')
+	, ('administrador de sistemas')
+	, ('diretor-executivo')
+	, ('oficial de empréstimos')
+	, ('consultor de pessoal')
+	, ('engenheiro de design')
+	, ('fabricante')
+	, ('gestor de projeto')
+	, ('gerente de restaurante')
+	, ('paramédico')
+	, ('professor associado')
+	, ('coordenador da recepção')
+	, ('pregoeiro público')
+	, ('especialista em rh')
+	, ('dentista')
+	, ('trainee de varejo')
+	, ('tecnólogo de alimentos')
+	, ('gerente de caixa')
+	, ('cozinhar')
+	, ('chef manager')
+	, ('comissário de bordo')
+	, ('auditor')
+	, ('coordenador de rh')
+	, ('biólogo')
+	, ('pintor de produção')
+	, ('desenvolvedor da web')
+	, ('conferencista')
+	, ('desenvolvedor móvel')
+	, ('engenheiro de software')
+	, ('inspetor')
+	, ('webmaster')
+	, ('corretor da bolsa')
+	, ('operador')
+	, ('audiologista')
+	, ('operador cnc');
