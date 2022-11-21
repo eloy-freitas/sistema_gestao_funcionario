@@ -7,7 +7,7 @@ import java.time.LocalDate;
 public class CalculaBonusDistanciaTrabalho extends CalculadoraBonusStrategy{
 
     public CalculaBonusDistanciaTrabalho() {
-        super("Bonûs distância do trabalho");
+        super("Bônus distância do trabalho");
     }
 
     @Override
