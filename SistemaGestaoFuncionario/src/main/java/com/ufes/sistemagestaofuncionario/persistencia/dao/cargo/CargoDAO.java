@@ -30,7 +30,7 @@ public class CargoDAO implements ICargoDAO{
                 .concat("\n, id_cargo")
                 .concat("\n, dt_modificacao)")
                 .concat("\n VALUES (?,") 
-                .concat("(select id_cargo from cargo where nm_cargo = ?), ?);");
+                .concat("(select id_cargo from cargo where nm_cargo = lower(?)), ?);");
             ps = conexao.prepareStatement(query);
             ps.setLong(1, funcionario.getId());
             ps.setString(2, funcionario.getCargo().getNome());
@@ -56,7 +56,7 @@ public class CargoDAO implements ICargoDAO{
                         .concat("\n, id_cargo")
                         .concat("\n, dt_modificacao)")
                         .concat("\n VALUES (?,") 
-                        .concat("(select id_cargo from cargo where nm_cargo = ?), ?);");
+                        .concat("(select id_cargo from cargo where nm_cargo = lower(?)), ?);");
                     ps = conexao.prepareStatement(query);
                     ps.setLong(1, f.getId());
                     ps.setString(2, f.getCargo().getNome());

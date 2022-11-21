@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public class CalculadoraBonusAssiduidadeStrategy extends CalculadoraBonusStrategy{
 
     public CalculadoraBonusAssiduidadeStrategy() {
-        super("Bonûs por assiduidade");
+        super("Bônus por assiduidade");
     }
 
     

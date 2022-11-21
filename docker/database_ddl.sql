@@ -70,9 +70,9 @@ delete from cargo;
 delete from funcionario;
 
 insert into bonus(nm_bonus) values
-	('bonûs distância do trabalho')
-	, ('bonûs por tempo de serviço')
-	, ('bonûs por assiduidade');
+	('bônus distância do trabalho')
+	, ('bônus por tempo de serviço')
+	, ('bônus por assiduidade');
 
 insert into cargo(nm_cargo)
 values

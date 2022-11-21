@@ -62,6 +62,7 @@ public class FuncionarioRepository implements IFuncionarioRepository {
     @Override
     public boolean atualizar(Funcionario funcionario) throws ClassNotFoundException, SQLException {
         abrirConexoes();
+        cargoDAO.save(funcionario);
         return funcionarioDAO.update(funcionario);
     }
 

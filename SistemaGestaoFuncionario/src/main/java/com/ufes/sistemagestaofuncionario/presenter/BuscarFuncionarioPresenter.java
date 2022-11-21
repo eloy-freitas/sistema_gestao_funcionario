@@ -146,17 +146,23 @@ public class BuscarFuncionarioPresenter {
     private void abrirVisualizarDetalhesFuncionario() {
         JTable tabela = view.getTblFuncionario();
         int linha = tabela.getSelectedRow();
-        Object id = tabela.getModel().getValueAt(linha, 0);
         Funcionario funcionario;
         try {
+            Object id = tabela.getModel().getValueAt(linha, 0);
             funcionario = funcionarioService.buscarPorId(
                     Long.valueOf(id.toString()));
             fechar();
             new ExibirDetalhesFuncionarioPresenter(funcionario);
+            
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(view,
                     "Erro ao buscar funcionário.\n\n"
                     + ex.getMessage(),
+                    "ERRO",
+                    JOptionPane.ERROR_MESSAGE);
+        } catch(ArrayIndexOutOfBoundsException e){
+            JOptionPane.showMessageDialog(view,
+                    "Você deve selecionar um funcionário.\n\n",
                     "ERRO",
                     JOptionPane.ERROR_MESSAGE);
         }
@@ -165,17 +171,24 @@ public class BuscarFuncionarioPresenter {
     private void abrirVisualizarBonus() {
         JTable tabela = view.getTblFuncionario();
         int linha = tabela.getSelectedRow();
-        Object id = tabela.getModel().getValueAt(linha, 0);
         Funcionario funcionario;
         try {
+            Object id = tabela.getModel().getValueAt(linha, 0);
             funcionario = funcionarioService.buscarPorId(
                     Long.valueOf(id.toString()));
+            
             fechar();
             new VisualizarBonusPresenter(funcionario);
+            
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(view,
                     "Erro ao buscar funcionário.\n\n"
                     + ex.getMessage(),
+                    "ERRO",
+                    JOptionPane.ERROR_MESSAGE);
+        } catch(ArrayIndexOutOfBoundsException e){
+            JOptionPane.showMessageDialog(view,
+                    "Você deve selecionar um funcionário.\n\n",
                     "ERRO",
                     JOptionPane.ERROR_MESSAGE);
         }
