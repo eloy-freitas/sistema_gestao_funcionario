@@ -14,9 +14,10 @@ services:
     environment:
       POSTGRES_USER: $POSTGRES_USER
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD
-      PGDATA: /data/postgres
+      POSTGRES_DB: postgres
     volumes:
-       - ./funcionario_db_volume:/data/postgres
+       - ./funcionario_db_volume:/var/lib/postgresql/data
+       - ./database_ddl.sql:/docker-entrypoint-initdb.d/database_ddl.sql
     ports:
       - "5432:5432"
     networks:
