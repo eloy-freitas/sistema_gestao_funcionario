@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CargoDAO implements ICargoDAO{
 
@@ -30,7 +32,7 @@ public class CargoDAO implements ICargoDAO{
                 .concat("\n, id_cargo")
                 .concat("\n, dt_modificacao)")
                 .concat("\n VALUES (?,") 
-                .concat("(select id_cargo from cargo where nm_cargo = ?), ?);");
+                .concat("(select id_cargo from cargo where nm_cargo = lower(?)), ?);");
             ps = conexao.prepareStatement(query);
             ps.setLong(1, funcionario.getId());
             ps.setString(2, funcionario.getCargo().getNome());
@@ -56,7 +58,7 @@ public class CargoDAO implements ICargoDAO{
                         .concat("\n, id_cargo")
                         .concat("\n, dt_modificacao)")
                         .concat("\n VALUES (?,") 
-                        .concat("(select id_cargo from cargo where nm_cargo = ?), ?);");
+                        .concat("(select id_cargo from cargo where nm_cargo = lower(?)), ?);");
                     ps = conexao.prepareStatement(query);
                     ps.setLong(1, f.getId());
                     ps.setString(2, f.getCargo().getNome());
@@ -71,6 +73,25 @@ public class CargoDAO implements ICargoDAO{
             throw new SQLException("Erro ao registrar o cargo.\n" + ex.getMessage());
         } finally {
             ConexaoPostgreSQL.closeConnection(conexao, ps);
+        }
+    }
+
+    @Override
+    public boolean update(Funcionario funcionario) throws SQLException{
+        PreparedStatement ps = null;
+        String query = "UPDATE funcionario_cargo"
+                + " SET id_cargo = ?, dt_modificacao = ?"
+                + " WHERE id_funcionario = ?";
+        try {
+            ps = conexao.prepareStatement(query);
+            ps.setLong(1, funcionario.getCargo().getId());
+            System.out.println(funcionario.getCargo().getId());
+            ps.setDate(2, Date.valueOf(LocalDate.now()));
+            ps.setLong(3, funcionario.getId());
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            throw new SQLException(ex.getMessage());
         }
     }
     

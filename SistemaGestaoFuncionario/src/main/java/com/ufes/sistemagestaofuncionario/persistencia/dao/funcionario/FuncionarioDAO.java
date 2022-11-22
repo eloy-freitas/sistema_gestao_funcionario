@@ -107,7 +107,7 @@ public class FuncionarioDAO implements IFuncionarioDAO {
                     + ", vl_salario_base = ?"
                     + ", vl_distancia_trabalho = ?"
                     + ", nu_idade = ?"
-                    + ", id_cargo = ?"
+                    + ", dt_admissao = ?"
                     + ", dt_modificacao = ? "
                     + "WHERE id_funcionario = ?;";
             ps = conexao.prepareStatement(query);
@@ -115,7 +115,7 @@ public class FuncionarioDAO implements IFuncionarioDAO {
             ps.setDouble(2, funcionario.getSalarioBase());
             ps.setDouble(3, funcionario.getDistanciaTrabalho());
             ps.setInt(4, funcionario.getIdade());
-            ps.setLong(5, funcionario.getCargo().getId());
+            ps.setDate(5, Date.valueOf(funcionario.getDataAdmissao()));
             // convertendo LocalDate para Date (SQL)
             Date sqlDate = Date.valueOf(LocalDate.now());
             ps.setDate(6, sqlDate);

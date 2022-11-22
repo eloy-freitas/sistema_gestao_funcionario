@@ -29,7 +29,7 @@ public class BonusCalculadoDAO implements IBonusCalculadoDAO{
                 + ", vl_bonus" //3 
                 + ", dt_modificacao)\n" //4
                         + "values (?"
-                + ", (select id_bonus from bonus b where b.nm_bonus = ?), ?, ?);";
+                + ", (select id_bonus from bonus b where b.nm_bonus = lower(?)), ?, ?);";
         try {
             ListIterator<Funcionario> itFuncionario 
                     = funcionarios.listIterator();
