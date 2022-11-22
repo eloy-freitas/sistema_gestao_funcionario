@@ -14,19 +14,21 @@ https://docs.docker.com/desktop/
 ```
 ### Para iniciar o banco de dados siga o passo a passo:
 
-- Execute no terminal o seguinte comando para permitir a inicialiazação da base de dados:
+- Execute no terminal o seguinte comando para entrar no diretório docker:
 
 ```
-chmod +x initdb.sh
+cd docker 
 ```
 - Execute o seguinte comando para inicializar o container docker e criar as tabelas do banco de dados:
 
 ```
-./initdb.sh
+docker compose up -d
+ou
+docker-compose up -d
 ```
 
 ## Considerações:
-- No diretório ddl existe o arquivo funcionario_reduzido.csv com uma quantidade pequena de registro para teste. 
+- No diretório data existe o arquivo funcionario_reduzido.csv com uma quantidade pequena de registro para teste. 
 
 - A insersão de funcionarios de um arquivo muito grande demora muito.
 

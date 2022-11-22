@@ -26,7 +26,7 @@ public class ExibirDetalhesFuncionarioPresenter {
         this.funcionario = funcionario;
         desativaCampos();
         initServices();
-        initListeners();       
+        initListeners();
         populaCargos();
         initComboBox();
         initCampos(this.funcionario);
@@ -133,7 +133,7 @@ public class ExibirDetalhesFuncionarioPresenter {
             Cargo cargo = iterator.next();
             view.getCbCargo().addItem(cargo.getNome());
         }
-        
+
     }
 
     private void fechar() {
@@ -176,23 +176,27 @@ public class ExibirDetalhesFuncionarioPresenter {
                 view.getFtfSalario().getText()));
         this.funcionario.setDistanciaTrabalho(Double.valueOf(
                 view.getTfDistanciaTrabalho().getText()));
-        for(Cargo cargo : listaCargos){
-            if(view.getCbCargo().getSelectedItem().toString()
-                    .equals(cargo.getNome()))
+        for (Cargo cargo : listaCargos) {
+            if (view.getCbCargo().getSelectedItem().toString()
+                    .equals(cargo.getNome())) {
                 this.funcionario.setCargo(cargo);
+            }
         }
     }
 
     private void editar() {
         ativaCampos();
         view.getBtnEditar().setText("Salvar Alterações");
-
         view.getBtnEditar().addActionListener((ActionEvent e) -> {
-            obterCampos();
+            atualizar();
         });
+    }
 
+    private void atualizar() {
+        obterCampos();
         try {
             funcionarioService.atualizar(this.funcionario);
+            cargoService.atualizar(this.funcionario);
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(view,
                     "Erro ao atualizar o funcionário.\n\n"
@@ -203,6 +207,5 @@ public class ExibirDetalhesFuncionarioPresenter {
             fechar();
             new BuscarFuncionarioPresenter();
         }
-
     }
 }
