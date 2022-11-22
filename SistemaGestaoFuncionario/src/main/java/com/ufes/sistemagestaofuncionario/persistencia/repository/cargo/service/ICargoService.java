@@ -6,10 +6,15 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface ICargoService {
-    List<Cargo> buscarTodos() throws ClassNotFoundException, SQLException;
-    Cargo buscarPorNome(String nome) throws ClassNotFoundException, SQLException;
-    boolean criar(Funcionario funcionario) throws ClassNotFoundException, SQLException; 
-    boolean criar(List<Funcionario> funcionarios) throws ClassNotFoundException, SQLException; 
 
+    List<Cargo> buscarTodos() throws ClassNotFoundException, SQLException;
+
+    Cargo buscarPorNome(String nome) throws ClassNotFoundException, SQLException;
+
+    boolean criar(Funcionario funcionario) throws ClassNotFoundException, SQLException;
+
+    boolean criar(List<Funcionario> funcionarios) throws ClassNotFoundException, SQLException;
+
+    boolean atualizar(Funcionario funcionario) throws ClassNotFoundException, SQLException;
 
 }

@@ -15,4 +15,6 @@ public interface ICargoRepository {
 
     boolean criar(List<Funcionario> funcionarios) throws SQLException, ClassNotFoundException;
 
+    boolean atualizar(Funcionario funcionario) throws SQLException, ClassNotFoundException;
+
 }
