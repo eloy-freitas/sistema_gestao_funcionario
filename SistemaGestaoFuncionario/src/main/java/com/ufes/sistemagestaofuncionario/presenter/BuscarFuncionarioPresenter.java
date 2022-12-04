@@ -3,6 +3,7 @@ package com.ufes.sistemagestaofuncionario.presenter;
 import com.ufes.sistemagestaofuncionario.model.Funcionario;
 import com.ufes.sistemagestaofuncionario.persistencia.repository.funcionario.service.FuncionarioService;
 import com.ufes.sistemagestaofuncionario.persistencia.repository.funcionario.service.IFuncionarioService;
+import com.ufes.sistemagestaofuncionario.presenter.manterfuncionariostate.EdicaoState;
 import com.ufes.sistemagestaofuncionario.view.funcionario.BuscarFuncionarioView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -151,9 +152,8 @@ public class BuscarFuncionarioPresenter {
             Object id = tabela.getModel().getValueAt(linha, 0);
             funcionario = funcionarioService.buscarPorId(
                     Long.valueOf(id.toString()));
+            new ManterFuncionarioPresenter(funcionario);
             fechar();
-            new ExibirDetalhesFuncionarioPresenter(funcionario);
-            
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(view,
                     "Erro ao buscar funcionário.\n\n"

@@ -4,6 +4,10 @@ import com.ufes.sistemagestaofuncionario.model.Cargo;
 import com.ufes.sistemagestaofuncionario.model.Funcionario;
 import com.ufes.sistemagestaofuncionario.persistencia.repository.cargo.service.CargoService;
 import com.ufes.sistemagestaofuncionario.persistencia.repository.funcionario.service.FuncionarioService;
+import com.ufes.sistemagestaofuncionario.presenter.manterfuncionariostate.EdicaoState;
+import com.ufes.sistemagestaofuncionario.presenter.manterfuncionariostate.InclusaoState;
+import com.ufes.sistemagestaofuncionario.presenter.manterfuncionariostate.ManterFuncionarioPresenterState;
+import com.ufes.sistemagestaofuncionario.presenter.manterfuncionariostate.VisualizacaoState;
 import com.ufes.sistemagestaofuncionario.utils.conversores.ConversorCalendar;
 import com.ufes.sistemagestaofuncionario.view.funcionario.ManterFuncionarioView;
 import java.awt.event.ActionEvent;
@@ -11,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.List;
 import java.util.ListIterator;
@@ -22,17 +27,23 @@ public class ManterFuncionarioPresenter {
     private FuncionarioService funcionarioService;
     private CargoService cargoService;
     private List<Cargo> cargos;
+    private Funcionario funcionario;
+    private ManterFuncionarioPresenterState estado;
 
     public ManterFuncionarioPresenter() {
         view = new ManterFuncionarioView();
-        initServices();
-        initListeners();
-        populaCargos();
-        initComboBox();
-        view.setVisible(true);
+        view.getTfDataAdmissao().setEnabled(false);
+        this.estado = new InclusaoState(this);
     }
-
-    private void initServices() {
+    
+    public ManterFuncionarioPresenter(Funcionario funcionario) {
+        view = new ManterFuncionarioView();
+        this.funcionario = funcionario;
+        view.getTfDataAdmissao().setEnabled(false);
+        this.estado = new VisualizacaoState(this);
+    }
+    
+    public void initServices() {
         try {
             funcionarioService = new FuncionarioService();
             cargoService = new CargoService();
@@ -45,9 +56,9 @@ public class ManterFuncionarioPresenter {
         }
     }
 
-    private void initListeners() {
+    public void initListeners() {
         // Botão fechar
-        view.getBtnFechar().addActionListener(new ActionListener() {
+        view.getBtnCancelar().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 fechar();
@@ -61,10 +72,18 @@ public class ManterFuncionarioPresenter {
                 salvar();
             }
         });
+        
+        // Botão editar
+        view.getBtnEditar().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                atualizar();
+            }
+        });
 
     }
 
-    private void populaCargos() {
+    public void populaCargos() {
         try {
             cargos = cargoService.buscarTodos();
         } catch (ClassNotFoundException | SQLException ex) {
@@ -76,7 +95,7 @@ public class ManterFuncionarioPresenter {
         }
     }
 
-    private void initComboBox() {
+    public void initComboBox() {
         ListIterator<Cargo> iterator = cargos.listIterator();
 
         while (iterator.hasNext()) {
@@ -86,11 +105,11 @@ public class ManterFuncionarioPresenter {
 
     }
 
-    private void fechar() {
+    public void fechar() {
         view.dispose();
     }
 
-    private Funcionario obterCampos() throws ClassNotFoundException, SQLException {
+    public Funcionario obterCampos() throws ClassNotFoundException, SQLException {
         /* 
         *  Utilizando calendar por se mostrar o objeto mais estável retornado
         *  pelo DatePicker.
@@ -127,26 +146,76 @@ public class ManterFuncionarioPresenter {
                 idade
         );
     }
-
-    private void salvar() {
+    
+    private void salvar()   {
         try {
-            Funcionario funcionario = obterCampos();
-            if (funcionarioService.salvar(funcionario)) {
-                JOptionPane.showMessageDialog(view,
-                        "Funcionário(a)\n"
-                        + funcionario.getNome() + "\n"
-                        + "salvo(a) com sucesso!",
-                        "Sucesso",
-                        JOptionPane.INFORMATION_MESSAGE);
-            }
+            estado.salvar();
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(view,
                     "Ocorreu um erro ao salvar o funcionário.\n\n"
                     + ex.getMessage(),
                     "ERRO",
                     JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(view,
+                    "Falha ao iniciar janela\n\n"
+                    + e.getMessage(),
+                    "ERRO",
+                    JOptionPane.ERROR_MESSAGE);
         }
-
-        view.dispose();
     }
+    
+    public void initCampos() {
+        view.getCbCargo().setSelectedItem(
+                this.funcionario.getCargo().getNome());
+
+        view.getFtfSalario().setText(Double.toString(
+                funcionario.getSalarioBase()));
+
+        view.getTfNome().setText(
+                funcionario.getNome());
+
+        view.getLbIdade().setText(Integer.toString(
+                funcionario.getIdade()) + " anos");
+
+        view.getTfDistanciaTrabalho().setText(Double.toString(
+                funcionario.getDistanciaTrabalho()));
+
+        DateTimeFormatter formatador
+                = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        view.getTfDataAdmissao().setText(formatador.format(
+                funcionario.getDataAdmissao()));
+    }
+    
+    private void atualizar(){
+        try {
+            estado.editar();
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(view,
+                    "Falha ao iniciar janela\n\n"
+                    + e.getMessage(),
+                    "ERRO",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public ManterFuncionarioView getView() {
+        return view;
+    }
+
+    public FuncionarioService getFuncionarioService() {
+        return funcionarioService;
+    }
+
+    public CargoService getCargoService() {
+        return cargoService;
+    }
+
+    public void setEstado(ManterFuncionarioPresenterState estado) {
+        this.estado = estado;
+    }
+    
+    
+    
+    
 }
