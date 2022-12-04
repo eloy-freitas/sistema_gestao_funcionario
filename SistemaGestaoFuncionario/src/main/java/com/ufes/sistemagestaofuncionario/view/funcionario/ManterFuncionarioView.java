@@ -89,6 +89,15 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
     public JButton getBtnSalvar() {
         return btnSalvar;
     }
+
+    public JLabel getLbDataAdmissao2() {
+        return lbDataAdmissao2;
+    }
+
+    public JLabel getLbIdade2() {
+        return lbIdade2;
+    }
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -120,8 +129,8 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
         btnEditar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         lbIdade = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        lbIdade2 = new javax.swing.JLabel();
+        lbDataAdmissao2 = new javax.swing.JLabel();
         tfDataAdmissao = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -154,9 +163,9 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
 
         lbIdade.setText("<idade>");
 
-        jLabel9.setText("Idade:");
+        lbIdade2.setText("Idade:");
 
-        jLabel7.setText("Data Admissão:");
+        lbDataAdmissao2.setText("Data Admissão:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -203,11 +212,11 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
                                         .addComponent(dpDataAdmissao, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 6, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel9)
+                        .addComponent(lbIdade2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbIdade)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel7)
+                        .addComponent(lbDataAdmissao2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tfDataAdmissao, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -257,9 +266,9 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
                     .addComponent(btnCancelar)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lbIdade)
-                        .addComponent(jLabel9)
+                        .addComponent(lbIdade2)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
+                            .addComponent(lbDataAdmissao2)
                             .addComponent(tfDataAdmissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
@@ -321,12 +330,12 @@ public class ManterFuncionarioView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel lbDataAdmissao;
+    private javax.swing.JLabel lbDataAdmissao2;
     private javax.swing.JLabel lbDataNascimento;
     private javax.swing.JLabel lbIdade;
+    private javax.swing.JLabel lbIdade2;
     private javax.swing.JTextField tfDataAdmissao;
     private javax.swing.JTextField tfDistanciaTrabalho;
     private javax.swing.JTextField tfFaltas;

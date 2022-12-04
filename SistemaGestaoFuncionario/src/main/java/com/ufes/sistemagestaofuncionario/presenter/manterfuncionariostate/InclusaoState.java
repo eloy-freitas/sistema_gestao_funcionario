@@ -17,6 +17,11 @@ public class InclusaoState extends ManterFuncionarioPresenterState{
     }
     
     private void initView(){
+        presenter.getView().getLbIdade().setVisible(false);
+        presenter.getView().getLbIdade2().setVisible(false);
+        presenter.getView().getLbDataAdmissao2().setVisible(false);
+        presenter.getView().getLbDataAdmissao().setVisible(false);
+        presenter.getView().getTfDataAdmissao().setVisible(false);
         presenter.getView().getBtnEditar().setEnabled(false);
         presenter.getView().getBtnExcluir().setEnabled(false);
     }
