@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Calendar;
+import javax.swing.JOptionPane;
 
 public class InclusaoState extends ManterFuncionarioPresenterState{
 
@@ -74,7 +75,23 @@ public class InclusaoState extends ManterFuncionarioPresenterState{
     
     @Override
     public void salvar() throws ClassNotFoundException, SQLException{
-        new SalvarCommand(presenter).executar();
+        try {
+            new SalvarCommand(presenter).executar();
+            JOptionPane.showMessageDialog(
+                presenter.getView(),
+                "Funcionário(a)\n"
+                + presenter.getFuncionario().getNome() + "\n"
+                + "salvo(a) com sucesso!",
+                "Sucesso",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+        }catch (ClassNotFoundException | SQLException ex) {
+            JOptionPane.showMessageDialog(presenter.getView(),
+                "Ocorreu um erro ao salvar o funcionário.\n\n"
+                + ex.getMessage(),
+                "ERRO",
+                JOptionPane.ERROR_MESSAGE);
+        } 
         presenter.fechar();
     }
     

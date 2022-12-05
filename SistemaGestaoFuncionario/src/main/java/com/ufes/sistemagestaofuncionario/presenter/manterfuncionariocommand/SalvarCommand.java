@@ -16,23 +16,7 @@ public class SalvarCommand implements ManterFuncionarioCommand{
 
     @Override
     public void executar() throws ClassNotFoundException, SQLException{
-        try {
-            Funcionario funcionario = presenter.obterCampos();
-            if (presenter.getFuncionarioService().salvar(funcionario)) {
-                JOptionPane.showMessageDialog(presenter.getView(),
-                    "Funcionário(a)\n"
-                    + funcionario.getNome() + "\n"
-                    + "salvo(a) com sucesso!",
-                    "Sucesso",
-                    JOptionPane.INFORMATION_MESSAGE);
-            }
-        }catch (ClassNotFoundException | SQLException ex) {
-            JOptionPane.showMessageDialog(presenter.getView(),
-                "Ocorreu um erro ao salvar o funcionário.\n\n"
-                + ex.getMessage(),
-                "ERRO",
-                JOptionPane.ERROR_MESSAGE);
-        } 
-        
+        Funcionario funcionario = presenter.obterCampos();
+        presenter.getFuncionarioService().salvar(funcionario);
     }
 }
