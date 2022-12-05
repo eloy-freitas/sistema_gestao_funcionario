@@ -1,6 +1,8 @@
 package com.ufes.sistemagestaofuncionario.presenter.manterfuncionariostate;
 
 import com.ufes.sistemagestaofuncionario.presenter.ManterFuncionarioPresenter;
+import com.ufes.sistemagestaofuncionario.presenter.manterfuncionariocommand.ExcluirCommand;
+import java.sql.SQLException;
 
 
 public class VisualizacaoState extends ManterFuncionarioPresenterState{
@@ -36,6 +38,11 @@ public class VisualizacaoState extends ManterFuncionarioPresenterState{
     @Override
     public void editar(){
         presenter.setEstado(new EdicaoState(presenter));
+    }
+    
+    @Override
+    public void excluir() throws ClassNotFoundException, SQLException{
+        new ExcluirCommand(presenter).executar();
     }
     
     

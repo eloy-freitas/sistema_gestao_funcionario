@@ -80,6 +80,14 @@ public class ManterFuncionarioPresenter {
                 atualizar();
             }
         });
+        
+        // Botão excluir
+        view.getBtnExcluir().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                excluir();
+            }
+        });
 
     }
 
@@ -123,24 +131,6 @@ public class ManterFuncionarioPresenter {
         return funcionario;
     }
     
-    private void salvar()   {
-        try {
-            estado.salvar();
-        } catch (ClassNotFoundException | SQLException ex) {
-            JOptionPane.showMessageDialog(view,
-                    "Ocorreu um erro ao salvar o funcionário.\n\n"
-                    + ex.getMessage(),
-                    "ERRO",
-                    JOptionPane.ERROR_MESSAGE);
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(view,
-                    "Falha ao iniciar janela\n\n"
-                    + e.getMessage(),
-                    "ERRO",
-                    JOptionPane.ERROR_MESSAGE);
-        }
-    }
-    
     public void initCampos() {
         view.getCbCargo().setSelectedItem(
                 this.funcionario.getCargo().getNome());
@@ -168,13 +158,34 @@ public class ManterFuncionarioPresenter {
             estado.editar();
         } catch (Exception e){
             JOptionPane.showMessageDialog(view,
-                    "Falha ao iniciar janela\n\n"
-                    + e.getMessage(),
-                    "ERRO",
-                    JOptionPane.ERROR_MESSAGE);
+                "Ação inválida para o estado atual.\n\n",
+                "ERRO",
+                JOptionPane.ERROR_MESSAGE);
         }
     }
-
+    
+    private void salvar()   {
+        try {
+            estado.salvar();
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(view,
+            "Ação inválida para o estado atual.\n\n",
+            "ERRO",
+            JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void excluir(){
+        try {
+            estado.excluir();
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(view,
+            "Ação inválida para o estado atual.\n\n",
+            "ERRO",
+            JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
     public ManterFuncionarioView getView() {
         return view;
     }
