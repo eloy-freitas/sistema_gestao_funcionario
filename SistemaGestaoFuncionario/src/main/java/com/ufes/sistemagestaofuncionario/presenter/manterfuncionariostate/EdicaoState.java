@@ -52,5 +52,11 @@ public class EdicaoState extends ManterFuncionarioPresenterState{
     @Override
     public void salvar() throws ClassNotFoundException, SQLException{
         new AtualizarCommand(presenter).executar();
+        presenter.setEstado(new VisualizacaoState(presenter));
+    }
+    
+    @Override
+    public void cancelar(){
+        presenter.setEstado(new VisualizacaoState(presenter));
     }
 }

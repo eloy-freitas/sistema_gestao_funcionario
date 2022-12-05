@@ -4,19 +4,14 @@ import com.ufes.sistemagestaofuncionario.model.Cargo;
 import com.ufes.sistemagestaofuncionario.model.Funcionario;
 import com.ufes.sistemagestaofuncionario.persistencia.repository.cargo.service.CargoService;
 import com.ufes.sistemagestaofuncionario.persistencia.repository.funcionario.service.FuncionarioService;
-import com.ufes.sistemagestaofuncionario.presenter.manterfuncionariostate.EdicaoState;
 import com.ufes.sistemagestaofuncionario.presenter.manterfuncionariostate.InclusaoState;
 import com.ufes.sistemagestaofuncionario.presenter.manterfuncionariostate.ManterFuncionarioPresenterState;
 import com.ufes.sistemagestaofuncionario.presenter.manterfuncionariostate.VisualizacaoState;
-import com.ufes.sistemagestaofuncionario.utils.conversores.ConversorCalendar;
 import com.ufes.sistemagestaofuncionario.view.funcionario.ManterFuncionarioView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.List;
 import java.util.ListIterator;
 import javax.swing.JOptionPane;
@@ -32,6 +27,11 @@ public class ManterFuncionarioPresenter {
 
     public ManterFuncionarioPresenter() {
         view = new ManterFuncionarioView();
+        initServices();
+        initListeners();
+        populaCargos();
+        initComboBox();
+        initCampos();
         view.getTfDataAdmissao().setEnabled(false);
         this.estado = new InclusaoState(this);
     }
@@ -39,6 +39,11 @@ public class ManterFuncionarioPresenter {
     public ManterFuncionarioPresenter(Funcionario funcionario) {
         view = new ManterFuncionarioView();
         this.funcionario = funcionario;
+        initServices();
+        initListeners();
+        populaCargos();
+        initComboBox();
+        initCampos();
         view.getTfDataAdmissao().setEnabled(false);
         this.estado = new VisualizacaoState(this);
     }
@@ -61,7 +66,7 @@ public class ManterFuncionarioPresenter {
         view.getBtnCancelar().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                fechar();
+                cancelar();
             }
         });
 
@@ -151,6 +156,17 @@ public class ManterFuncionarioPresenter {
                 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         view.getTfDataAdmissao().setText(formatador.format(
                 funcionario.getDataAdmissao()));
+    }
+    
+    private void cancelar(){
+        try {
+            estado.cancelar();
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(view,
+            "Ação inválida para o estado atual.\n\n",
+                "ERRO",
+                JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     private void atualizar(){

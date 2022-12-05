@@ -34,8 +34,6 @@ public class ExcluirCommand implements ManterFuncionarioCommand{
                             "Funcionário excluído com sucesso!",
                             "Sucesso",
                             JOptionPane.INFORMATION_MESSAGE);
-                    presenter.fechar();
-                    new BuscarFuncionarioPresenter();
                 }
             }
         } catch (ClassNotFoundException | SQLException ex) {

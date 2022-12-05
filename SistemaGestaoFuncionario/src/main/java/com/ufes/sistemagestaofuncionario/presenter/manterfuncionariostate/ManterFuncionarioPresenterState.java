@@ -14,24 +14,25 @@ public abstract class ManterFuncionarioPresenterState {
     }
     
     public void salvar() throws Exception{
-        throw new Exception("Estado inválido");
+        throw new Exception("Estado inválido para realizar essa ação");
     }
     
     public void editar() throws Exception{
-        throw new Exception("Estado inválido");
+        throw new Exception("Estado inválido para realizar essa ação");
     }
     
     public void excluir() throws Exception{
-        throw new Exception("Estado inválido");
+        throw new Exception("Estado inválido para realizar essa ação");
     }
     
-    public void atualizar() throws Exception{
-        throw new Exception("Estado inválido");
+    public void cancelar() throws Exception{
+        throw new Exception("Estado inválido para realizar essa ação");
     }
+
 
     public abstract void initView();
     
     public Funcionario obterCampos() throws Exception{
-        throw new Exception("Estado inválido");
+        throw new Exception("Estado inválido para realizar essa ação");
     }
 }
