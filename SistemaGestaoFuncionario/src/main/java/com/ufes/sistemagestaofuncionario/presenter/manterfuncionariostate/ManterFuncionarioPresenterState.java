@@ -1,5 +1,6 @@
 package com.ufes.sistemagestaofuncionario.presenter.manterfuncionariostate;
 
+import com.ufes.sistemagestaofuncionario.model.Funcionario;
 import com.ufes.sistemagestaofuncionario.presenter.ManterFuncionarioPresenter;
 import com.ufes.sistemagestaofuncionario.presenter.manterfuncionariocommand.ManterFuncionarioCommand;
 
@@ -25,6 +26,12 @@ public abstract class ManterFuncionarioPresenterState {
     }
     
     public void atualizar() throws Exception{
+        throw new Exception("Estado inválido");
+    }
+
+    public abstract void initView();
+    
+    public Funcionario obterCampos() throws Exception{
         throw new Exception("Estado inválido");
     }
 }

@@ -16,22 +16,10 @@ public class AtualizarCommand implements ManterFuncionarioCommand{
     }
     
     @Override
-    public void executar() {
-        try {
-            Funcionario funcionario = presenter.obterCampos();
-            presenter.getFuncionarioService().atualizar(funcionario);
-            presenter.getCargoService().atualizar(funcionario);
-        } catch (ClassNotFoundException | SQLException ex) {
-            JOptionPane.showMessageDialog(presenter.getView(),
-                    "Erro ao atualizar o funcionário.\n\n"
-                    + ex.getMessage(),
-                    "ERRO",
-                    JOptionPane.ERROR_MESSAGE);
-        } finally {
-            presenter.fechar();
-            new BuscarFuncionarioPresenter();
-        }
+    public void executar() throws ClassNotFoundException, SQLException {
+        Funcionario funcionario = presenter.obterCampos();
+        presenter.getFuncionarioService().atualizar(funcionario);
+        presenter.getCargoService().atualizar(funcionario);
     }
-    
     
 }

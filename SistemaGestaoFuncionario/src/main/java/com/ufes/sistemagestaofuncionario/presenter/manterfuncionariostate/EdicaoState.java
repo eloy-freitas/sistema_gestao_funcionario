@@ -1,8 +1,10 @@
 package com.ufes.sistemagestaofuncionario.presenter.manterfuncionariostate;
 
+import com.ufes.sistemagestaofuncionario.model.Cargo;
 import com.ufes.sistemagestaofuncionario.model.Funcionario;
 import com.ufes.sistemagestaofuncionario.presenter.ManterFuncionarioPresenter;
 import com.ufes.sistemagestaofuncionario.presenter.manterfuncionariocommand.AtualizarCommand;
+import java.sql.SQLException;
 
 
 public class EdicaoState extends ManterFuncionarioPresenterState{
@@ -12,7 +14,27 @@ public class EdicaoState extends ManterFuncionarioPresenterState{
         initView();
     }
     
-    private void initView(){
+    @Override
+    public Funcionario obterCampos() {
+        Funcionario funcionario = presenter.getFuncionario();
+        
+        funcionario.setNome(presenter.getView().getTfNome().getText());
+        funcionario.setSalarioBase(Double.valueOf(
+                presenter.getView().getFtfSalario().getText()));
+        funcionario.setDistanciaTrabalho(Double.valueOf(
+                presenter.getView().getTfDistanciaTrabalho().getText()));
+        for (Cargo cargo : presenter.getCargos()) {
+            if (presenter.getView().getCbCargo().getSelectedItem().toString()
+                    .equals(cargo.getNome())) {
+                funcionario.setCargo(cargo);
+            }
+        }
+        
+        return funcionario;
+    }
+    
+    @Override
+    public void initView(){
         presenter.getView().getCheckBoxFuncionarioMes().setEnabled(true);
         presenter.getView().getDpDataAdmissao().setEnabled(true);
         presenter.getView().getDpDataNascimento().setEnabled(true);
@@ -28,7 +50,7 @@ public class EdicaoState extends ManterFuncionarioPresenterState{
     }
     
     @Override
-    public void atualizar(){
+    public void salvar() throws ClassNotFoundException, SQLException{
         new AtualizarCommand(presenter).executar();
         presenter.fechar();
     }

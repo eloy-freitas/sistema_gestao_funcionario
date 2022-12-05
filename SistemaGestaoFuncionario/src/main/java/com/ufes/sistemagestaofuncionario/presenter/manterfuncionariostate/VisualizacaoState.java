@@ -15,7 +15,8 @@ public class VisualizacaoState extends ManterFuncionarioPresenterState{
         initView();
     }
     
-    private void initView(){
+    @Override
+    public void initView(){
         presenter.getView().getCheckBoxFuncionarioMes().setEnabled(false);
         presenter.getView().getDpDataAdmissao().setEnabled(false);
         presenter.getView().getDpDataNascimento().setEnabled(false);

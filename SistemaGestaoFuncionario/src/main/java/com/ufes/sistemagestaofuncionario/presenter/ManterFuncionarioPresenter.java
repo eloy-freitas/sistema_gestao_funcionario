@@ -109,42 +109,18 @@ public class ManterFuncionarioPresenter {
         view.dispose();
     }
 
-    public Funcionario obterCampos() throws ClassNotFoundException, SQLException {
-        /* 
-        *  Utilizando calendar por se mostrar o objeto mais estável retornado
-        *  pelo DatePicker.
-        *  Convertendo o calendar em date, para poder realizar a conversao para
-        *  LocalDate.
-         */
-        LocalDate dataAdmissao = ConversorCalendar.calendarToLocalDate(
-                (Calendar) view.getDpDataAdmissao().getModel().getValue()
-        );
-        LocalDate dataNascimento = ConversorCalendar.calendarToLocalDate(
-                (Calendar) view.getDpDataNascimento().getModel().getValue()
-        );
-        /*
-        *  Calculando a idade do funcionário, com base no valor obtido no campo
-        *  DpDataNascimento.
-         */
-        Period period = Period.between(dataNascimento,
-                LocalDate.now());
-
-        int idade = period.getYears();
-        System.out.println(idade);
-        String nome = view.getTfNome().getText();
-        String cargo = view.getCbCargo().getSelectedItem().toString();
-        Double salarioBase = Double.valueOf(view.getFtfSalario().getText());
-        // boolean funcionarioMes = view.getCheckBoxFuncionarioMes().isSelected();
-        Double distanciaTrabalho = Double.valueOf(view.getTfDistanciaTrabalho().getText());
-
-        return new Funcionario(
-                nome,
-                new Cargo(cargo),
-                salarioBase,
-                distanciaTrabalho,
-                dataAdmissao,
-                idade
-        );
+    public Funcionario obterCampos(){
+        Funcionario funcionario = null;
+        try{
+            funcionario = estado.obterCampos();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(view,
+                    "Falha ao obter os campos do formulpario\n\n",
+                    "ERRO",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        
+        return funcionario;
     }
     
     private void salvar()   {
@@ -214,6 +190,15 @@ public class ManterFuncionarioPresenter {
     public void setEstado(ManterFuncionarioPresenterState estado) {
         this.estado = estado;
     }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public List<Cargo> getCargos() {
+        return cargos;
+    }
+    
     
     
     
