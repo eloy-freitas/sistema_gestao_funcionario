@@ -29,10 +29,11 @@ public abstract class ManterFuncionarioPresenterState {
         throw new Exception("Estado inválido para realizar essa ação");
     }
 
-
-    public abstract void initView();
-    
     public Funcionario obterCampos() throws Exception{
         throw new Exception("Estado inválido para realizar essa ação");
     }
+       
+    public abstract void initView();
+    
+ 
 }

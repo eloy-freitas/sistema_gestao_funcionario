@@ -15,12 +15,8 @@ public class InclusaoState extends ManterFuncionarioPresenterState{
 
     public InclusaoState(ManterFuncionarioPresenter presenter) {
         super(presenter);
-        presenter.initServices();
-        presenter.initListeners();
-        presenter.populaCargos();
-        presenter.initComboBox();
-        presenter.getView().setVisible(true);
         initView();
+        presenter.getView().setVisible(true);        
     }
 
     @Override
@@ -45,7 +41,6 @@ public class InclusaoState extends ManterFuncionarioPresenterState{
                 LocalDate.now());
 
         int idade = period.getYears();
-        System.out.println(idade);
         String nome = presenter.getView().getTfNome().getText();
         String cargo = presenter.getView().getCbCargo().getSelectedItem().toString();
         Double salarioBase = Double.valueOf(presenter.getView().getFtfSalario().getText());
@@ -79,12 +74,11 @@ public class InclusaoState extends ManterFuncionarioPresenterState{
             new SalvarCommand(presenter).executar();
             JOptionPane.showMessageDialog(
                 presenter.getView(),
-                "Funcionário(a)\n"
-                + presenter.getFuncionario().getNome() + "\n"
-                + "salvo(a) com sucesso!",
+                "Funcionário(a) salvo(a) com sucesso!",
                 "Sucesso",
                 JOptionPane.INFORMATION_MESSAGE
             );
+            presenter.fechar();
         }catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(presenter.getView(),
                 "Ocorreu um erro ao salvar o funcionário.\n\n"
@@ -92,7 +86,7 @@ public class InclusaoState extends ManterFuncionarioPresenterState{
                 "ERRO",
                 JOptionPane.ERROR_MESSAGE);
         } 
-        presenter.fechar();
+
     }
     
 }

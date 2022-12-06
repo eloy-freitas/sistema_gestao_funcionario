@@ -31,7 +31,6 @@ public class ManterFuncionarioPresenter {
         initListeners();
         populaCargos();
         initComboBox();
-        initCampos();
         view.getTfDataAdmissao().setEnabled(false);
         this.estado = new InclusaoState(this);
     }
@@ -53,11 +52,13 @@ public class ManterFuncionarioPresenter {
             funcionarioService = new FuncionarioService();
             cargoService = new CargoService();
         } catch (ClassNotFoundException | SQLException ex) {
-            JOptionPane.showMessageDialog(view,
-                    "Erro ao carregar dados iniciais necessários\n\n"
-                    + ex.getMessage(),
-                    "Erro de Inicialização",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(
+                view,
+                "Erro ao carregar dados iniciais necessários\n\n"
+                + ex.getMessage(),
+                "Erro de Inicialização",
+                JOptionPane.ERROR_MESSAGE
+            );
         }
     }
 
@@ -82,7 +83,7 @@ public class ManterFuncionarioPresenter {
         view.getBtnEditar().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                atualizar();
+                editar();
             }
         });
         
@@ -100,11 +101,13 @@ public class ManterFuncionarioPresenter {
         try {
             cargos = cargoService.buscarTodos();
         } catch (ClassNotFoundException | SQLException ex) {
-            JOptionPane.showMessageDialog(view,
-                    "Ocorreu um erro ao carregar os cargos.\n\n"
-                    + ex.getMessage(),
-                    "ERRO",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(
+                view,
+                "Ocorreu um erro ao carregar os cargos.\n\n"
+                + ex.getMessage(),
+                "ERRO",
+                JOptionPane.ERROR_MESSAGE
+            );
         }
     }
 
@@ -127,10 +130,11 @@ public class ManterFuncionarioPresenter {
         try{
             funcionario = estado.obterCampos();
         }catch(Exception e){
-            JOptionPane.showMessageDialog(view,
-                    "Falha ao obter os campos do formulpario\n\n",
-                    "ERRO",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(
+                view,
+                "Falha ao obter os campos do formulpario\n\n",
+                "ERRO",
+                JOptionPane.ERROR_MESSAGE);
         }
         
         return funcionario;
@@ -162,21 +166,25 @@ public class ManterFuncionarioPresenter {
         try {
             estado.cancelar();
         } catch (Exception e){
-            JOptionPane.showMessageDialog(view,
-            "Ação inválida para o estado atual.\n\n",
+            JOptionPane.showMessageDialog(
+                view,
+                "Estado inválido para realizar essa ação\n\n",
                 "ERRO",
-                JOptionPane.ERROR_MESSAGE);
+                JOptionPane.ERROR_MESSAGE
+            );
         }
     }
     
-    private void atualizar(){
+    private void editar(){
         try {
             estado.editar();
         } catch (Exception e){
-            JOptionPane.showMessageDialog(view,
-                "Ação inválida para o estado atual.\n\n",
+            JOptionPane.showMessageDialog(
+                view,
+                "Estado inválido para realizar essa ação\n\n",
                 "ERRO",
-                JOptionPane.ERROR_MESSAGE);
+                JOptionPane.ERROR_MESSAGE
+            );
         }
     }
     
@@ -184,10 +192,12 @@ public class ManterFuncionarioPresenter {
         try {
             estado.salvar();
         }catch (Exception e){
-            JOptionPane.showMessageDialog(view,
-            "Ação inválida para o estado atual.\n\n",
-            "ERRO",
-            JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(  
+                view,
+                "Estado inválido para realizar essa ação\n\n",
+                "ERRO",
+                JOptionPane.ERROR_MESSAGE
+            );
         }
     }
     
@@ -195,10 +205,12 @@ public class ManterFuncionarioPresenter {
         try {
             estado.excluir();
         } catch (Exception e){
-            JOptionPane.showMessageDialog(view,
-            "Ação inválida para o estado atual.\n\n",
-            "ERRO",
-            JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(
+                view,
+                "Estado inválido para realizar essa ação\n\n",
+                "ERRO",
+                JOptionPane.ERROR_MESSAGE
+            );
         }
     }
     
@@ -225,9 +237,4 @@ public class ManterFuncionarioPresenter {
     public List<Cargo> getCargos() {
         return cargos;
     }
-    
-    
-    
-    
-    
 }
