@@ -40,6 +40,12 @@ docker-compose up -d
 
 ### Model
 
+### ManterFuncionarioPresenter
+
+![ManterFuncionarioPresenter](docs/ManterFuncionarioPresenter.png)
+
+### Modelo de domínio
+
 ![Model](img/SistemaGestaoFuncionario-Modelo%20Dom%C3%ADnio.jpg)
 
 ### Calculadora Bonus service
