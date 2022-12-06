@@ -1,10 +1,8 @@
 package com.ufes.sistemagestaofuncionario.presenter.manterfuncionariocommand;
 
 import com.ufes.sistemagestaofuncionario.model.Funcionario;
-import com.ufes.sistemagestaofuncionario.presenter.BuscarFuncionarioPresenter;
 import com.ufes.sistemagestaofuncionario.presenter.ManterFuncionarioPresenter;
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
 
 
 public class AtualizarCommand implements ManterFuncionarioCommand{
